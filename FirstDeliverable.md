@@ -10,6 +10,8 @@ Our goals for this group project for Advanced Software Design class are: Learn h
 
 **Team Members & Roles:**
 
+---
+
 Alex:
 
 - Backend, flask
@@ -31,6 +33,9 @@ Palmy:
 - Assets, Css, User interface
 
 **Team's Information:**
+
+---
+
 Communication: We will use Whatsapp groupchat for our main communication. Each person is expected to check project-related messages at least once a day. We expect everybody to respond to messages in 2-3 hours (excluding sleep). We will not send messages about assignments/works Friday night and Saturday night. For urgent things, we will do calls but not at night time (after 10 pm). In addition, we will communicate via text and before class for clarifications and questions as needed.
 
 Coding: We will keep track of who is working on what task by using Github Isssues and Milestones assigning different tasks to different people. We plan to coordinate out-of-class meetings on a week-to-week basis as a whole group to review progress and discuss. We will be respectful of each other’s time, responding to both logistical and technical questions in a timely manner and being accommodating to schedule changes. Though we plan to code individually, we will be in constant communication about what each of us is working on to avoid two people repeating the same task.
