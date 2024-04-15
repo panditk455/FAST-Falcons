@@ -1,0 +1,32 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Center the content vertically and horizontally */
+body,
+html {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 100% viewport height */
+  background-color: rgb(
+    245,
+    244,
+    240
+  ); /* Background color for the wrapper using RGB values */
+}
+
+.content {
+  text-align: center; /* Center the text inside the content */
+  padding: 300px;
+  background-image: url("../asset/background.gif"); /* Background image for the content */
+  background-size: cover; /* Cover the entire content area with the background image */
+  border-radius: 10px; /* Optional rounded corners */
+}
