@@ -25,10 +25,9 @@ html {
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding: 300px;
+  padding: 200px;
   background-image: url("../asset/background.gif"); /* Background image for the content */
   background-size: cover; /* Cover the entire content area with the background image */
-  border-radius: 10px; /* Optional rounded corners */
 
   /* Additional styles for avatar and controls */
   .avatar-container {
@@ -47,12 +46,18 @@ html {
     padding: 10px 20px;
     margin: 0 10px;
     border: none;
-    background-color: #4caf50;
+    background-color: rgb(
+      245,
+      244,
+      240;
     color: white;
     cursor: pointer;
   }
 
   button:hover {
-    background-color: #45a049;
+    background-color:rgb(
+      245,
+      244,
+      240;
   }
 }
