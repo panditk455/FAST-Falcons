@@ -29,4 +29,30 @@ html {
   background-image: url("../asset/background.gif"); /* Background image for the content */
   background-size: cover; /* Cover the entire content area with the background image */
   border-radius: 10px; /* Optional rounded corners */
+
+  /* Additional styles for avatar and controls */
+  .avatar-container {
+    margin-bottom: 20px;
+  }
+
+  .controls {
+    margin-bottom: 20px;
+  }
+
+  .clothing-container {
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
 }
