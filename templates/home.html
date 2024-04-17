@@ -3,27 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carl Chat</title>
+    <title>Carl Chat Main</title>
     <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
-    <div class="wrapper">
-      <div class="content">
-        <h1>Welcome</h1>
-        <p>To Carl Chat</p>
-        <div class="avatar-container">
-          <img id="avatar" src="../asset/default_avatar.gif" alt="Avatar" />
-        </div>
-        <div class="controls">
-          <button id="left-btn">Left</button>
-          <button id="right-btn">Right</button>
-          <button id="save-btn">Save</button>
-        </div>
-        <div class="clothing-container">
-          <img id="cloth" src="default-cloth.png" alt="Clothing" />
-        </div>
-      </div>
+
+    <div class="homebutton">
+      <p>
+        <a href="../templates/home.html">
+          <button>
+          <img id="homeicon" src="../asset/houseicon.jpg"/>
+          </button>
+        </a>
+      </p>
+        <!--<img id="homeicon" src="../asset/house.jpg"/>
+        <link href="../asset/house.jpg" />-->
     </div>
+    <h1 id="maintitle">Carleton Campus Map</h1>
+      <div class="mapcontent">
+      </div>
+    
     <script src="../js/script.js"></script>
   </body>
 </html>

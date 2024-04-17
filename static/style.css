@@ -28,11 +28,35 @@ html {
   padding: 200px;
   background-image: url("../asset/background.gif"); /* Background image for the content */
   background-size: cover; /* Cover the entire content area with the background image */
+}
 
-  /* Additional styles for avatar and controls */
-  .avatar-container {
-    margin-bottom: 20px;
-  }
+#maintitle {
+  text-align: center;
+  padding: 2px;
+  font-family: "Brush Script MT";
+  font-size: 45px;
+}
+
+#homeicon {
+  background-image: url("../asset/houseicon.jpg");
+  width: 40px;
+  height: 40px;
+}
+.mapcontent {
+  padding: 200px;
+  background-image: url("../asset/FrontPage1.jpg"); 
+  background-position: center;
+  background-size: cover; 
+  width: 90%;
+  height: 100vh;
+  margin-left: 5%;
+  margin-top: 15px;
+  margin-bottom: 5%;
+}
+
+.avatar-container {
+  margin-bottom: 20px;
+  } 
 
   .controls {
     margin-bottom: 20px;
@@ -43,21 +67,35 @@ html {
   }
 
   button {
-    padding: 10px 20px;
-    margin: 0 10px;
+    padding: 5px 5px;
+    margin: 0px;
     border: none;
     background-color: rgb(
       245,
       244,
-      240;
+      240);
     color: white;
     cursor: pointer;
   }
 
-  button:hover {
-    background-color:rgb(
-      245,
-      244,
-      240;
+  .homebutton button{
+    background-color: transparent;
+    color: black;
+    border: 2px solid rgb(0, 0, 0);
+    font-family: "Brush Script MT ", sans-serif;
+    margin-left: 10px;
+    margin-top: 5px;
+    transition-duration: 0.4s;
   }
-}
+    
+  .homebutton button:hover{
+    background-color: rgb(169, 169, 169);
+    border: 2px solid rgb(0, 0, 0);
+    margin-left: 10px;
+    transition-duration: 0.4s;
+  }
+
+  button:hover {
+    background-color:rgb(255, 255, 255);
+  }
+
