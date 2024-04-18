@@ -1,3 +1,5 @@
+-- db-setup.sql
+
 CREATE DATABASE USER_LOGINS
 
 USE USER_LOGINS;
@@ -12,3 +14,4 @@ INSERT INTO User (username, pass_word) VALUES ('test_username', 'test_password')
 CREATE USER 'webapp'@'%' IDENTIFIED BY 'randompasswordRN';
 
 GRANT ALL ON USER_LOGINS.* TO 'webapp'@'%';
+
