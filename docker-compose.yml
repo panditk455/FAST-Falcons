@@ -1,0 +1,31 @@
+
+## NOTE: The volumes command makes a directory on my laptop
+##    accessible from within the container machine
+
+
+services:
+  app:
+    build: ./app
+    ports:
+      - "100:5000"
+    restart: on-failure
+    depends_on:
+      - "db"
+  db:
+    build: ./db
+    ports:
+      - "3306:3306"
+    restart: on-failure
+
+# volumes connect a folder on my machine with a folder on the container machine
+
+# If I want the database to persist after the container ends and then restarts
+# ... then I need to store the database on a volume connected to my machine
+# This volume command links the location where mysql stores its database
+# to the ./db-storage folder on my machine
+
+# I looked online to discover that /var/lib/mysql
+#   Is where MySQL stores the database data
+
+    volumes:
+      - ./db-storage:/var/lib/mysql

@@ -1,36 +1,22 @@
-# Dockerfile
+# Here is online information about the MySQL database image:
+#   https://hub.docker.com/_/mysql
+# I could also have used a Mongo or a Postgres SQL image if I wanted
 
-# Alpine is a very small/lightweight Linux distribution
-# We are starting from an alpine image with Python 3 installed
-FROM python:3.7-alpine
+FROM mysql
 
-# The WORKDIR command both creates a directory in the container 
-# and sets that directory to be the current directory for all further commands
-WORKDIR /code
+# I looked up information online about the MySQL image
+# That information tells me that if the container machine starts up
+#   and it finds no existing data, it will run any SQL files
+#   in the directory /docker-entrypoint-initdb.d
+COPY db-setup.sql /docker-entrypoint-initdb.d
 
-# We install Flask in the container using Pip
-RUN pip install flask
 
-# We want port 5000 (the default Flask port) to be used outside the container
-EXPOSE 5000
+# The online information indicates that the mysql image expects to find
+#   a root password for the database system in a certain environment variable
 
-# We copy everything in the current directory on our machine 
-# ... into the working directory in the container 
-# (In particular, this includes api.py)
-COPY . .
+# The ENV command in a dockerfile sets an environment variable
 
-# When the container starts running,
-#    This is the final command that we want to be executed
-#
-# CMD is almost always used to start a program that
-#    runs indefinitely and listens over the network for requests
-CMD ["python3", "app.py"]
+ENV MYSQL_ROOT_PASSWORD=randompasswordRN
 
-# Instead of running the Flask app through Python
-# .. We could also set some environment variables
-#    and run the app using the flask command
-#
-# ENV FLASK_APP=api.py
-# ENV FLASK_RUN_HOST=0.0.0.0
-# CMD ["flask", "run"]
- 
+# Port 3306 is the default port used by MySQL
+EXPOSE 3306
