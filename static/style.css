@@ -38,7 +38,7 @@ html {
 }
 
 #homeicon {
-  background-image: url("../asset/houseicon.jpg");
+  /* background-image: url("../asset/houseicon.jpg"); */
   width: 40px;
   height: 40px;
 }
