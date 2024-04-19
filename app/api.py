@@ -7,14 +7,14 @@ app = Flask(__name__, static_url_path='',
             static_folder='static', template_folder='templates')
 
 # Connect to the mySQL database
-"""db = mysql.connector.connect(
-    host="localhost",
+db = mysql.connector.connect(
+    host="db",
     port="3306",
     user="webapp",
-    password="Creek285*",
-    database="USER_LOGIN"
+    password="randompasswordRN",
+    database="USER_LOGINS"
 )
-cursor = db.cursor()"""
+cursor = db.cursor()
 
 # To test hompage
 # http://stearns.mathcs.carleton.edu:5137/
@@ -39,8 +39,20 @@ def register():
 def login():
     return render_template('login.html')
 
+'''@app.route('/test')
+def test_db():
+    sql = "SELECT * FROM user;"
+    cursor.execute(sql)
 
+   # .... look at my code to fetch ...
+
+    answer = "test output: "
+
+    for row in rows:
+        answer += row
+
+    return answer'''
 
 if __name__ == '__main__':
-    my_port = 5137
+    my_port = 5555
     app.run(host='0.0.0.0', port=my_port, debug=False)

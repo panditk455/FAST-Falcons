@@ -6,7 +6,7 @@ services:
   app:
     build: ./app
     ports:
-      - "100:5000"
+      - "5555:5555"
     restart: on-failure
     depends_on:
       - "db"
