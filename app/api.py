@@ -1,10 +1,9 @@
 # import psycopg2
 from flask import Flask, render_template, redirect, session, request
-import mysql.connector
+#import mysql.connector
 
 
-app = Flask(__name__, static_url_path='',
-            static_folder='static', template_folder='templates')
+app = Flask(__name__)
 
 # Connect to the mySQL database
 db = mysql.connector.connect(
