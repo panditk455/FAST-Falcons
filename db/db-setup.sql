@@ -13,3 +13,6 @@ VALUES
 CREATE USER 'webapp' @'%' IDENTIFIED BY 'randompasswordRN';
 
 GRANT ALL ON USER_LOGINS.* TO 'webapp' @'%';
+
+
+-- mysql -u webapp -p -h localhost -P 3306

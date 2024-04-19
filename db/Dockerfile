@@ -20,3 +20,9 @@ ENV MYSQL_ROOT_PASSWORD=randompasswordRN
 
 # Port 3306 is the default port used by MySQL
 EXPOSE 3306
+
+# docker build - < Dockerfile
+# docker compose up
+
+
+# mysql -u webapp -p -h localhost -P 3306
