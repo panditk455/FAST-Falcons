@@ -7,6 +7,9 @@
     </head>
     <body>
         <h2>Login</h2>
+        {% if error %}
+        <p style="color: red;">{{error}}</p>
+        {% endif %}
         <form action="/login" method = "post">
             <label for="username">Username:</label><br>
             <input type="text" id = "username" name = "username" required><br>
