@@ -1,131 +1,92 @@
-/* Reset default margin and padding */
-* {
+/* registerandlogin.css */
+
+body {
   margin: 0;
-  padding: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+body * {
   box-sizing: border-box;
 }
 
-/* Center the content vertically and horizontally */
-body,
-html {
-  height: 100%;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* 100% viewport height */
-  background-color: rgb(
-    245,
-    244,
-    240
-  ); /* Background color for the wrapper using RGB values */
-}
-
-.content {
-  text-align: center; /* Center the text inside the content */
-  padding: 200px;
-  background-image: url("../static/background.gif"); /* Background image for the content */
-  background-size: cover; /* Cover the entire content area with the background image */
-}
-
-#maintitle {
+h2 {
+  color: #77ffc0;
   text-align: center;
-  padding: 2px;
-  font-family: "Brush Script MT";
-  font-size: 45px;
 }
 
-#homeicon {
-  background-image: url("../static/houseicon.jpg");
-  width: 40px;
-  height: 40px;
-}
-.mapcontent {
-  padding: 200px;
-  background-image: url("../static/FrontPage1.jpg"); 
-  background-position: center;
-  background-size: cover; 
-  width: 90%;
-  height: 100vh;
-  margin-left: 5%;
-  margin-top: 15px;
-  margin-bottom: 5%;
+.circle-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 20px; /* Adjust margin as needed */
 }
 
-.avatar-container {
-  margin-bottom: 20px;
-  } 
+.circle-image img {
+  width: 100%;
+  height: auto;
+}
 
-  .controls {
-    margin-bottom: 20px;
+form {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  color: #f0ffffde;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: #514869;
+  color: #f0ffffde;
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px #00000056;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+  color: #f0ffff94;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 16px 0;
+  margin: 25px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #2b134b;
+  background: #00ff88;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px #00ff8052;
+}
+
+p {
+  color: #f0ffffde;
+  text-align: center;
+}
+
+p a {
+  color: #77ffc0;
+}
+
+@media only screen and (max-width: 600px) {
+  form {
+    width: 90%;
   }
-
-  .clothing-container {
-    margin-top: 20px;
-  }
-
-  button {
-    padding: 5px 5px;
-    margin: 0px;
-    border: none;
-    background-color: rgb(
-      245,
-      244,
-      240);
-    color: white;
-    cursor: pointer;
-  }
-
-  .homebutton button{
-    background-color: transparent;
-    color: black;
-    border: 2px solid rgb(0, 0, 0);
-    font-family: "Brush Script MT ", sans-serif;
-    margin-left: 10px;
-    margin-top: 5px;
-    transition-duration: 0.4s;
-  }
-    
-  .homebutton button:hover{
-    background-color: rgb(169, 169, 169);
-    border: 2px solid rgb(0, 0, 0);
-    margin-left: 10px;
-    transition-duration: 0.4s;
-  }
-
-  button:hover {
-    background-color:rgb(255, 255, 255);
-  }
-
-  .dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    left: 10px;
-    right: auto;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #565252;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }

@@ -15,4 +15,6 @@ CREATE USER 'webapp' @'%' IDENTIFIED BY 'randompasswordRN';
 GRANT ALL ON USER_LOGINS.* TO 'webapp' @'%';
 
 
--- mysql -u webapp -p -h localhost -P 3306
+-- mysql -u 
+-- fuuncion to get called whe u press that button.
+--x
