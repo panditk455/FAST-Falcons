@@ -26,6 +26,12 @@
         </div>
     </div>
 
+    {% if username %}
+    <p>Logged in as: {{ username }}!</p>
+    {% else %}
+    <p>Playing as: guest!</p>
+    {% endif %}
+
     </div>
     <h1 id="maintitle">Carleton Campus Map</h1>
       <div class="mapcontent">

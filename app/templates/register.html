@@ -11,6 +11,9 @@
     <div class="circle-image">
         <img src="...\static\login.gif">
     </div>
+    {% if error %}
+    <p style = "color: red;">{{ error }}</p>
+    {% endif %}
     <form action="/register" method="post">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br>
