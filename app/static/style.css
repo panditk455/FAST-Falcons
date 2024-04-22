@@ -44,9 +44,9 @@ html {
 }
 .mapcontent {
   padding: 200px;
-  background-image: url("../static/FrontPage1.jpg"); 
+  background-image: url("../static/FrontPage1.jpg");
   background-position: center;
-  background-size: cover; 
+  background-size: cover;
   width: 90%;
   height: 100vh;
   margin-left: 5%;
@@ -56,76 +56,74 @@ html {
 
 .avatar-container {
   margin-bottom: 20px;
-  } 
+}
 
-  .controls {
-    margin-bottom: 20px;
-  }
+.controls {
+  margin-bottom: 20px;
+}
 
-  .clothing-container {
-    margin-top: 20px;
-  }
+.clothing-container {
+  margin-top: 20px;
+}
 
-  button {
-    padding: 5px 5px;
-    margin: 0px;
-    border: none;
-    background-color: rgb(
-      245,
-      244,
-      240);
-    color: white;
-    cursor: pointer;
-  }
+button {
+  padding: 5px 5px;
+  margin: 0px;
+  border: none;
+  background-color: rgb(245, 244, 240);
+  color: rgb(70, 64, 64);
+  cursor: pointer;
+}
 
-  .homebutton button{
-    background-color: transparent;
-    color: black;
-    border: 2px solid rgb(0, 0, 0);
-    font-family: "Brush Script MT ", sans-serif;
-    margin-left: 10px;
-    margin-top: 5px;
-    transition-duration: 0.4s;
-  }
-    
-  .homebutton button:hover{
-    background-color: rgb(169, 169, 169);
-    border: 2px solid rgb(0, 0, 0);
-    margin-left: 10px;
-    transition-duration: 0.4s;
-  }
+.homebutton button {
+  background-color: transparent;
+  color: black;
+  border: 2px solid rgb(0, 0, 0);
+  font-family: "Brush Script MT ", sans-serif;
+  margin-left: 10px;
+  margin-top: 5px;
+  transition-duration: 0.4s;
+}
 
-  button:hover {
-    background-color:rgb(255, 255, 255);
-  }
+.homebutton button:hover {
+  background-color: rgb(169, 169, 169);
+  border: 2px solid rgb(0, 0, 0);
+  margin-left: 10px;
+  transition-duration: 0.4s;
+}
 
-  .dropdown {
-    position: relative;
-    display: inline-block;
+button:hover {
+  background-color: rgb(52, 49, 49);
+  color: rgb(169, 169, 169);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    left: 10px;
-    right: auto;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  left: 10px;
+  right: auto;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #565252;
+  background-color: #565252;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
