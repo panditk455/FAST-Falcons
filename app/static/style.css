@@ -42,16 +42,12 @@ html {
   width: 40px;
   height: 40px;
 }
-.mapcontent {
-  padding: 200px;
-  background-image: url("../static/FrontPage1.jpg");
-  background-position: center;
-  background-size: cover;
-  width: 90%;
-  height: 100vh;
-  margin-left: 5%;
-  margin-top: 15px;
-  margin-bottom: 5%;
+
+#mapimage {
+  left:0;
+  top:0;
+  transform: scale(0.7);
+  transform-origin: top left;
 }
 
 .avatar-container {
