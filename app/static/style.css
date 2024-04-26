@@ -16,7 +16,11 @@ html {
   justify-content: center;
   align-items: center;
   height: 100vh; /* 100% viewport height */
-  background-color: rgb(255, 255, 255); /* Background color for the wrapper using RGB values */
+  background-color: rgb(
+    245,
+    244,
+    240
+  ); /* Background color for the wrapper using RGB values */
 }
 
 .content {
@@ -46,8 +50,8 @@ html {
 }
 
 #mapimage {
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   transform: scale(0.7);
   transform-origin: top left;
 }
@@ -106,7 +110,7 @@ button {
   border: 2px solid rgb(0, 0, 0);
   font-family: "Brush Script MT ", sans-serif;
   margin-left: 10px;
-  float:right;
+  float: right;
   margin-top: 5px;
   transition-duration: 0.4s;
   text-align: right;
@@ -119,11 +123,10 @@ button {
 .logoutbutton button:hover {
   background-color: rgb(169, 169, 169);
   border: 2px solid rgb(0, 0, 0);
-  float:right;
+  float: right;
   margin-left: 10px;
   transition-duration: 0.4s;
 }
-
 
 button:hover {
   background-color: rgb(52, 49, 49);
