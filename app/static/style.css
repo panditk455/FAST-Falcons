@@ -16,11 +16,7 @@ html {
   justify-content: center;
   align-items: center;
   height: 100vh; /* 100% viewport height */
-  background-color: rgb(
-    245,
-    244,
-    240
-  ); /* Background color for the wrapper using RGB values */
+  background-color: rgb(255, 255, 255); /* Background color for the wrapper using RGB values */
 }
 
 .content {
@@ -39,6 +35,12 @@ html {
 
 #homeicon {
   background-image: url("../static/houseicon.jpg");
+  width: 40px;
+  height: 40px;
+}
+
+#logouticon {
+  background-image: url("../static/logouticon.jpg");
   width: 40px;
   height: 40px;
 }
@@ -66,9 +68,19 @@ button {
   padding: 5px 5px;
   margin: 0px;
   border: none;
-  background-color: rgb(245, 244, 240);
+  background-color: rgb(255, 255, 255);
   color: rgb(70, 64, 64);
   cursor: pointer;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.lowerbar {
+  display: grid;
+  grid-template-columns: auto auto;
 }
 
 .homebutton button {
@@ -87,6 +99,31 @@ button {
   margin-left: 10px;
   transition-duration: 0.4s;
 }
+
+.logoutbutton button {
+  background-color: transparent;
+  color: black;
+  border: 2px solid rgb(0, 0, 0);
+  font-family: "Brush Script MT ", sans-serif;
+  margin-left: 10px;
+  float:right;
+  margin-top: 5px;
+  transition-duration: 0.4s;
+  text-align: right;
+}
+
+.userinfo {
+  text-align: right;
+}
+
+.logoutbutton button:hover {
+  background-color: rgb(169, 169, 169);
+  border: 2px solid rgb(0, 0, 0);
+  float:right;
+  margin-left: 10px;
+  transition-duration: 0.4s;
+}
+
 
 button:hover {
   background-color: rgb(52, 49, 49);

@@ -8,15 +8,30 @@
   </head>
   <body>
 
-    <div class="homebutton">
-      <p>
-        <a href="/home">
-          <button>
-          <img id="homeicon" src="../static/houseicon.jpg"/>
-          </button>
-        </a>
-      </p>
+    <div class="topbar">
+      <div class="homebutton">
+        <p>
+          <a href="/home">
+            <button>
+            <img id="homeicon" src="../static/houseicon.jpg"/>
+            </button>
+          </a>
+        </p>
+        </div>
 
+        <div class="logoutbutton">
+          <p>
+            <a href="/logout">
+              <button>
+              <img id="logouticon" src="../static/logouticon.jpg"/>
+              </button>
+            </a>
+          </p>
+        </div>
+      </div>
+
+
+    <div class="lowerbar">
       <div class="dropdown">
         <button id="settings">Settings</button>
         <div class="dropdown-content">
@@ -24,16 +39,17 @@
             <a href="/aboutus">About Us</a>
             <a href="/contact">Contact Us</a>
             <a href="/logout">Logout</a>
-        </div>
+        </div> 
+        <div class = "userinfo">
+          {% if username %}
+          <p>Logged in as: {{ username }}!</p>
+          {% else %}
+          <p>Playing as: guest!</p>
+          {% endif %}
+        </div>  
     </div>
+  </div>
 
-    {% if username %}
-    <p>Logged in as: {{ username }}!</p>
-    {% else %}
-    <p>Playing as: guest!</p>
-    {% endif %}
-
-    </div>
     <h1 id="maintitle">Carleton Campus Map</h1>
 
     
