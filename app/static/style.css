@@ -28,6 +28,9 @@ html {
   padding: 200px;
   background-image: url("../static/background.gif"); /* Background image for the content */
   background-size: cover; /* Cover the entire content area with the background image */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Arrange child elements vertically */
+  align-items: center;
 }
 
 #maintitle {
@@ -56,16 +59,28 @@ html {
   transform-origin: top left;
 }
 
+.intro {
+  margin-bottom: 20px; /* Add margin at the bottom of the paragraph */
+}
+
 .avatar-container {
   margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex; /* Use flexbox for avatar images */
+  justify-content: center; /* Center avatar images horizontally */
+  align-items: center; /* Center avatar images vertically */
+}
+
+.avatar-container img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
 }
 
 .controls {
   margin-bottom: 20px;
-}
-
-.clothing-container {
-  margin-top: 20px;
 }
 
 button {

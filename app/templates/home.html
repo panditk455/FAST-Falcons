@@ -7,63 +7,71 @@
     <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
-
     <div class="topbar">
       <div class="homebutton">
         <p>
           <a href="/home">
             <button>
-            <img id="homeicon" src="../static/houseicon.jpg"/>
+              <img id="homeicon" src="../static/asset/houseicon.jpg" />
             </button>
           </a>
         </p>
-        </div>
-
-        <div class="logoutbutton">
-          <p>
-            <a href="/logout">
-              <button>
-              <img id="logouticon" src="../static/logouticon.jpg"/>
-              </button>
-            </a>
-          </p>
-        </div>
       </div>
 
+      <div class="logoutbutton">
+        <p>
+          <a href="/logout">
+            <button>
+              <img id="logouticon" src="../static/asset/logouticon.jpg" />
+            </button>
+          </a>
+        </p>
+      </div>
+    </div>
 
     <div class="lowerbar">
       <div class="dropdown">
         <button id="settings">Settings</button>
         <div class="dropdown-content">
-            <a href="/aboutpage">About Page</a>
-            <a href="/aboutus">About Us</a>
-            <a href="/contact">Contact Us</a>
-            <a href="/logout">Logout</a>
-        </div> 
-        <div class = "userinfo">
+          <a href="/aboutpage">About Page</a>
+          <a href="/aboutus">About Us</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/logout">Logout</a>
+        </div>
+        <div class="userinfo">
           {% if username %}
           <p>Logged in as: {{ username }}!</p>
           {% else %}
           <p>Playing as: guest!</p>
           {% endif %}
-        </div>  
+        </div>
+      </div>
     </div>
-  </div>
 
     <h1 id="maintitle">Carleton Campus Map</h1>
 
-    
-    <img id="mapimage" src="../static/FrontPage1.jpg" usemap="#clickmap">
+    <img
+      id="mapimage"
+      src="../static/asset/FrontPage1.jpg"
+      usemap="#clickmap"
+    />
 
     <map name="clickmap">
-      <area shape="rect" coords="655,591,738,697" alt="Sayles" href="/sayles">
-      <area shape="rect" coords="683,345,770,437" alt="Library" href="/library">
-      <area shape="rect" coords="890,697,993,795" alt="BaldSpot" href="/baldspot">
+      <area shape="rect" coords="655,591,738,697" alt="Sayles" href="/sayles" />
+      <area
+        shape="rect"
+        coords="683,345,770,437"
+        alt="Library"
+        href="/library"
+      />
+      <area
+        shape="rect"
+        coords="890,697,993,795"
+        alt="BaldSpot"
+        href="/baldspot"
+      />
     </map>
-      
 
-
-    <script src="../static/settings.js"></script>
-
+    <script src="../static/js/settings.js"></script>
   </body>
 </html>
