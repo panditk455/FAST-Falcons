@@ -19,21 +19,6 @@ cursor = db.cursor()
 # To test hompage
 # http://stearns.mathcs.carleton.edu:5137/
 
-
-@app.route('/')
-def load_selectcharacter():
-    return render_template("selectcharacter.html")
-
-
-@app.route('/home')
-def load_homepage():
-    if 'username' in session:
-        username = session['username']
-        return render_template("home.html", username=username)
-    else:
-        return redirect('login')
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -74,13 +59,36 @@ def login():
         if user:
             # If the user exists, store their username in the session to indicate that they are loggin in
             session['username'] = username
-            return redirect('/')
+            return redirect('/welcome')
         else:
             # If the user does not exist or the password is incorrect, return an error message
             error_message = "Invalid username or password! Please try again!"
             return render_template('login.html',error = error_message)
     return render_template('login.html')
 
+@app.route('/welcome')
+def load_welcome():
+    return render_template("welcome.html")
+
+@app.route('/home')
+def load_homepage():
+    if 'username' in session:
+        username = session['username']
+        return render_template("home.html", username=username)
+    else:
+        return redirect('login')
+
+@app.route('/profile')
+def load_homepage():
+    if 'username' in session:
+        username = session['username']
+        return render_template("home.html", username=username)
+    else:
+        return redirect('login')
+
+@app.route('/avatar')
+def load_selectcharacter():
+    return render_template("change_avatar.html")
 
 @app.route('/logout')
 def logout():
