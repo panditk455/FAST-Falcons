@@ -18,7 +18,10 @@ html {
 /* Style for individual buttons */
 .home_button button,
 .setting_button button,
-.profile_button button {
+.profile_button button,
+.sayles_button button,
+.library_button button,
+.baldspot_button button {
   background-color: transparent;
   color: transparent;
   border: none;
@@ -29,7 +32,10 @@ html {
 /* Add this CSS for manual positioning of buttons */
 .home_button,
 .setting_button,
-.profile_button {
+.profile_button,
+.sayles_button,
+.library_button,
+.baldspot_button {
   position: absolute;
 }
 
@@ -47,7 +53,6 @@ html {
   top: 1px;
   left: 1350px;
 }
-
 /* Style for the icon and icon-hover */
 .icon,
 .icon-hover {
@@ -65,7 +70,10 @@ html {
 /* Show icon-hover on button hover */
 .home_button button:hover .icon-hover,
 .setting_button button:hover .icon-hover,
-.profile_button button:hover .icon-hover {
+.profile_button button:hover .icon-hover,
+.sayles_button button:hover .icon-hover,
+.library_button button:hover .icon-hover,
+.baldspot_button button:hover .icon-hover {
   display: block;
   margin-top: 1px;
   transition-duration: 0.4s;
@@ -74,7 +82,10 @@ html {
 /* Hide icon on button hover */
 .home_button button:hover .icon,
 .setting_button button:hover .icon,
-.profile_button button:hover .icon {
+.profile_button button:hover .icon,
+.sayles_button button:hover .icon,
+.library_button button:hover .icon,
+.baldspot_button button:hover .icon {
   display: none;
 }
 
@@ -147,8 +158,28 @@ html {
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
   align-items: center;
+  background-color: rgba(246, 246, 246);
+}
+
+.intro {
+  margin-bottom: 20px; /* Add margin at the bottom of the paragraph */
 }
 
 #mapimage {
   max-width: 80%;
+}
+
+.sayles_button {
+  top: 57%;
+  left: 38%;
+}
+
+.library_button {
+  top: 42%;
+  left: 39%;
+}
+
+.baldspot_button {
+  top: 64%;
+  left: 46.5%;
 }

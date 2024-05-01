@@ -3,7 +3,7 @@ CREATE DATABASE USER_LOGINS;
 
 USE USER_LOGINS;
 
-CREATE TABLE user(username TEXT, pass_word TEXT);
+CREATE TABLE user(username TEXT, pass_word TEXT, visited_welcome BOOLEAN DEFAULT FALSE);
 
 INSERT INTO
     user (username, pass_word)

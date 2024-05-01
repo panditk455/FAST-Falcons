@@ -1,7 +1,5 @@
-# import psycopg2
 from flask import Flask, render_template, redirect, session, request
 import mysql.connector
-
 
 app = Flask(__name__)
 app.secret_key = 'secretkeyfornow'
@@ -16,8 +14,16 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
-# To test hompage
-# http://stearns.mathcs.carleton.edu:5137/
+# Check if the user has already visited the welcome page
+def has_visited_welcome(username):
+    cursor.execute("SELECT visited_welcome FROM user WHERE username=%s", (username,))
+    result = cursor.fetchone()
+    return result[0] if result else False
+
+# Update the visited_welcome flag in the database
+def mark_welcome_visited(username):
+    cursor.execute("UPDATE user SET visited_welcome = 1 WHERE username=%s", (username,))
+    db.commit()
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -36,7 +42,7 @@ def register():
 
         # If the username is unique, insert the new user into the database
         cursor.execute(
-            "INSERT INTO user (username, pass_word) VALUES (%s, %s)", (username, password))
+            "INSERT INTO user (username, pass_word, visited_welcome) VALUES (%s, %s, 0)", (username, password))
         db.commit()
 
         # Store the username in the session to indicate that the user is logged in
@@ -59,7 +65,13 @@ def login():
         if user:
             # If the user exists, store their username in the session to indicate that they are loggin in
             session['username'] = username
-            return redirect('/welcome')
+            
+            # Check if the user has visited the welcome page
+            if not has_visited_welcome(username):
+                mark_welcome_visited(username)
+                return redirect('/welcome')
+            else:
+                return redirect('/home')
         else:
             # If the user does not exist or the password is incorrect, return an error message
             error_message = "Invalid username or password! Please try again!"
@@ -85,10 +97,6 @@ def load_homepage():
 @app.route('/profile')
 def load_profile():
     return render_template("profile.html")
-
-# @app.route('/avatar')
-# def load_selectcharacter():
-#     return render_template("change_avatar.html")
 
 @app.route('/logout')
 def logout():
