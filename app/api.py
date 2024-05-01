@@ -93,7 +93,31 @@ def load_homepage():
         return render_template("home.html", username=username)
     else:
         return redirect('/login')
+    
+@app.route('/sayles')
+def load_sayles():
+    if 'username' in session:
+        username = session['username']
+        return render_template("sayles.html", username=username)
+    else:
+        return redirect('/login')
 
+@app.route('/library')
+def load_library():
+    if 'username' in session:
+        username = session['username']
+        return render_template("library.html", username=username)
+    else:
+        return redirect('/login')
+    
+@app.route('/baldspot')
+def load_baldspot():
+    if 'username' in session:
+        username = session['username']
+        return render_template("baldspot.html", username=username)
+    else:
+        return redirect('/login')
+    
 @app.route('/profile')
 def load_profile():
     return render_template("profile.html")
