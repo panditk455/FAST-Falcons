@@ -78,23 +78,23 @@ def load_homepage():
     else:
         return redirect('login')
 
-@app.route('/profile')
-def load_homepage():
-    if 'username' in session:
-        username = session['username']
-        return render_template("home.html", username=username)
-    else:
-        return redirect('login')
+# @app.route('/profile')
+# def load_homepage():
+#     if 'username' in session:
+#         username = session['username']
+#         return render_template("home.html", username=username)
+#     else:
+#         return redirect('login')
 
-@app.route('/avatar')
-def load_selectcharacter():
-    return render_template("change_avatar.html")
+# @app.route('/avatar')
+# def load_selectcharacter():
+#     return render_template("change_avatar.html")
 
-@app.route('/logout')
-def logout():
-    # Remove the username from the session to indicate that the user is logged out
-    session.pop('username', None)
-    return redirect('/')
+# @app.route('/logout')
+# def logout():
+#     # Remove the username from the session to indicate that the user is logged out
+#     session.pop('username', None)
+#     return redirect('/')
 
 
 '''@app.route('/test')

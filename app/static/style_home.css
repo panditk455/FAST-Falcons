@@ -1,38 +1,18 @@
-/* Reset default margin and padding */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
 }
 
-/* Center the content vertically and horizontally */
 body,
 html {
   height: 100%;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin-top: 0;
-  background-color: rgb(
-    245,
-    244,
-    240
-  ); /* Background color for the wrapper using RGB values */
-}
-
-.top-element {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
-  background-color: transparent;
-  position: relative;
+.navbar {
+  background-color: lightblue;
+  position: relative; /* Required for absolute positioning of children */
 }
 
 /* Style for individual buttons */
@@ -40,23 +20,32 @@ html {
 .setting_button button,
 .profile_button button {
   background-color: transparent;
-  color: black;
+  color: transparent;
+  border: none;
   font-family: "Brush Script MT", sans-serif;
   transition-duration: 0.4s;
   position: relative; /* Ensure proper positioning for icon-hover */
 }
-
-/* Style for the home button */
-.home_button button {
-  margin-right: auto; /* Push the home button to the left */
+/* Add this CSS for manual positioning of buttons */
+.home_button,
+.setting_button,
+.profile_button {
+  position: absolute;
 }
 
-.setting_button button {
-  margin-right: 10px; /* Add spacing between setting and profile buttons */
+.home_button {
+  top: 1px;
+  left: 10px;
 }
 
-.profile_button button {
-  margin-left: auto; /* Push the profile button to the right */
+.setting_button {
+  top: 1px;
+  left: 1265px;
+}
+
+.profile_button {
+  top: 1px;
+  left: 1350px;
 }
 
 /* Style for the icon and icon-hover */
@@ -130,8 +119,7 @@ html {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  top: 300%; /* Position the dropdown below the button with some spacing */
-  left: 50; /* Align the dropdown with the left edge of the parent element */
+  top: 450%; /* Position the dropdown below the button with some spacing */
 }
 
 .dropdown-content a {
@@ -153,28 +141,6 @@ html {
   align-items: center;
 }
 
-.userinfo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#maintitle {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
 #mapimage {
-  max-width: 100%;
-  height: auto;
-}
-
-.map-container {
-  position: relative;
-}
-
-.map-container map {
-  position: absolute;
-  top: 0;
-  left: 0;
+  max-width: 80%;
 }
