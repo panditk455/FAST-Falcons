@@ -4,74 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carl Chat Main</title>
-    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/style_home.css" />
   </head>
   <body>
-    <div class="topbar">
-      <div class="homebutton">
-        <p>
-          <a href="/home">
-            <button>
-              <img id="homeicon" src="../static/asset/houseicon.jpg" />
-            </button>
-          </a>
-        </p>
+    <nav class="navbar">
+      <div class="home_button">
+        <a href="/home">
+          <button>
+            <img class="icon" src="../static/asset/home_button.png" />
+            <img
+              class="icon-hover"
+              src="../static/asset/home_button_hover.png"
+            />
+          </button>
+        </a>
+      </div>
+      <div class="setting_button">
+        <button id="setting-btn">
+          <img
+            class="icon"
+            src="../static/asset/setting_button.png"
+            alt="Setting"
+          />
+          <img
+            class="icon-hover"
+            src="../static/asset/setting_button_hover.png"
+            alt="Setting Hover"
+          />
+        </button>
       </div>
 
-      <div class="logoutbutton">
-        <p>
-          <a href="/logout">
-            <button>
-              <img id="logouticon" src="../static/asset/logouticon.jpg" />
-            </button>
-          </a>
-        </p>
+      <!-- Modal or Popup -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <!-- Close button for the modal -->
+          <span class="close">&times;</span>
+          <!-- Modal content goes here -->
+          <h2>Settings</h2>
+          <p>
+            This is the content of the modal. It can cover most of the screen.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div class="lowerbar">
-      <div class="dropdown">
-        <button id="settings">Settings</button>
+      <div class="profile_button">
+        <button>
+          <img
+            class="icon"
+            src="../static/asset/profile_button.png"
+            alt="Profile"
+          />
+          <img
+            class="icon-hover"
+            src="../static/asset/profile_button_hover.png"
+            alt="Profile Hover"
+          />
+        </button>
         <div class="dropdown-content">
-          <a href="/aboutpage">About Page</a>
-          <a href="/aboutus">About Us</a>
-          <a href="/contact">Contact Us</a>
+          <a href="/profile">Profile</a>
           <a href="/logout">Logout</a>
         </div>
-        <div class="userinfo">
-          {% if username %}
-          <p>Logged in as: {{ username }}!</p>
-          {% else %}
-          <p>Playing as: guest!</p>
-          {% endif %}
-        </div>
+      </div>
+
+      <div class="userinfo">
+        {% if username %}
+        <p>Logged in as: {{ username }}!</p>
+        {% else %}
+        <p>Playing as: guest!</p>
+        {% endif %}
+      </div>
+    </nav>
+
+    <!-- Modal or Popup -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <!-- Close button for the modal -->
+        <span class="close">&times;</span>
+        <!-- Modal content goes here -->
+        <h2>Settings</h2>
+        <p>
+          This is the content of the modal. It can cover most of the screen.
+        </p>
       </div>
     </div>
 
-    <h1 id="maintitle">Carleton Campus Map</h1>
+    <div class="content">
+      <h1 class="intro">Carleton Campus Map</h1>
 
-    <img
-      id="mapimage"
-      src="../static/asset/FrontPage1.jpg"
-      usemap="#clickmap"
-    />
-
-    <map name="clickmap">
-      <area shape="rect" coords="655,591,738,697" alt="Sayles" href="/sayles" />
-      <area
-        shape="rect"
-        coords="683,345,770,437"
-        alt="Library"
-        href="/library"
+      <img
+        id="mapimage"
+        src="../static/asset/FrontPage1.png"
+        usemap="#clickmap"
       />
-      <area
-        shape="rect"
-        coords="890,697,993,795"
-        alt="BaldSpot"
-        href="/baldspot"
-      />
-    </map>
 
-    <script src="../static/js/settings.js"></script>
+      <div class="sayles_button">
+        <a href="/sayles">
+          <button>
+            <img class="icon" src="../static/asset/location_button.png" />
+            <img
+              class="icon-hover"
+              src="../static/asset/location_button_hover.png"
+            />
+          </button>
+        </a>
+      </div>
+
+      <div class="library_button">
+        <a href="/library">
+          <button>
+            <img class="icon" src="../static/asset/location_button.png" />
+            <img
+              class="icon-hover"
+              src="../static/asset/location_button_hover.png"
+            />
+          </button>
+        </a>
+      </div>
+
+      <div class="baldspot_button">
+        <a href="/baldspot">
+          <button>
+            <img class="icon" src="../static/asset/location_button.png" />
+            <img
+              class="icon-hover"
+              src="../static/asset/location_button_hover.png"
+            />
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <script src="../static/js/scripts_home.js"></script>
   </body>
 </html>

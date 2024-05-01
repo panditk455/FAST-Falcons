@@ -13,8 +13,8 @@ html {
 
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   height: 100vh; /* 100% viewport height */
   background-color: rgb(
     245,
@@ -41,13 +41,13 @@ html {
 }
 
 #homeicon {
-  background-image: url("../static/houseicon.jpg");
+  background-image: url("../static/asset/houseicon.jpg");
   width: 40px;
   height: 40px;
 }
 
 #logouticon {
-  background-image: url("../static/logouticon.jpg");
+  background-image: url("../static/asset/logouticon.jpg");
   width: 40px;
   height: 40px;
 }
@@ -107,8 +107,8 @@ button {
   color: black;
   border: 2px solid rgb(0, 0, 0);
   font-family: "Brush Script MT ", sans-serif;
-  margin-left: 10px;
-  margin-top: 5px;
+  margin-top: 20px; /* Add margin to push the home button down from the top */
+  margin-left: 20px; /* Add margin to push the home button from the left */
   transition-duration: 0.4s;
 }
 

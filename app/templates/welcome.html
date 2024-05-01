@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carl Chat</title>
+    <link rel="stylesheet" href="../static/style_welcome.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="top-element">
+        <div class="userinfo">
+          {% if username %}
+          <p>Logged in as: {{ username }}!</p>
+          {% else %}
+          <p>Playing as: guest!</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="content">
+        <h1>Welcome to Carl Chat</h1>
+
+        <p class="intro">Choose your Avatar and go talk with Carls!</p>
+
+        <div class="avatar-container">
+          <img src="../static/asset/avatar.png" alt="avatar" />
+        </div>
+
+        <div class="controls">
+          <div class="left-right-buttons">
+            <button id="left-btn">Left</button>
+            <button id="right-btn">Right</button>
+          </div>
+          <div class="go-chat-button">
+            <a href="/home">
+              <button id="save-btn">Go Chat!</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../static/js/script.js"></script>
+  </body>
+</html>

@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif; /* Set default font to Segoe UI */
 }
 
 /* Center the content vertically and horizontally */
