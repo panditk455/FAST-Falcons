@@ -1,0 +1,69 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+.navbar {
+  background-color: lightblue;
+  position: relative; /* Required for absolute positioning of children */
+}
+
+/* Style for individual buttons */
+.close_button button {
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  font-family: "Brush Script MT", sans-serif;
+  transition-duration: 0.4s;
+  position: relative; /* Ensure proper positioning for icon-hover */
+}
+/* Add this CSS for manual positioning of buttons */
+.close_button {
+  position: absolute;
+}
+
+.close_button {
+  top: 1px;
+  left: 1350px;
+}
+
+/* Style for the icon and icon-hover */
+.icon,
+.icon-hover {
+  width: 70px; /* Set the width of the icon */
+  height: 70px; /* Set the height of the icon */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.icon-hover {
+  display: none; /* Hide icon-hover by default */
+}
+
+/* Show icon-hover on button hover */
+.close_button button:hover .icon-hover {
+  display: block;
+  margin-top: 1px;
+  transition-duration: 0.4s;
+}
+
+/* Hide icon on button hover */
+.close_button button:hover .icon {
+  display: none;
+}
+
+.content {
+  text-align: center; /* Center the text inside the content */
+  padding: 150px;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Arrange child elements vertically */
+  align-items: center;
+}

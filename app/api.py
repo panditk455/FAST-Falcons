@@ -68,7 +68,11 @@ def login():
 
 @app.route('/welcome')
 def load_welcome():
-    return render_template("welcome.html")
+    if 'username' in session:
+        username = session['username']
+        return render_template("welcome.html", username=username)
+    else:
+        return redirect('/login')
 
 @app.route('/home')
 def load_homepage():
@@ -76,40 +80,21 @@ def load_homepage():
         username = session['username']
         return render_template("home.html", username=username)
     else:
-        return redirect('login')
+        return redirect('/login')
 
-# @app.route('/profile')
-# def load_homepage():
-#     if 'username' in session:
-#         username = session['username']
-#         return render_template("home.html", username=username)
-#     else:
-#         return redirect('login')
+@app.route('/profile')
+def load_profile():
+    return render_template("profile.html")
 
 # @app.route('/avatar')
 # def load_selectcharacter():
 #     return render_template("change_avatar.html")
 
-# @app.route('/logout')
-# def logout():
-#     # Remove the username from the session to indicate that the user is logged out
-#     session.pop('username', None)
-#     return redirect('/')
-
-
-'''@app.route('/test')
-def test_db():
-    sql = "SELECT * FROM user;"
-    cursor.execute(sql)
-
-   # .... look at my code to fetch ...
-
-    answer = "test output: "
-
-    for row in rows:
-        answer += row
-
-    return answer'''
+@app.route('/logout')
+def logout():
+    # Remove the username from the session to indicate that the user is logged out
+    session.pop('username', None)
+    return redirect('/login')
 
 if __name__ == '__main__':
     my_port = 5555

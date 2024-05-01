@@ -133,6 +133,14 @@ html {
 .profile_button:hover .dropdown-content {
   display: block;
 }
+
+.userinfo {
+  position: absolute;
+  top: 1200%;
+  left: 43%;
+  /* transform: translate(-50%, -50%); */
+}
+
 .content {
   text-align: center; /* Center the text inside the content */
   padding: 150px;
