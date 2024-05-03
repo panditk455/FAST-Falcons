@@ -16,7 +16,8 @@ html {
 }
 
 /* Style for individual buttons */
-.close_button button {
+.close_button button,
+.chage_button button {
   background-color: transparent;
   color: transparent;
   border: none;
@@ -25,7 +26,8 @@ html {
   position: relative; /* Ensure proper positioning for icon-hover */
 }
 /* Add this CSS for manual positioning of buttons */
-.close_button {
+.close_button,
+.chage_button {
   position: absolute;
 }
 
@@ -33,7 +35,6 @@ html {
   top: 1px;
   left: 1350px;
 }
-
 /* Style for the icon and icon-hover */
 .icon,
 .icon-hover {
@@ -49,14 +50,16 @@ html {
 }
 
 /* Show icon-hover on button hover */
-.close_button button:hover .icon-hover {
+.close_button button:hover .icon-hover,
+.change_button button:hover .icon-hover {
   display: block;
   margin-top: 1px;
   transition-duration: 0.4s;
 }
 
 /* Hide icon on button hover */
-.close_button button:hover .icon {
+.close_button button:hover .icon,
+.change_button button:hover .icon {
   display: none;
 }
 
@@ -66,4 +69,102 @@ html {
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
   align-items: center;
+  height: 100vh;
+}
+
+.circle-image {
+  width: 220px;
+  height: 220px;
+  background-color: transparent;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  border: 2px solid rgb(255, 200, 35);
+}
+
+.circle-image img {
+  width: 100%; /* Changed width to 100% */
+  height: 100%; /* Changed height to 100% */
+  object-fit: cover; /* Changed background to object-fit */
+}
+
+.chage_button {
+  top: 10px;
+  left: 800px;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.avatar-container {
+  margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex; /* Use flexbox for avatar images */
+  justify-content: center; /* Center avatar images horizontally */
+  align-items: center; /* Center avatar images vertically */
+}
+
+.avatar-container img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Arrange children in a column */
+}
+
+.left-right-buttons {
+  display: flex; /* Arrange children in a row */
+  justify-content: space-between; /* Space evenly between children */
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 5px 10px; /* Adjust padding as needed */
+  margin: 0px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  color: rgb(70, 64, 64);
+  cursor: pointer;
+}
+
+.go-chat-button {
+  margin-top: 10px; /* Add margin between left-right buttons and go-chat button */
 }

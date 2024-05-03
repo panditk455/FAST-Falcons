@@ -120,7 +120,11 @@ def load_baldspot():
     
 @app.route('/profile')
 def load_profile():
-    return render_template("profile.html")
+    if 'username' in session:
+        username = session['username']
+        return render_template("profile.html", username=username)
+    else:
+        return redirect('/login')
 
 @app.route('/logout')
 def logout():
