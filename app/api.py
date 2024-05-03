@@ -47,7 +47,7 @@ def register():
 
         # Store the username in the session to indicate that the user is logged in
         session['username'] = username
-        return redirect('/home')
+        return redirect('/login')
     return render_template('register.html')
 
 
