@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+.navbar {
+  background-color: lightblue;
+  position: relative; /* Required for absolute positioning of children */
+}
+
+/* Style for individual buttons */
+.navbar button {
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  font-family: "Brush Script MT", sans-serif;
+  transition-duration: 0.4s;
+  position: relative; /* Ensure proper positioning for icon-hover */
+}
+
+/* Style for the icon and icon-hover */
+.icon,
+.icon-hover {
+  width: 70px; /* Set the width of the icon */
+  height: 70px; /* Set the height of the icon */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.icon-hover {
+  display: none; /* Hide icon-hover by default */
+}
+
+/* Show icon-hover on button hover */
+.navbar button:hover .icon-hover {
+  display: block;
+  margin-top: 1px;
+  transition-duration: 0.4s;
+}
+
+/* Hide icon on button hover */
+.navbar button:hover .icon {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none; /* Hide the dropdown content by default */
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 100%; /* Position the dropdown below the button with some spacing */
+}
+
+/* Show the dropdown content when hovering over the parent button */
+.navbar .profile_button:hover .dropdown-content {
+  display: block;
+}
+
+.userinfo {
+  position: absolute;
+  top: 1200%;
+  left: 43%;
+}
+
+.content {
+  text-align: center; /* Center the text inside the content */
+  padding: 150px;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Arrange child elements vertically */
+  align-items: center;
+  background-color: rgba(246, 246, 246);
+}
+
+.intro {
+  margin-bottom: 20px; /* Add margin at the bottom of the paragraph */
+}
+
+#mapimage {
+  max-width: 100%;
+  background-attachment: fixed;
+}
+
+/* Buttons */
+.button-container {
+  position: relative;
+}
+
+.button-container button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Button positions */
+.coffee_button,
+.crossiant_button,
+.cupcake_button,
+.fries_button,
+.bread_button,
+.tea_button {
+  position: absolute;
+}
+
+/* Adjust button positions */
+.coffee_button {
+  top: 42%;
+  left: 25%;
+}
+
+.crossiant_button {
+  top: 42%;
+  left: 35%;
+}
+
+.cupcake_button {
+  top: 42%;
+  left: 45%;
+}
+
+.fries_button {
+  top: 42%;
+  left: 55%;
+}
+
+.bread_button {
+  top: 42%;
+  left: 65%;
+}
+
+.tea_button {
+  top: 42%;
+  left: 75%;
+}
+
+/* Button icons */
+.button-container button img {
+  width: 70px;
+  height: 70px;
+}
+
+/* Button hover effect */
+.button-container button:hover img.icon {
+  display: none;
+}
+
+.button-container button:hover img.icon-hover {
+  display: block;
+}
