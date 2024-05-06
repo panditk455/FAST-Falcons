@@ -178,3 +178,25 @@ button:hover {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.center-med{
+  text-align: center;
+  font-size: large;
+}
+
+.big-button{
+  font-size: large;
+}
+
+.center-big{
+  text-align: center;
+  font-size: 80px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.red{
+  color: red;
+  display: block;
+  margin-right: 30px;
+}
