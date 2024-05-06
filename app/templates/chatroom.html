@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carl Chat Main</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="/static/chatroom.js"></script>
+</head>
+<body onload="initializeNumbers();">
+    <div class="topbar">
+        <div class="homebutton">
+            <p>
+                <a href="/home">
+                    <button>
+                        <img id="homeicon" src="../static/asset/houseicon.jpg"/>
+                    </button>
+                </a>
+            </p>
+        </div>
+
+        <div class="logoutbutton">
+            <p>
+                <a href="/logout">
+                    <button>
+                        <img id="logouticon" src="../static/asset/logouticon.jpg"/>
+                    </button>
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="lowerbar">
+        <div class="dropdown">
+            <button id="settings">Settings</button>
+            <div class="dropdown-content">
+                <a href="/aboutpage">About Page</a>
+                <a href="/aboutus">About Us</a>
+                <a href="/contact">Contact Us</a>
+                <a href="/logout">Logout</a>
+            </div> 
+        </div>
+        <div class="userinfo">
+            {% if username %}
+                <p>Logged in as: {{ username }}!</p>
+            {% else %}
+                <p>Playing as: guest!</p>
+            {% endif %}
+        </div>  
+    </div>
+
+    <div id="chatroom">
+        <h1>Chatroom</h1>
+        <div id="chat"></div>
+        <input type="text" id="message_input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <p class="heading-class">
+        Welcome to Room # <b id="roomNumber">?</b>
+      </p>
+
+      <p class="center-big">
+        <b class="red" id="text0" style="display: block;"> ? </b>
+        <b class="red" id="text1" style="display: block;"> ? </b>
+        <b class="red" id="text2" style="display: block;"> ? </b>
+        <b class="red" id="text3" style="display: block;"> ? </b>
+        <b class="red" id="text4" style="display: block;"> ? </b>
+    </p>
+    
+    <p class="center-med">
+        Players: <b id="playerNames">No One Here</b>
+      </p>
+      
+
+    <p class="center-med">
+        <button class="big-button" onclick="leaveRoom();">LEAVE ROOM</button>
+      </p>
+
+    <script src="../static/settings.js"></script>
+
+</body>
+</html>
