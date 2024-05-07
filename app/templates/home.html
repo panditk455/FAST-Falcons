@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carl Chat Main</title>
     <link rel="stylesheet" href="../static/style_home.css" />
+    <script src="/static/js/baldspot.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -106,8 +107,8 @@
         </div>
 
         <div class="baldspot_button">
-          <a href="/baldspot">
-            <button>
+          <a href="/chatroom">
+            <button onclick="joinRoom();">
               <img class="icon" src="../static/asset/location_button.png" />
               <img
                 class="icon-hover"
@@ -119,6 +120,9 @@
       </div>
     </div>
 
+    <script>
+      var username = {{username|tojson|safe}};
+    </script>
     <script src="../static/js/modal.js"></script>
   </body>
 </html>
