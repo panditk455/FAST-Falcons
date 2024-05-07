@@ -1,5 +1,3 @@
-
-
 * {
     padding: 0;
     margin: 0;
@@ -8,7 +6,6 @@
 .container {
     height: 100vh;
     width: 100%;
-
     background-size: cover;
     background-position: center;
     position: relative;
@@ -37,17 +34,14 @@
     top: 45%;
 }
 
-
 .left-col {
     margin-left: 11%;
 }
-
 
 .left-col h1 {
     font-size: 100%;
     color: black;
 }
-
 
 .right-col {
     float: right;
