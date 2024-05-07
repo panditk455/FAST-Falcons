@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carl Chat Main</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/style.css" />
     <script src="/static/baldspot.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="topbar">
-        <div class="homebutton">
-            <p>
-                <a href="/home">
-                    <button>
-                        <img id="homeicon" src="../static/asset/houseicon.jpg"/>
-                    </button>
-                </a>
-            </p>
-        </div>
+      <div class="homebutton">
+        <p>
+          <a href="/home">
+            <button>
+              <img id="homeicon" src="../static/asset/houseicon.jpg" />
+            </button>
+          </a>
+        </p>
+      </div>
 
-        <div class="logoutbutton">
-            <p>
-                <a href="/logout">
-                    <button>
-                        <img id="logouticon" src="../static/asset/logouticon.jpg"/>
-                    </button>
-                </a>
-            </p>
-        </div>
+      <div class="logoutbutton">
+        <p>
+          <a href="/logout">
+            <button>
+              <img id="logouticon" src="../static/asset/logouticon.jpg" />
+            </button>
+          </a>
+        </p>
+      </div>
     </div>
 
     <div class="lowerbar">
-        <div class="dropdown">
-            <button id="settings">Settings</button>
-            <div class="dropdown-content">
-                <a href="/aboutpage">About Page</a>
-                <a href="/aboutus">About Us</a>
-                <a href="/contact">Contact Us</a>
-                <a href="/logout">Logout</a>
-            </div> 
+      <div class="dropdown">
+        <button id="settings">Settings</button>
+        <div class="dropdown-content">
+          <a href="/aboutpage">About Page</a>
+          <a href="/aboutus">About Us</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/logout">Logout</a>
         </div>
+      </div>
     </div>
 
     <p class="center-med">
-        <button class="big-button" onclick="joinRoom();"> Join Game </button>
-      </p>
+      <button class="big-button" onclick="joinRoom();">Join Game</button>
+    </p>
 
     <script>
       var username = {{username|tojson|safe}};
     </script>
 
     <script src="../static/settings.js"></script>
-
-</body>
+  </body>
 </html>
