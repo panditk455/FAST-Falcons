@@ -1,56 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carl Chat Main</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <script src="/static/sayles.js"></script>
-</head>
-<body>
-    <div class="topbar">
-        <div class="homebutton">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sayles</title>
+    <link rel="stylesheet" href="../static/style_sayles.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="navbar">
+        <div class="home_button">
+          <a href="/home">
+            <button>
+              <img class="icon" src="../static/asset/home_button.png" />
+              <img
+                class="icon-hover"
+                src="../static/asset/home_button_hover.png"
+              />
+            </button>
+          </a>
+        </div>
+        <div class="setting_button">
+          <button id="modal-btn">
+            <img
+              class="icon"
+              src="../static/asset/setting_button.png"
+              alt="Setting"
+            />
+            <img
+              class="icon-hover"
+              src="../static/asset/setting_button_hover.png"
+              alt="Setting Hover"
+            />
+          </button>
+        </div>
+
+        <!-- Modal or Popup -->
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close">&times;</span>
+            <!-- Modal content goes here -->
+            <h2>Settings</h2>
             <p>
-                <a href="/home">
-                    <button>
-                        <img id="homeicon" src="../static/asset/houseicon.jpg"/>
-                    </button>
-                </a>
+              This is the content of the modal. It can cover most of the screen.
             </p>
+          </div>
         </div>
 
-        <div class="logoutbutton">
-            <p>
-                <a href="/logout">
-                    <button>
-                        <img id="logouticon" src="../static/asset/logouticon.jpg"/>
-                    </button>
-                </a>
-            </p>
+        <div class="profile_button">
+          <button>
+            <img
+              class="icon"
+              src="../static/asset/profile_button.png"
+              alt="Profile"
+            />
+            <img
+              class="icon-hover"
+              src="../static/asset/profile_button_hover.png"
+              alt="Profile Hover"
+            />
+          </button>
+          <div class="dropdown-content">
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+          </div>
         </div>
+
+        <div class="userinfo">
+          {% if username %}
+          <p>Logged in as: {{ username }}!</p>
+          {% else %}
+          <p>Playing as: guest!</p>
+          {% endif %}
+        </div>
+      </nav>
+      <div class="content">
+        <h1 class="intro">Sayles</h1>
+
+        <img id="image" src="../static/asset/Sayles_cafe.gif" />
+        <img id="menu_image" src="../static/asset/Sayles_menu.png" />
+      </div>
     </div>
-
-    <div class="lowerbar">
-        <div class="dropdown">
-            <button id="settings">Settings</button>
-            <div class="dropdown-content">
-                <a href="/aboutpage">About Page</a>
-                <a href="/aboutus">About Us</a>
-                <a href="/contact">Contact Us</a>
-                <a href="/logout">Logout</a>
-            </div> 
-        </div>
-    </div>
-
-    <p class="center-med">
-        <button class="big-button" onclick="joinRoom();"> Join Game </button>
-      </p>
-
-    <script>
-      var username = {{username|tojson|safe}};
-    </script>
-
-    <script src="../static/settings.js"></script>
-
-</body>
+    <script src="../static/js/modal.js"></script>
+  </body>
 </html>

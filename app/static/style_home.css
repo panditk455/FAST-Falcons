@@ -10,6 +10,19 @@ html {
   height: 100%;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 0; /* No padding at the top */
+  padding-bottom: 0; /* No padding at the bottom */
+  padding-left: 0.625rem; /* Converted from 10px to rem */
+  padding-right: 0.625rem; /* Converted from 10px to rem */
+  background-color: rgba(246, 246, 246);
+}
+
 .navbar {
   background-color: lightblue;
   position: relative; /* Required for absolute positioning of children */
@@ -40,18 +53,24 @@ html {
 }
 
 .home_button {
-  top: 1px;
-  left: 10px;
+  position: fixed;
+  left: 1.25rem;
+  top: 1rem;
+  z-index: 50;
 }
 
 .setting_button {
-  top: 1px;
-  left: 1265px;
+  position: fixed;
+  right: 11rem;
+  top: 1rem;
+  z-index: 50;
 }
 
 .profile_button {
-  top: 1px;
-  left: 1350px;
+  position: fixed;
+  right: 5.8rem;
+  top: 1rem;
+  z-index: 50;
 }
 /* Style for the icon and icon-hover */
 .icon,
@@ -146,40 +165,44 @@ html {
 }
 
 .userinfo {
-  position: absolute;
-  top: 1200%;
-  left: 43%;
-  /* transform: translate(-50%, -50%); */
+  position: fixed;
+  left: 40rem;
+  top: 1rem;
+  z-index: 50;
 }
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding: 150px;
+  padding-top: 0; /* No padding at the top */
+  padding-bottom: 0; /* No padding at the bottom */
+  padding-left: 1.25rem; /* Converted from 20px to rem */
+  padding-right: 1.25rem; /* Converted from 20px to rem */
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
-  align-items: center;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
   background-color: rgba(246, 246, 246);
 }
 
 .intro {
-  margin-bottom: 20px; /* Add margin at the bottom of the paragraph */
+  margin-bottom: 1.25rem; /* Converted from 20px to rem */
 }
 
-#mapimage {
-  max-width: 80%;
+#image {
+  max-width: 60%; /* No change needed, as percentage values are relative */
 }
 
 .sayles_button {
-  top: 57%;
-  left: 38%;
+  top: 23.5rem;
+  left: 34.75rem;
 }
 
 .library_button {
-  top: 42%;
-  left: 39%;
+  top: 16.5rem;
+  left: 35.8rem;
 }
 
 .baldspot_button {
-  top: 64%;
-  left: 46.5%;
+  top: 26.5rem;
+  left: 42rem;
 }
