@@ -10,13 +10,29 @@ html {
   height: 100%;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 0; /* No padding at the top */
+  padding-bottom: 0; /* No padding at the bottom */
+  padding-left: 0.625rem; /* Converted from 10px to rem */
+  padding-right: 0.625rem; /* Converted from 10px to rem */
+  background-color: rgba(246, 246, 246);
+}
+
+/* --- everything in nav bar start here --- */
 .navbar {
   background-color: lightblue;
   position: relative; /* Required for absolute positioning of children */
 }
 
 /* Style for individual buttons */
-.navbar button {
+.home_button button,
+.setting_button button,
+.profile_button button {
   background-color: transparent;
   color: transparent;
   border: none;
@@ -24,7 +40,33 @@ html {
   transition-duration: 0.4s;
   position: relative; /* Ensure proper positioning for icon-hover */
 }
+/* Add this CSS for manual positioning of buttons */
+.home_button,
+.setting_button,
+.profile_button {
+  position: absolute;
+}
 
+.home_button {
+  position: fixed;
+  left: 1.25rem;
+  top: 1rem;
+  z-index: 50;
+}
+
+.setting_button {
+  position: fixed;
+  right: 11rem;
+  top: 1rem;
+  z-index: 50;
+}
+
+.profile_button {
+  position: fixed;
+  right: 5.8rem;
+  top: 1rem;
+  z-index: 50;
+}
 /* Style for the icon and icon-hover */
 .icon,
 .icon-hover {
@@ -40,14 +82,18 @@ html {
 }
 
 /* Show icon-hover on button hover */
-.navbar button:hover .icon-hover {
+.home_button button:hover .icon-hover,
+.setting_button button:hover .icon-hover,
+.profile_button button:hover .icon-hover {
   display: block;
   margin-top: 1px;
   transition-duration: 0.4s;
 }
 
 /* Hide icon on button hover */
-.navbar button:hover .icon {
+.home_button button:hover .icon,
+.setting_button button:hover .icon,
+.profile_button button:hover .icon {
   display: none;
 }
 
@@ -92,101 +138,51 @@ html {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  top: 100%; /* Position the dropdown below the button with some spacing */
+  top: 450%; /* Position the dropdown below the button with some spacing */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 /* Show the dropdown content when hovering over the parent button */
-.navbar .profile_button:hover .dropdown-content {
+.profile_button:hover .dropdown-content {
   display: block;
 }
 
 .userinfo {
-  position: absolute;
-  top: 1200%;
-  left: 43%;
+  position: fixed;
+  left: 40rem;
+  top: 1rem;
+  z-index: 50;
 }
+
+/* --- everything in nav bar end here --- */
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding: 150px;
+  padding-top: 10rem; /* No padding at the top */
+  padding-bottom: 0; /* No padding at the bottom */
+  padding-left: 1.25rem; /* Converted from 20px to rem */
+  padding-right: 1.25rem; /* Converted from 20px to rem */
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
-  align-items: center;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
   background-color: rgba(246, 246, 246);
 }
 
 .intro {
-  margin-bottom: 20px; /* Add margin at the bottom of the paragraph */
+  margin-bottom: 0.1rem;
 }
 
-#mapimage {
-  max-width: 100%;
-  background-attachment: fixed;
+#image {
+  max-width: 70%;
 }
 
-/* Buttons */
-.button-container {
-  position: relative;
-}
-
-.button-container button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-/* Button positions */
-.coffee_button,
-.crossiant_button,
-.cupcake_button,
-.fries_button,
-.bread_button,
-.tea_button {
-  position: absolute;
-}
-
-/* Adjust button positions */
-.coffee_button {
-  top: 42%;
-  left: 25%;
-}
-
-.crossiant_button {
-  top: 42%;
-  left: 35%;
-}
-
-.cupcake_button {
-  top: 42%;
-  left: 45%;
-}
-
-.fries_button {
-  top: 42%;
-  left: 55%;
-}
-
-.bread_button {
-  top: 42%;
-  left: 65%;
-}
-
-.tea_button {
-  top: 42%;
-  left: 75%;
-}
-
-/* Button icons */
-.button-container button img {
-  width: 70px;
-  height: 70px;
-}
-
-/* Button hover effect */
-.button-container button:hover img.icon {
-  display: none;
-}
-
-.button-container button:hover img.icon-hover {
-  display: block;
+#menu_image {
+  max-width: 40%;
 }
