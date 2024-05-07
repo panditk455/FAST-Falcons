@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carl Chat Main</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="/static/chatroom.js"></script>
 </head>
 <body onload="initializeNumbers();">
@@ -13,7 +13,8 @@
             <p>
                 <a href="/home">
                     <button>
-                        <img id="homeicon" src="../static/asset/houseicon.jpg"/>
+                        <img src="{{ url_for('static', filename='asset/houseicon.jpg') }}" id = "homeicon">
+
                     </button>
                 </a>
             </p>
@@ -23,7 +24,7 @@
             <p>
                 <a href="/logout">
                     <button>
-                        <img id="logouticon" src="../static/asset/logouticon.jpg"/>
+                        <img src="{{ url_for('static', filename='asset/logouticon.jpg') }}" id="logouticon">
                     </button>
                 </a>
             </p>
