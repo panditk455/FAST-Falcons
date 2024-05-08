@@ -75,8 +75,8 @@ html {
 /* Style for the icon and icon-hover */
 .icon,
 .icon-hover {
-  width: 70px; /* Set the width of the icon */
-  height: 70px; /* Set the height of the icon */
+  width: 20px; /* Set the width of the icon */
+  height: 20px; /* Set the height of the icon */
   position: absolute;
   top: 0;
   left: 0;
