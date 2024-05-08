@@ -180,8 +180,22 @@ html {
   background-color: rgba(246, 246, 246);
 }
 
+h1.intro {
+  font-size: 36px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .intro {
-  margin-bottom: 0.1rem;
+  margin-bottom: 4rem;
 }
 
 #image {
@@ -189,5 +203,5 @@ html {
 }
 
 #menu_image {
-  max-width: 20%;
+  max-width: 35%;
 }
