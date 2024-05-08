@@ -1,10 +1,15 @@
 /* registerandlogin.css */
 
+@font-face {
+  font-family: "font1";
+  src: url("../static/font.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Times New Roman", Times, serif; /* Set default font to Segoe UI */
+  font-family: "font1", sans-serif;
 }
 
 /* Center the content vertically and horizontally */
@@ -28,7 +33,6 @@ html {
 .content {
   text-align: center;
   padding: 80px;
-  background-image: url("../static/login.gif");
   background-size: cover; /* Adjusted to cover */
   background-position: center; /* Centered background image */
   width: 100%;
@@ -41,8 +45,8 @@ h2 {
 }
 
 .circle-image {
-  width: 120px;
-  height: 120px;
+  width: 70px;
+  height: 70px;
   background-color: white;
   border-radius: 50%;
   overflow: hidden;
@@ -53,8 +57,8 @@ h2 {
 }
 
 .circle-image img {
-  width: 100%; /* Changed width to 100% */
-  height: 100%; /* Changed height to 100% */
+  width: 130%; /* Changed width to 100% */
+  height: 130%; /* Changed height to 100% */
   object-fit: cover; /* Changed background to object-fit */
 }
 

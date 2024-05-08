@@ -1,8 +1,13 @@
-/* Reset default margin and padding */
+@font-face {
+  font-family: "font1";
+  src: url("../static/font.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "font1", sans-serif;
 }
 
 /* Center the content vertically and horizontally */
@@ -179,23 +184,23 @@ button:hover {
   display: block;
 }
 
-.center-med{
+.center-med {
   text-align: center;
   font-size: large;
 }
 
-.big-button{
+.big-button {
   font-size: large;
 }
 
-.center-big{
+.center-big {
   text-align: center;
   font-size: 80px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.red{
+.red {
   color: red;
   display: block;
   margin-right: 30px;

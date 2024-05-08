@@ -1,8 +1,13 @@
+@font-face {
+  font-family: "font1";
+  src: url("../static/font.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "font1", sans-serif;
 }
 
 body,
@@ -180,9 +185,9 @@ html {
 }
 
 #image {
-  max-width: 70%;
+  max-width: 50%;
 }
 
 #menu_image {
-  max-width: 40%;
+  max-width: 20%;
 }
