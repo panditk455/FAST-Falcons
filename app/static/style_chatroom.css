@@ -46,10 +46,12 @@ html {
   position: relative; /* Ensure proper positioning for icon-hover */
 }
 /* Add this CSS for manual positioning of buttons */
-.home_button,
-.setting_button,
-.profile_button {
-  position: absolute;
+.home_button button,
+.setting_button button,
+.profile_button button {
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
 }
 
 .home_button {
@@ -75,8 +77,8 @@ html {
 /* Style for the icon and icon-hover */
 .icon,
 .icon-hover {
-  width: 20px; /* Set the width of the icon */
-  height: 20px; /* Set the height of the icon */
+  width: 30px; /* Set the width of the icon */
+  height: 30px; /* Set the height of the icon */
   position: absolute;
   top: 0;
   left: 0;
