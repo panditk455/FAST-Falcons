@@ -37,10 +37,7 @@ html {
 /* Style for individual buttons */
 .home_button button,
 .setting_button button,
-.profile_button button,
-.sayles_button button,
-.library_button button,
-.baldspot_button button {
+.profile_button button {
   background-color: transparent;
   color: transparent;
   border: none;
@@ -51,10 +48,7 @@ html {
 /* Add this CSS for manual positioning of buttons */
 .home_button,
 .setting_button,
-.profile_button,
-.sayles_button,
-.library_button,
-.baldspot_button {
+.profile_button {
   position: absolute;
 }
 
@@ -95,10 +89,7 @@ html {
 /* Show icon-hover on button hover */
 .home_button button:hover .icon-hover,
 .setting_button button:hover .icon-hover,
-.profile_button button:hover .icon-hover,
-.sayles_button button:hover .icon-hover,
-.library_button button:hover .icon-hover,
-.baldspot_button button:hover .icon-hover {
+.profile_button button:hover .icon-hover {
   display: block;
   margin-top: 1px;
   transition-duration: 0.4s;
@@ -107,10 +98,7 @@ html {
 /* Hide icon on button hover */
 .home_button button:hover .icon,
 .setting_button button:hover .icon,
-.profile_button button:hover .icon,
-.sayles_button button:hover .icon,
-.library_button button:hover .icon,
-.baldspot_button button:hover .icon {
+.profile_button button:hover .icon {
   display: none;
 }
 
@@ -181,7 +169,7 @@ html {
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding-top: 0; /* No padding at the top */
+  padding-top: 10rem; /* No padding at the top */
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 1.25rem; /* Converted from 20px to rem */
   padding-right: 1.25rem; /* Converted from 20px to rem */
@@ -190,27 +178,4 @@ html {
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
   background-color: rgba(246, 246, 246);
-}
-
-.intro {
-  margin-bottom: 1.25rem; /* Converted from 20px to rem */
-}
-
-#image {
-  max-width: 60%; /* No change needed, as percentage values are relative */
-}
-
-.sayles_button {
-  top: 23.5rem;
-  left: 34.75rem;
-}
-
-.library_button {
-  top: 16.5rem;
-  left: 35.8rem;
-}
-
-.baldspot_button {
-  top: 26.5rem;
-  left: 42rem;
 }
