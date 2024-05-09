@@ -78,10 +78,29 @@
       <div class="content">
         <h1 class="intro">Sayles</h1>
         <h2>Choose your favorite menu and go chat!</h2>
-        <img id="menu_image" src="../static/asset/Sayles_menu.png" />
+
+        <img
+          id="menu_image"
+          src="../static/asset/Sayles_menu.png"
+          usemap="#clickmenu"
+        />
+        <map name="clickmenu">
+          <area shape="rect" coords="28,28,63,63" alt="cupcakes" />
+          <area shape="rect" coords="85,20,120,65" alt="coffee" />
+          <area shape="rect" coords="169,20,190,65" alt="crossaint" />
+          <area shape="rect" coords="210,17,240,64" alt="fries" />
+          <area shape="rect" coords="280,17,310,63" alt="bread" />
+          <area shape="rect" coords="370,30,420,60" alt="tea" />
+        </map>
+
+        <div id="popupContainer" class="popup-container">
+          <img id="popupImage" class="popup-image" src="" alt="Popup Image" />
+        </div>
+
         <img id="image" src="../static/asset/Sayles_cafe.gif" />
       </div>
     </div>
     <script src="../static/js/modal.js"></script>
+    <script src="../static/js/menu.js"></script>
   </body>
 </html>

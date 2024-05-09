@@ -205,3 +205,32 @@ h2 {
 #menu_image {
   max-width: 35%;
 }
+
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 89%;
+  left: 50.2%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: transparent;
+  padding: 1.25rem; /* 20px / 16px = 1.25rem */
+  border-radius: 0.3125rem; /* 5px / 16px = 0.3125rem */
+  /* 10px / 16px = 0.625rem */
+
+  /* Responsive positioning */
+  width: 50%; /* Adjust the width as needed */
+  max-width: 400px; /* Adjust the max-width as needed */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .popup-container {
+    width: 90%; /* Adjust the width for smaller screens */
+  }
+}
+
+.popup-image {
+  max-width: 10%;
+  max-height: 50vh;
+}
