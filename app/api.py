@@ -26,11 +26,7 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
-# Check if the user has already visited the welcome page
-def has_visited_welcome(username):
-    cursor.execute("SELECT visited_welcome FROM user WHERE username=%s", (username,))
-    result = cursor.fetchone()
-    return result[0] if result else False
+
 
 @app.route('/requestRoomNum/<name>')
 def requestRoom(name):
@@ -139,6 +135,12 @@ def sendmessage(num,text,count):
     return json.dumps(room_dict)
 
 
+# Check if the user has already visited the welcome page
+def has_visited_welcome(username):
+    cursor.execute("SELECT visited_welcome FROM user WHERE username=%s", (username,))
+    result = cursor.fetchone()
+    return result[0] if result else False
+
 # Update the visited_welcome flag in the database
 def mark_welcome_visited(username):
     cursor.execute("UPDATE user SET visited_welcome = 1 WHERE username=%s", (username,))
@@ -166,7 +168,7 @@ def register():
 
         # Store the username in the session to indicate that the user is logged in
         session['username'] = username
-        return redirect('/home')
+        return redirect('/login')
     return render_template('register.html')
 
 
