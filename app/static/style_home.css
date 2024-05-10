@@ -28,6 +28,7 @@ html {
   background-color: rgba(246, 246, 246);
 }
 
+/* --- everything in nav bar start here --- */
 .navbar {
   background-color: lightblue;
   position: relative; /* Required for absolute positioning of children */
@@ -175,6 +176,8 @@ html {
   top: 1rem;
   z-index: 50;
 }
+
+/* --- everything in nav bar end here --- */
 
 .content {
   text-align: center; /* Center the text inside the content */

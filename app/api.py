@@ -114,8 +114,6 @@ def sendmessage(num,text,count):
     Message = text
     room_dict = room_data[num]
 
-    
-    
     if (currenttext > 4): 
         room_dict['red'][0] = room_dict['red'][1]
         room_dict['red'][1] = room_dict['red'][2]
