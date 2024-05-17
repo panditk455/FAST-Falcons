@@ -241,12 +241,12 @@ h2 {
 
 #drag1 {
   left: 50px;
-  top: 100px;
+  top: 80px;
 }
 
 #drag2 {
   left: 200px;
-  top: 150px;
+  top: 80px;
 }
 
 .draggable-container {
