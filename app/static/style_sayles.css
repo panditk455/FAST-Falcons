@@ -230,3 +230,25 @@ h2 {
   max-width: 10%;
   max-height: 50vh;
 }
+
+.draggable {
+  width: 100px;
+  height: 100px;
+  cursor: move;
+  position: absolute;
+  z-index: 1000;
+}
+
+#drag1 {
+  left: 50px;
+  top: 100px;
+}
+
+#drag2 {
+  left: 200px;
+  top: 150px;
+}
+
+.draggable-container {
+  position: relative;
+}
