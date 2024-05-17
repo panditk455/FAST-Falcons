@@ -230,3 +230,29 @@ h2 {
   max-width: 10%;
   max-height: 50vh;
 }
+
+.draggable {
+  width: 100px;
+  height: 100px;
+  cursor: move;
+  position: absolute;
+  z-index: 1000;
+}
+
+#drag1 {
+  left: 20px;
+  top: 90px;
+}
+
+#drag2 {
+  left: 200px;
+  top: 80px;
+}
+
+.draggable-section {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+  min-height: 200px;
+}
