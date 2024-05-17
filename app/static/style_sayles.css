@@ -240,8 +240,8 @@ h2 {
 }
 
 #drag1 {
-  left: 50px;
-  top: 80px;
+  left: 20px;
+  top: 90px;
 }
 
 #drag2 {
@@ -249,6 +249,10 @@ h2 {
   top: 80px;
 }
 
-.draggable-container {
+.draggable-section {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  margin-top: 20px;
   position: relative;
+  min-height: 200px;
 }
