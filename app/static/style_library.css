@@ -179,3 +179,27 @@ html {
   align-items: center; /* Center horizontally */
   background-color: rgba(246, 246, 246);
 }
+
+/* Add this CSS to your existing style_library.css */
+
+.section {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20%;
+  cursor: pointer;
+}
+#section1 { top: 40%; }
+#section2 { top: 60%; }
+#section3 { top: 80%; }
+#section4 { top: 100%; }
+.clicked {
+  background-color: rgba(0, 0, 255, 0.3);
+}
+.image-wrapper {
+  position: relative;
+  text-align: center;
+}
+#music_image {
+  max-width: 100%;
+}

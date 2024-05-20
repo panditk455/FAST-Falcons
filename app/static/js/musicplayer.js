@@ -1,6 +1,4 @@
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
   let audioElement = document.getElementById("mysound");
@@ -41,3 +39,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
+
+
+// #each floor clickable
+document.addEventListener("DOMContentLoaded", function () {
+    let sections = document.querySelectorAll(".section");
+  
+    sections.forEach(section => {
+      section.addEventListener("click", function () {
+        sections.forEach(s => s.classList.remove("clicked"));
+        section.classList.add("clicked");
+        // how to handle specific actions for each section?? songs lists and stuff
+      });
+    });
+  });
+  
