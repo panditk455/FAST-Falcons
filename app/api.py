@@ -35,7 +35,6 @@ def requestRoom(name):
     # Pick a random Room number
     # Check and make sure that player name isn't already in the room
     while (not done):
-        #room_num = random.randint(1,9)
         room_num = 1
         if room_num in room_data:
             data_dict = room_data[room_num]
@@ -59,28 +58,21 @@ def gameRoom(num, name):
         return redirect('/login')
     global room_data
     
-    #initialize the room data if it doesn't exist
+    # Initialize the room data if it doesn't exist
     if not (num in room_data):
         data = {}
-        data['red'] = [" "," "," "," "," "]
-        data['names'] = [ name ]
+        data['red'] = [" "] * 20  # CHANGED: List of 20 messages instead of 5
+        data['names'] = [name]    # CHANGED: Initialize names list with the provided name
         data['counter'] = 0
         room_data[num] = data
     else:
         data = room_data[num]
-        data['names'].append(name)
+        if name not in data['names']:  # CHANGED: Check if the name is already in the list
+            data['names'].append(name)
 
     notify_sockets(num)
 
-    return render_template("chatroom.html",username=username)
-    
-    # @app.route('/getupdate/')
-    # def returnNumbers():
-    #     global Message
-
-    #     my_dict = {}
-    #     my_dict['red'] = Message
-    #     return json.dumps(my_dict)
+    return render_template("chatroom.html", username=username)
 
 @app.route('/getupdate/<num>')
 def returnData(num):
@@ -89,24 +81,12 @@ def returnData(num):
     if num in room_data:
         data_dict = room_data[num]
     else:
-        data_dict = {'red':[" "," "," "," "," "], 'names':[], 'counter' : 0} 
+        data_dict = {'red': [" "] * 20, 'names': [], 'counter': 0}  # CHANGED: List of 20 messages instead of 5
         
     return json.dumps(data_dict)
 
-# @app.route('/sendmessage/<text>')
-# def blue_up(text):
-#     global Message
-
-#     Message = text
-
-#     notify_sockets()
-
-#     my_dict = {}
-#     my_dict['red'] = Message
-#     return json.dumps(my_dict)
-
 @app.route('/sendmessage/<num>/<text>/<count>')
-def sendmessage(num,text,count): 
+def sendmessage(num, text, count): 
     v = count
     global currenttext 
     global Message
@@ -114,24 +94,19 @@ def sendmessage(num,text,count):
     Message = text
     room_dict = room_data[num]
 
-    if (currenttext > 4): 
-        room_dict['red'][0] = room_dict['red'][1]
-        room_dict['red'][1] = room_dict['red'][2]
-        room_dict['red'][2] = room_dict['red'][3]
-        room_dict['red'][3] = room_dict['red'][4]
-        room_dict['red'][4] = Message
+    if currenttext >= 20:  
+        for i in range(19): 
+            room_dict['red'][i] = room_dict['red'][i + 1]
+        room_dict['red'][19] = Message
     else:
         room_dict['red'][currenttext] = Message
         room_dict['counter'] += 1
 
-        #room_dict['counter'] = 0
     currenttext += 1
 
     notify_sockets(num)
 
-
     return json.dumps(room_dict)
-
 
 # Check if the user has already visited the welcome page
 def has_visited_welcome(username):
@@ -182,7 +157,7 @@ def login():
             "SELECT * FROM user WHERE username=%s AND pass_word=%s", (username, password))
         user = cursor.fetchone()
         if user:
-            # If the user exists, store their username in the session to indicate that they are loggin in
+            # If the user exists, store their username in the session to indicate that they are logged in
             session['username'] = username
             
             # Check if the user has visited the welcome page
@@ -194,7 +169,7 @@ def login():
         else:
             # If the user does not exist or the password is incorrect, return an error message
             error_message = "Invalid username or password! Please try again!"
-            return render_template('login.html',error = error_message)
+            return render_template('login.html', error=error_message)
     return render_template('login.html')
 
 @app.route('/welcome')
@@ -251,16 +226,6 @@ def logout():
     session.pop('username', None)
     return redirect('/login')
 
-#This function tries to notify each of the browser clients
-# It is called whenever anything has changed and the browsers need to update
-# def notify_sockets():
-#     dead_count = 0
-#     for ws in web_sockets:
-#         try:
-#             ws.send("Update")
-#         except:
-#             dead_count += 1
-
 def notify_sockets(room):
     global web_sockets
 
@@ -272,21 +237,21 @@ def notify_sockets(room):
             try:
                 ws.send("Update")
             except:
-                dead_sockets.append( (num,name) )
+                dead_sockets.append( (num, name) )
                 
     for num, name in dead_sockets:
-        leave_room(num,name)
+        leave_room(num, name)
 
 @app.route('/leaveroom/<num>/<name>')
 def leave_room(num, name):
     global web_sockets
     global room_data
     
-    #Remove the WebSocket from the global dictionary
-    if (num,name) in web_sockets:
-        del web_sockets[(num,name)]
+    # Remove the WebSocket from the global dictionary
+    if (num, name) in web_sockets:
+        del web_sockets[(num, name)]
 
-    #Remove the player from the list of names in the room
+    # Remove the player from the list of names in the room
     if num in room_data:
         data_dict = room_data[num]
         if name in data_dict['names']:
@@ -295,37 +260,18 @@ def leave_room(num, name):
     notify_sockets(num)
     return "Player: " + name + " Left"
 
-
-#This listens for incoming websocket connections
-#ws is the varible that stores the web socket object
-# @sock.route('/openSocket')
-# def open_socket(ws):
-#     sys.stderr.write("WebSocket Connection Opened!\n")
-
-#     # Add this to the global list of sockets
-#     web_sockets.append(ws)
-    
-#     # We want to keep the socket open as long as the browser client is active
-#     while True:
-#         ans = True
-    
-#     return ""
-
 @sock.route('/openSocket/<num>/<name>')
-def open_socket(ws,num,name):
+def open_socket(ws, num, name):
     global web_sockets
     
-    #sys.stderr.write("WebSocket Connection Opened! " + num + " " + name + "\n")
-    
     # Add this to the global websocket dictionary
-    web_sockets[(num,name)]=ws
+    web_sockets[(num, name)] = ws
     
     # We want to keep the socket open as long as the browser client is active
     while True:
         time.sleep(10)
     
     return ""
-
 
 if __name__ == '__main__':
     my_port = 5555

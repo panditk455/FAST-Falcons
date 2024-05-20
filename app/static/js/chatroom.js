@@ -68,10 +68,6 @@ function applyUpdate(the_json) {
 
   currenttext = counter;
 
-  // if (currenttext == 0) {
-  //     updatetext = 1;
-  //     new_red = the_json['red'][currenttext];
-  // }
 
   names_elem = document.getElementById("playerNames");
   names_elem.innerHTML = the_json["names"];
