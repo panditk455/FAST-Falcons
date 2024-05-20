@@ -6,7 +6,37 @@
     <title>Library</title>
     <link rel="stylesheet" href="../static/style_library.css" />
     <link rel="stylesheet" href="../static/music.css" />
-    <style></style>
+    <style>
+      .section {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 20%;
+        cursor: pointer;
+      }
+      #section1 {
+        top: 40%;
+      }
+      #section2 {
+        top: 60%;
+      }
+      #section3 {
+        top: 80%;
+      }
+      #section4 {
+        top: 100%;
+      }
+      .clicked {
+        background-color: rgba(0, 0, 255, 0.3);
+      }
+      .image-wrapper {
+        position: relative;
+        text-align: center;
+      }
+      #music_image {
+        max-width: 100%;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar">
@@ -36,12 +66,9 @@
         </button>
       </div>
 
-      <!-- Modal or Popup -->
       <div id="myModal" class="modal">
         <div class="modal-content">
-          <!-- Close button for the modal -->
           <span class="close">&times;</span>
-          <!-- Modal content goes here -->
           <h2>Settings</h2>
           <p>
             This is the content of the modal. It can cover most of the screen.
@@ -78,30 +105,39 @@
 
     <div class="container">
       <div class="left-col">
-        <h1>
-          Choose <br />
-          Your <br />
-          Vibe
-        </h1>
+        <h1>Choose <br />Your <br />Vibe</h1>
         <select id="songSelector">
-          <option value="../static/asset/sounds/music1.mp3">Song 1</option>
-          <option value="../static/asset/sounds/music2.mp3">Song 2</option>
-          <option value="../static/asset/sounds/music3.mp3">Song 3</option>
-          <option value="../static/asset/sounds/music4.mp3">Song 4</option>
-          <option value="../static/asset/sounds/music5.mp3">Song 5</option>
-          <!-- Add more options for additional songs -->
+          <option value="asset/sounds/music1.mp3">Song 1</option>
+          <option value="asset/sounds/music2.mp3">Song 2</option>
+          <option value="asset/sounds/music3.mp3">Song 3</option>
+          <option value="asset/sounds/music4.mp3">Song 4</option>
+          <option value="asset/sounds/music5.mp3">Song 5</option>
         </select>
       </div>
 
       <div class="right-col">
-        <p>Click Here To Listen</p>
+        <p>Click Here To Listen to music</p>
         <img src="../static/asset/Play.png" id="icon" />
       </div>
     </div>
 
     <audio id="mysound"></audio>
 
+    <div class="content">
+      <h1 class="intro">Library</h1>
+      <h2>Choose your favorite floor and Listen to music</h2>
+
+      <div class="image-wrapper">
+        <img id="music_image" src="../static/asset/library.png" alt="Library" />
+        <div id="section1" class="section"></div>
+        <div id="section2" class="section"></div>
+        <div id="section3" class="section"></div>
+        <div id="section4" class="section"></div>
+      </div>
+    </div>
+
     <script src="../static/js/modal.js"></script>
     <script src="../static/js/musicplayer.js"></script>
+    <script src="../static/js/library.js"></script>
   </body>
 </html>

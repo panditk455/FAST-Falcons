@@ -30,6 +30,20 @@ function initializeNumbers() {
   socket.onmessage = function (event) {
     fetchUpdate();
   };
+  // Setup text elements for messages
+  const textContainer = document.getElementById("textContainer");
+  for (let i = 0; i < 20; i++) {
+    const bElement = document.createElement("b");
+    bElement.className = "red";
+    bElement.id = "text" + i;
+    bElement.style.display = "block";
+    textContainer.appendChild(bElement);
+  }
+}
+
+function scrollToBottom() {
+  var chatDiv = document.getElementById("textContainer");
+  chatDiv.scrollTop = chatDiv.scrollHeight;
 }
 
 // This function is called periodically to fetch updates from the server
@@ -41,48 +55,16 @@ function fetchUpdate() {
     .then((the_json) => applyUpdate(the_json));
 }
 
-// function applyUpdate(the_json) {
-//     new_red = the_json['red'];
-
-//     red_elem = document.getElementById("redText");
-
-//     red_elem.innerHTML = new_red;
-// } // Start with 'red1'
 function applyUpdate(the_json) {
   room_elem = document.getElementById("roomNumber");
   room_elem.innerHTML = room_num;
   counter = the_json["counter"];
 
-  // new_red = the_json['red'][currenttext-1];
-  //var updatetext = currenttext
-
-  // Assuming the_json and currenttext are defined elsewhere in your code
-
-  for (i = 0; i <= 4; i++) {
+  for (i = 0; i <= 19; i++) {
     new_red = the_json["red"][i];
     red_elem = document.getElementById("text" + i);
     red_elem.innerHTML = new_red;
   }
-
-  // else{
-  //     the_json['red'].shift();
-  //     red_elem = document.getElementById("text" + 4);
-  //     the_json['red'].push(red_elem);
-  //     for (i = 0; i <= 4; i++) {
-  //         new_red = the_json['red'][i];
-  //         red_elem = document.getElementById("text" + i);
-  //         red_elem.innerHTML = new_red;
-  //         }
-
-  // }
-  // for (let i = 0; i <= counter; i++) {
-  //     for (let j = 0; j <= i; j++) {
-  //          new_red = the_json['red'][i - 1];
-  //          red_elem = document.getElementById("text" + i-1);
-  //          red_elem.innerHTML = new_red;
-
-  //     }
-  // }
 
   currenttext = counter;
 
@@ -95,54 +77,47 @@ function applyUpdate(the_json) {
   names_elem.innerHTML = the_json["names"];
 }
 
-// // This function is called when the page loads
-// function initializeNumbers(){
-//     // Open the Websocket when the page loads
-//     socket = new WebSocket("/openSocket");
-
-//     // Fetch the initial numbers from the server
-//     fetchUpdate();
-
-//     // Fetch a new update whenever the socket receives a message
-//     socket.onmessage = function(event){
-// 	fetchUpdate();
-//     }
-// }
-
-// This function runs when the user requests to change rooms
-
 function sendMessage() {
   var message = document.getElementById("message_input").value;
+  if (!message.trim()) return; // Avoid sending empty messages
   document.getElementById("message_input").value = "";
   currenttext += 1;
-  if (currenttext > 4) {
-    var blue_elem = document.getElementById("text" + 0);
-    var red_elem = document.getElementById("text" + 1);
-    blue_elem = red_elem;
-    var blue_elem = document.getElementById("text" + 1);
-    var red_elem = document.getElementById("text" + 2);
-    blue_elem = red_elem;
-    var blue_elem = document.getElementById("text" + 2);
-    var red_elem = document.getElementById("text" + 3);
-    blue_elem = red_elem;
-    var blue_elem = document.getElementById("text" + 3);
-    var red_elem = document.getElementById("text" + 4);
-    blue_elem = red_elem;
-    var red_elem = document.getElementById("text" + 4);
-    red_elem.innerHTML = message;
+  message = play_name + ": " + message;
+
+  if (currenttext > 19) {
+    // Shift content of each element to the previous one, up to 'text19'
+    for (var i = 0; i < 19; i++) {
+      var currentElement = document.getElementById("text" + i);
+      var nextElement = document.getElementById("text" + (i + 1));
+      currentElement.innerHTML = nextElement.innerHTML;
+    }
+    // Update the last element 'text19' with the new message
+    document.getElementById("text19").innerHTML = message;
   } else {
-    // Get the current 'red' element based on the counter
+    // Update the current 'red' element based on the counter
     var red_elem = document.getElementById("text" + currenttext);
     red_elem.innerHTML = message;
   }
 
   // Update the URL and send the message to the server
 
+  scrollToBottom();
   var URL = "/sendmessage/" + room_num + "/" + message + "/" + currenttext;
   fetch(URL);
 
   // Increment the counter and wrap around if necessary
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Add event listener for the Enter key
+  document
+    .getElementById("message_input")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+});
 
 function leaveRoom() {
   // Alert the server that a player has left the room
@@ -151,7 +126,7 @@ function leaveRoom() {
 }
 
 function changeRoom() {
-  URL = "/home";
+  URL = "/sayles";
   location.href = URL;
 }
 

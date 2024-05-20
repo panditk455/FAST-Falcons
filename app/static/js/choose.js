@@ -34,7 +34,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   saveBtn.addEventListener("click", () => {
     console.log("Save button clicked!");
-    // Logic to save the chosen avatar state
-    alert("Avatar saved successfully!");
+    const avatarPath = avatars[avatarIndex];
+
+    // Send AJAX request to save the chosen avatar path
+    fetch("/save_avatar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ avatar_path: avatarPath }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          alert("Avatar saved successfully!");
+        } else {
+          alert("Error saving avatar: " + data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   });
 });

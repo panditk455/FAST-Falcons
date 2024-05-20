@@ -12,7 +12,7 @@
 
 body,
 html {
-  height: 100%;
+  height: 200%;
 }
 
 .wrapper {
@@ -20,7 +20,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 200%;
   padding-top: 0; /* No padding at the top */
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
@@ -46,12 +46,10 @@ html {
   position: relative; /* Ensure proper positioning for icon-hover */
 }
 /* Add this CSS for manual positioning of buttons */
-.home_button button,
-.setting_button button,
-.profile_button button {
-  width: 30px;
-  height: 30px;
-  font-size: 16px;
+.home_button,
+.setting_button,
+.profile_button {
+  position: absolute;
 }
 
 .home_button {
@@ -77,8 +75,8 @@ html {
 /* Style for the icon and icon-hover */
 .icon,
 .icon-hover {
-  width: 30px; /* Set the width of the icon */
-  height: 30px; /* Set the height of the icon */
+  width: 70px; /* Set the width of the icon */
+  height: 70px; /* Set the height of the icon */
   position: absolute;
   top: 0;
   left: 0;
@@ -192,8 +190,8 @@ html {
 }
 
 .center-big {
-  text-align: center;
-  font-size: 80px;
+  text-align: Left;
+  font-size: 50px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -202,4 +200,223 @@ html {
   color: red;
   display: block;
   margin-right: 30px;
+}
+
+/* Additional styles for scrollable message container */
+#textContainer {
+  background-color: rgb(157, 155, 155);
+  height: 500px;
+  width: 500px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 3px solid rgb(157, 155, 155);
+  padding: 5px;
+}
+
+/*.message {
+  display: block;
+  Font: 25px;
+  color: rgb(38, 0, 255);
+}
+
+.play_name{
+  Font: 25px;
+  color: red
+}*/
+
+.create-post {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 1px grey;
+  box-shadow: 0 0 5px 1px grey;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+
+.header::before,
+h1,
+.cross-icon {
+  content: "";
+  flex-basis: 100%;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -0.25rem;
+  left: 0;
+  background-color: rgb(193, 190, 190);
+}
+
+h1 {
+  text-align: center;
+}
+
+.cross-icon {
+  text-align: right;
+}
+
+.cross-icon-mark {
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 50%;
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yY/r/fCbUcoRfiez.png);
+  background-position: 3.5px -483.5px;
+  background-size: 26px 1031px;
+  width: 15px;
+  height: 15px;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.post-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-pic {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: green;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  border-radius: 50%;
+}
+
+.full-name {
+  margin-bottom: 0.3rem;
+}
+
+.post-content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+textarea {
+  font-size: 1.25rem;
+  width: 100%;
+  border: none;
+  resize: none;
+  outline: none;
+  line-height: 1.25;
+}
+
+.emoji-picker {
+  text-align: right;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+emoji-picker {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: -26rem;
+  left: 65%;
+}
+
+.emoji {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.add-to-your-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7rem;
+  border: 1px solid rgb(193, 190, 190);
+  padding: 1.25rem 1rem;
+  border-radius: 5px;
+}
+
+.add-to-post-text {
+  font-weight: bold;
+}
+
+.add-to-post-icons {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.add-to-post-icons div {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.post-btn {
+  outline: none;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.75rem 0;
+  margin-top: 1rem;
+  background-color: #1b74e4;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.post-btn:hover {
+  background-color: rgba(27, 116, 228, 0.85);
+}
+
+.post-btn:disabled,
+.post-btn[disabled] {
+  cursor: not-allowed;
+  background-color: #e4e6eb;
+  color: #bdc1c5;
+}
+
+.post-audience-section {
+  transform: translateY(-5rem);
+  display: none;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 1px grey;
+  box-shadow: 0 0 5px 1px grey;
+}
+
+.post-audience-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto;
+  align-items: center;
+  padding-left: 1.5rem;
+}
+
+.post-audience-header::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -0.25rem;
+  left: 0;
+  background-color: rgb(193, 190, 190);
+}
+
+.arrow-left-icon {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #606770;
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/1gFkxZXWOU8.png);
+  background-position: 0px -182px;
+  background-size: 26px 972px;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
 }
