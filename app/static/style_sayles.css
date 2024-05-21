@@ -256,3 +256,13 @@ h2 {
   position: relative;
   min-height: 200px;
 }
+
+.JoinMed {
+  text-align: center;
+  font-size: large;
+}
+
+.JoinButton {
+  font-size: large;
+}
+

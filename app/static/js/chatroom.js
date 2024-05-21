@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
 function leaveRoom() {
   // Alert the server that a player has left the room
   URL = "/leaveroom/" + room_num + "/" + play_name;
