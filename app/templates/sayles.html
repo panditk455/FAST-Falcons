@@ -118,8 +118,11 @@
         <button class="JoinButton" onclick="join_oneonone_chat();">JOIN A ROOM</button>
       </p>
 
-  <script src="/static/js/chatroom.js"></script>
+  
+
     </div>
+    <script src="/static/js/oneonone.js"></script>
+    <script> var username = {{username|tojson|safe}}; </script>
     <script src="../static/js/modal.js"></script>
     <script src="../static/js/menu.js"></script>
     <script src="../static/js/drag.js"></script>

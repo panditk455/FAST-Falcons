@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carl Chat Posting</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style_chatroom.css') }}"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_chatroom.css') }}" />
     <script src="/static/js/chatroom.js"></script>
   </head>
   <body onload="initializeNumbers();">
@@ -16,29 +13,15 @@
         <div class="home_button">
           <a href="/home">
             <button>
-              <img
-                class="icon"
-                src="{{ url_for('static', filename='asset/home_button.png') }}"
-              />
-              <img
-                class="icon-hover"
-                src="{{ url_for('static', filename='asset/home_button_hover.png') }}"
-              />
+              <img class="icon" src="{{ url_for('static', filename='asset/home_button.png') }}" />
+              <img class="icon-hover" src="{{ url_for('static', filename='asset/home_button_hover.png') }}" />
             </button>
           </a>
         </div>
         <div class="setting_button">
           <button id="modal-btn">
-            <img
-              class="icon"
-              src="{{ url_for('static', filename='asset/setting_button.png') }}"
-              alt="Setting"
-            />
-            <img
-              class="icon-hover"
-              src="{{ url_for('static', filename='asset/setting_button_hover.png') }}"
-              alt="Setting Hover"
-            />
+            <img class="icon" src="{{ url_for('static', filename='asset/setting_button.png') }}" alt="Setting" />
+            <img class="icon-hover" src="{{ url_for('static', filename='asset/setting_button_hover.png') }}" alt="Setting Hover" />
           </button>
         </div>
 
@@ -49,24 +32,14 @@
             <span class="close">&times;</span>
             <!-- Modal content goes here -->
             <h2>Settings</h2>
-            <p>
-              This is the content of the modal. It can cover most of the screen.
-            </p>
+            <p>This is the content of the modal. It can cover most of the screen.</p>
           </div>
         </div>
 
         <div class="profile_button">
           <button>
-            <img
-              class="icon"
-              src="{{ url_for('static', filename='asset/profile_button.png') }}"
-              alt="Profile"
-            />
-            <img
-              class="icon-hover"
-              src="{{ url_for('static', filename='asset/profile_button_hover.png') }}"
-              alt="Profile Hover"
-            />
+            <img class="icon" src="{{ url_for('static', filename='asset/profile_button.png') }}" alt="Profile" />
+            <img class="icon-hover" src="{{ url_for('static', filename='asset/profile_button_hover.png') }}" alt="Profile Hover" />
           </button>
           <div class="dropdown-content">
             <a href="/profile">Profile</a>
@@ -83,43 +56,21 @@
         </div>
       </nav>
 
-      <div class="content">
-        <div id="chatroom">
-          <h1>Posting!</h1>
+       <div class="content">
 
-          <p class="heading-class">Welcome to Public Post!</p>
-          <section class="create-post">
-            <header class="header">
-              <h1>Create post</h1>
-              <div class="cross-icon">
-                <div class="cross-icon-mark"></div>
-              </div>
-            </header>
-            <div class="post-header">
-              <div class="profile-pic"></div>
-              <div class="user-info">
-                <div class="full-name">GeeksforGeeks</div>
-              </div>
-            </div>
-            <div class="post-content">
-              <p id="chat">
-                <textarea
-                  name="post-desc"
-                  id="message_input"
-                  cols="30"
-                  rows="5"
-                  placeholder="What's on your mind? Type..."
-                ></textarea>
-              </p>
-              <div class="emoji-picker">
-                <emoji-picker class="light"></emoji-picker>
-                <i class="emoji" aria-label="Insert an emoji" role="img"></i>
-              </div>
-              <button class="post-btn" onclick="sendMessage()">Post!</button>
-            </div>
-          </section>
+        <div id="chatroom">
+          <h1>Chatroom</h1>
+
+          <p class="heading-class">Welcome to Room # <b id="roomNumber">?</b></p>
 
           <p class="center-big" id="textContainer"></p>
+
+          <p id="chat">
+
+            <input type="text" id="message_input" placeholder="Type your message..." />
+            <button onclick="sendMessage()">Send</button>
+               
+          </p>
         </div>
 
         <p class="center-med">Players: <b id="playerNames">No One Here</b></p>
@@ -127,10 +78,13 @@
         <p class="center-med">
           <button class="big-button" onclick="leaveRoom();">LEAVE ROOM</button>
         </p>
+        
       </div>
+
     </div>
 
-    <script src="/static/js/chatroom.js"></script>
-    <script src="/static/js/posting.js"></script>
+    <!-- Include the JavaScript file -->
+    <!-- <script src="/static/js/chatroom.js"></script> -->
+    <script>var username = {{username|tojson|safe}}; </script>
   </body>
 </html>

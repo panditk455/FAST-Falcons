@@ -5,7 +5,7 @@ var socket;
 
 // Global Variable to store the room number and player name
 var room_num;
-var currenttext = 0; // Start with 'red1'
+var currenttext = -1; // Start with 'red1'
 var play_name;
 
 // This function is called when the page loads
@@ -62,9 +62,27 @@ function applyUpdate(the_json) {
 
   for (i = 0; i <= 19; i++) {
     new_red = the_json["red"][i];
+    index = new_red.indexOf(":");
+    part1 = new_red.substring(0, index);
+    part2 = new_red.substring(index + 1);
+
     red_elem = document.getElementById("text" + i);
-    red_elem.innerHTML = new_red;
-  }
+    // Check if "ohay" is in new_red
+    if (part1 === username) {
+      red_elem.className = "sent_text"
+        
+    }else{
+      red_elem.className = "red"
+    }
+    
+    if(room_num > 1){
+      red_elem.innerHTML = part2;
+    }else{
+      red_elem.innerHTML = new_red;
+    }
+   
+}
+
 
   currenttext = counter;
 
@@ -77,26 +95,37 @@ function sendMessage() {
   var message = document.getElementById("message_input").value;
   if (!message.trim()) return; // Avoid sending empty messages
   document.getElementById("message_input").value = "";
-  currenttext += 1;
-  message = play_name + ": " + message;
+  // currenttext += 1;
+  if(room_num == 1){
+    message = play_name + ": " + message;
+  }
+  
 
   if (currenttext > 19) {
     // Shift content of each element to the previous one, up to 'text19'
     for (var i = 0; i < 19; i++) {
       var currentElement = document.getElementById("text" + i);
       var nextElement = document.getElementById("text" + (i + 1));
+      currentElement.className = nextElement.className
       currentElement.innerHTML = nextElement.innerHTML;
     }
     // Update the last element 'text19' with the new message
-    document.getElementById("text19").innerHTML = message;
+    var lastElement = document.getElementById("text19");
+    // Change the class of the last element
+    lastElement.className = "sent_text";
+    lastElement.innerHTML = message;
   } else {
     // Update the current 'red' element based on the counter
     var red_elem = document.getElementById("text" + currenttext);
+    red_elem.className = "sent_text"; 
     red_elem.innerHTML = message;
   }
 
   // Update the URL and send the message to the server
-
+  if(room_num > 1){
+    message = play_name + ": " + message;
+  }
+  
   scrollToBottom();
   var URL = "/sendmessage/" + room_num + "/" + message + "/" + currenttext;
   fetch(URL);

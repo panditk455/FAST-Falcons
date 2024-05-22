@@ -10,12 +10,12 @@ import random
 app = Flask(__name__)
 app.secret_key = 'secretkeyfornow'
 sock = Sock(app)
-Oneonone_list = []
+Oneonone_list = {}
 Message = "Hello"
 room_data = {}
 web_sockets = {}
 currenttext = 0
-Oneonone_count = 0
+Oneonone_count = 2
 
 
 # Connect to the mySQL database
@@ -53,15 +53,31 @@ def requestRoom(name):
 
 @app.route('/oneononechat/<name>')
 def oneononechat(name):
-    Oneonone_count = 2
-    Oneonone_list.append[name]
-    if len(Oneonone_list) == 2:
-        Oneonone_count += 1
-        list = Oneonone_list
-        Oneonone_list = []
-        return json.dumps(list)
-    else:
+    global Oneonone_count
+    global Oneonone_list
+    if Oneonone_list == {}:
+        Oneonone_list['chatroom'] =  Oneonone_count
+        Oneonone_list[name] = 1
+        Oneonone_list['player_number'] = 0
+        Oneonone_list['count'] = 1
+
+    if  Oneonone_list['player_number'] == 0:
+        Oneonone_list['player_number'] = 1
         return json.dumps(Oneonone_list)
+    else:
+        Oneonone_count += 1
+        Oneonone_list['count'] = 2
+        time.sleep(2)
+        list = Oneonone_list
+        Oneonone_list = {}
+        return json.dumps(list)
+
+@app.route('/getchat')
+def getchat():
+    global Oneonone_list
+    return json.dumps(Oneonone_list)
+   
+
 
 @app.route('/gameRoom/<num>/<name>')
 def gameRoom(num, name):
@@ -79,6 +95,7 @@ def gameRoom(num, name):
         data['names'] = [name]
         data['counter'] = 0
         room_data[num] = data
+
     else:
         data = room_data[num]
         # CHANGED: Check if the name is already in the list

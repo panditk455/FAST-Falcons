@@ -1,7 +1,7 @@
 // When the button is clicked,
 // this function asks the server for the number of a room that isn't full
 // This function then calls redirectRoom to join the given room number
-function joinaRoom(){
+function joinRoom(){
    // player_name = document.getElementById("playerName").value;
     
     URL = "/requestRoomNum/" + username;

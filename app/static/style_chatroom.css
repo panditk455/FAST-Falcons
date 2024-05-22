@@ -190,7 +190,7 @@ html {
 }
 
 .center-big {
-  text-align: Left;
+  
   font-size: 50px;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -198,8 +198,15 @@ html {
 
 .red {
   color: red;
+  text-align: Left;
   display: block;
   margin-right: 30px;
+}
+.sent_text {
+  color: blue;
+  display: block;
+  text-align: right;
+  margin-left: 30px;
 }
 
 /* Additional styles for scrollable message container */
