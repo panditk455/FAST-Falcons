@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/about-us-page.css">
+
+
+  <title>Sayles</title>
+    <link rel="stylesheet" href="../static/style_sayles.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="navbar">
+        <div class="home_button">
+          <a href="/home">
+            <button>
+              <img class="icon" src="../static/asset/home_button.png" />
+              <img
+                class="icon-hover"
+                src="../static/asset/home_button_hover.png"
+              />
+            </button>
+          </a>
+        </div>
+        <div class="setting_button">
+          <button id="modal-btn">
+            <img
+              class="icon"
+              src="../static/asset/setting_button.png"
+              alt="Setting"
+            />
+            <img
+              class="icon-hover"
+              src="../static/asset/setting_button_hover.png"
+              alt="Setting Hover"
+            />
+          </button>
+        </div>
+
+        <!-- Modal or Popup -->
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close">&times;</span>
+            <!-- Modal content goes here -->
+            <h2>Settings</h2>
+            <p>
+              This is the content of the modal. It can cover most of the screen.
+            </p>
+          </div>
+        </div>
+
+        <div class="profile_button">
+          <button>
+            <img
+              class="icon"
+              src="../static/asset/profile_button.png"
+              alt="Profile"
+            />
+            <img
+              class="icon-hover"
+              src="../static/asset/profile_button_hover.png"
+              alt="Profile Hover"
+            />
+          </button>
+          <div class="dropdown-content">
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+
+        <div class="userinfo">
+          {% if username %}
+          <p>Logged in as: {{ username }}!</p>
+          {% else %}
+          <p>Playing as: guest!</p>
+          {% endif %}
+        </div>
+      </nav>
+
+
+  <h1 class="Header">About Us!</h1>
+
+  <p class="Body">
+    We are a group of second-year Computer Science students at Carleton College. 
+    This website was created as part of our Advanced Software Design class. The project uses Python and SQL for the backend, 
+    and HTML, JavaScript, and CSS for the frontend. We use Docker to run the application.
+  </p>
+
+  <div class="container">
+    <div class="image"> 
+      <img src="../static/asset/Alex-Headshot.png" alt="Photo of Alex" height="180"/>
+      <div class="caption">Alex Wcislo'26</div> 
+    </div>
+    <div class="image"> 
+      <img src="../static/asset/Palmy-Headshot.png" alt="Photo of Palmy" height="180"/>
+      <div class="caption">Palmy Klangsathorn'26</div> 
+    </div>
+    <div class="image"> 
+      <img src="../static/asset/Kritika-Headshot.png" alt="Photo of Kritika" height="180"/>
+      <div class="caption">Kritika Pandit '26</div>
+    </div>
+    <div class="image"> 
+      <img src="../static/asset/Dani-Headshot.png" alt="Photo of Dani" height="180"/>
+      <div class="caption">Daniel Lumbu '26</div> 
+    </div>
+    <div class="image">
+      <img src="../static/asset/Daniel-Headshot.png" alt="Photo of Daniel" height="180"/>
+      <div class="caption">Daniel Estrada '26</div> 
+    </div>
+  </div>
+
+</body>
+</html>
