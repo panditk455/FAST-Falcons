@@ -7,20 +7,14 @@
     joinBtn.disabled = true;
 
     URL = "/oneononechat/" + username;
-    fetch(URL).then(response => response.json()).then(data => {
-        if (data.count == 1) {
-          document.getElementById("waitingMessage").style.display = "block";
-        } else if (data.count == 2) {
-          redirectRoom(data);
-        }
-      })
-  }
- 
+    fetch(URL).then( response => response.json()).then( the_json => redirectRoom(the_json) );
+ }
  function redirectRoom(the_json){
      chat_list = the_json;
      room_number = chat_list['chatroom']
-
+ 
      if (chat_list['count'] == 1) {
+      document.getElementById("waitingMessage").style.display = "block";
 
       function chatwaiting() {
         URL = "/getchat"; 
