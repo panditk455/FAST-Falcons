@@ -152,7 +152,7 @@ function leaveRoom() {
 }
 
 function changeRoom() {
-  URL = "/sayles";
+  URL = "/";
   location.href = URL;
 }
 

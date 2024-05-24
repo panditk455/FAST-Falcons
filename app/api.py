@@ -207,7 +207,7 @@ def login():
                 mark_welcome_visited(username)
                 return redirect('/welcome')
             else:
-                return redirect('/home')
+                return redirect('')
         else:
             # If the user does not exist or the password is incorrect, return an error message
             error_message = "Invalid username or password! Please try again!"
@@ -224,7 +224,7 @@ def load_welcome():
         return redirect('/login')
 
 
-@app.route('/home')
+@app.route('/')
 def load_homepage():
     if 'username' in session:
         username = session['username']
