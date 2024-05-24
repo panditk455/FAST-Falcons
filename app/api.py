@@ -293,7 +293,7 @@ def notify_sockets(room):
         leave_room(num, name)
 
 
-@app.route('/leaveroom/<num>/<name>')
+@app.route('/leaveroom/<num>/<name>') 
 def leave_room(num, name):
     global web_sockets
     global room_data
@@ -340,6 +340,19 @@ def save_avatar():
         return {'status': 'success'}
     else:
         return {'status': 'error', 'message': 'User not logged in'}, 401
+
+@app.route('/get_avatar_path')
+def get_avatar_path():
+    if 'username' in session:
+        username = session['username']
+        cursor.execute("SELECT Avatar_Path FROM user WHERE username=%s", (username,))
+        result = cursor.fetchone()
+        if result:
+            return {'avatar_path': result[0]}
+        else:
+            return {'avatar_path': '../static/asset/avatar.png'}
+    else:
+        return {'avatar_path': '../static/asset/avatar.png'}
 
 
 if __name__ == '__main__':

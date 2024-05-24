@@ -115,10 +115,11 @@
         />
       </div>
       <p class="JoinMed">
-        <button class="JoinButton" onclick="join_oneonone_chat();">JOIN A ROOM</button>
+        <button class="JoinButton" id="joinRoomBtn" onclick="join_oneonone_chat();">JOIN A ROOM</button>
       </p>
+      
+      <p id="waitingMessage" style="display: none;">Waiting for another player...</p>
 
-  
 
     </div>
     <script src="/static/js/oneonone.js"></script>

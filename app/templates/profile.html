@@ -24,7 +24,7 @@
 
     <div class="content">
       <div class="circle-image">
-        <img src="../static/asset/avatar.png" />
+        <img id="profile-avatar" src="../static/asset/avatar.png" />
       </div>
       <div class="change_button">
         <button id = "modal-btn">
@@ -69,5 +69,16 @@
    </div>
     <script src="../static/js/modal.js"></script>
     <script src="../static/js/choose.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // FETCH THE AVATAR PATH AND UPDATE THE IMG SRC
+        fetch('/get_avatar_path')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('profile-avatar').src = data.avatar_path;
+            document.querySelector('.avatar-container img').src = data.avatar_path;
+          });
+      });
+    </script>
   </body>
 </html>
