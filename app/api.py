@@ -245,6 +245,10 @@ def logout():
     session.pop('username', None)
     return redirect('/login')
 
+@app.route('/aboutus')
+def load_aboutus_page():
+    return render_template("about-us-page.html")
+
 
 def notify_sockets(room):
     global web_sockets
