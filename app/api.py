@@ -283,8 +283,16 @@ def load_library():
         return render_template("library.html", username=username, user_data=user_data)
     else:
         return redirect('/login')
+    
+# sockets = Sockets(app)
 
-
+# @sockets.route('/ws')
+# def ws_handler(ws):
+#     while not ws.closed:
+#         message = ws.receive()
+#         # Broadcast the message to all connected clients
+#         for client in sockets.clients:
+#             client.send(message)
 
 @app.route('/baldspot')
 def load_baldspot():

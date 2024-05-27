@@ -191,7 +191,7 @@ h2 {
   font-size: 24px;
   color: #666;
   text-align: center;
-  margin-bottom: -5rem;
+  margin-bottom: -3rem;
 }
 
 .image-wrapper #music_image {
@@ -223,6 +223,7 @@ h2 {
 .image-wrapper {
   position: relative;
   text-align: center;
+  z-index: 1;
 }
 #music_image {
   max-width: 100%;
@@ -239,4 +240,32 @@ h2 {
   width: 130px;
   height: 130px;
   border-radius: 50%;
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 2; /* Ensure it's above .image-wrapper */
+  margin-top: 13.5rem;
+  margin-bottom: 0; /* You can remove this line as it's already 0 */
+}
+
+#muteButton {
+  padding: 0.5rem 1rem;
+  margin-right: 0.625rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+label {
+  font-size: 1rem;
+  margin-right: 0.625rem;
+}
+
+#volumeControl {
+  width: 9.375rem;
 }
