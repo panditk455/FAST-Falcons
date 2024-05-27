@@ -146,7 +146,6 @@ def sendmessage(num, text, count):
 
 # Check if the user has already visited the welcome page
 
-
 def has_visited_welcome(username):
     cursor.execute(
         "SELECT visited_welcome FROM user WHERE username=%s", (username,))
@@ -310,7 +309,10 @@ def logout():
 
 @app.route('/aboutus')
 def load_aboutus_page():
-    return render_template("about-us-page.html")
+    if 'username' in session:
+        return render_template("about-us-page.html")
+    else:
+        return redirect('/login')
 
 
 def notify_sockets(room):
