@@ -86,15 +86,15 @@
     <script src="../static/js/modal.js"></script>
     <script src="../static/js/choose.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        // FETCH THE AVATAR PATH AND UPDATE THE IMG SRC
-        fetch('/get_avatar_path')
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById('profile-avatar').src = data.avatar_path;
-            document.querySelector('.avatar-container img').src = data.avatar_path;
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fetch the avatar path and update the image source
+        fetch("/get_avatar_path")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("profile-avatar").src = data.avatar_path;
+            document.querySelector(".avatar-container img").src =
+              data.avatar_path;
           });
-      
 
         // Handle update username form submission
         document
