@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session, request
+from flask import Flask, jsonify, render_template, redirect, session, request
 from flask_sock import Sock
 from threading import Lock
 import json
@@ -51,17 +51,18 @@ def requestRoom(name):
 
     return json.dumps(my_dict)
 
+
 @app.route('/oneononechat/<name>')
 def oneononechat(name):
     global Oneonone_count
     global Oneonone_list
     if Oneonone_list == {}:
-        Oneonone_list['chatroom'] =  Oneonone_count
+        Oneonone_list['chatroom'] = Oneonone_count
         Oneonone_list[name] = 1
         Oneonone_list['player_number'] = 0
         Oneonone_list['count'] = 1
 
-    if  Oneonone_list['player_number'] == 0:
+    if Oneonone_list['player_number'] == 0:
         Oneonone_list['player_number'] = 1
         return json.dumps(Oneonone_list)
     else:
@@ -72,11 +73,11 @@ def oneononechat(name):
         Oneonone_list = {}
         return json.dumps(list)
 
+
 @app.route('/getchat')
 def getchat():
     global Oneonone_list
     return json.dumps(Oneonone_list)
-   
 
 
 @app.route('/gameRoom/<num>/<name>')
@@ -207,12 +208,43 @@ def login():
                 mark_welcome_visited(username)
                 return redirect('/welcome')
             else:
-                return redirect('')
+                return redirect('/')
         else:
             # If the user does not exist or the password is incorrect, return an error message
             error_message = "Invalid username or password! Please try again!"
             return render_template('login.html', error=error_message)
     return render_template('login.html')
+
+
+@app.route('/update_username', methods=['POST'])
+def update_username():
+    if 'username' in session:
+        old_username = session['username']
+        new_username = request.json.get('new_username')
+        cursor.execute("SELECT * FROM user WHERE username=%s", (new_username,))
+        if cursor.fetchone():
+            return jsonify({'message': 'Username already exists!'}), 409
+
+        cursor.execute(
+            "UPDATE user SET username=%s WHERE username=%s", (new_username, old_username))
+        db.commit()
+        session['username'] = new_username
+        return jsonify({'message': 'Username updated successfully!'})
+    else:
+        return jsonify({'message': 'User not logged in!'}), 401
+
+
+@app.route('/update_password', methods=['POST'])
+def update_password():
+    if 'username' in session:
+        username = session['username']
+        new_password = request.json.get('new_password')
+        cursor.execute(
+            "UPDATE user SET pass_word=%s WHERE username=%s", (new_password, username))
+        db.commit()
+        return jsonify({'message': 'Password updated successfully!'})
+    else:
+        return jsonify({'message': 'User not logged in!'}), 401
 
 
 @app.route('/welcome')
@@ -269,7 +301,6 @@ def load_profile():
         return redirect('/login')
 
 
-
 @app.route('/logout')
 def logout():
     # Remove the username from the session to indicate that the user is logged out
@@ -277,12 +308,9 @@ def logout():
     return redirect('/login')
 
 
-
-
 @app.route('/aboutus')
 def load_aboutus_page():
     return render_template("about-us-page.html")
-
 
 
 def notify_sockets(room):
@@ -302,7 +330,7 @@ def notify_sockets(room):
         leave_room(num, name)
 
 
-@app.route('/leaveroom/<num>/<name>') 
+@app.route('/leaveroom/<num>/<name>')
 def leave_room(num, name):
     global web_sockets
     global room_data
@@ -350,11 +378,13 @@ def save_avatar():
     else:
         return {'status': 'error', 'message': 'User not logged in'}, 401
 
+
 @app.route('/get_avatar_path')
 def get_avatar_path():
     if 'username' in session:
         username = session['username']
-        cursor.execute("SELECT Avatar_Path FROM user WHERE username=%s", (username,))
+        cursor.execute(
+            "SELECT Avatar_Path FROM user WHERE username=%s", (username,))
         result = cursor.fetchone()
         if result:
             return {'avatar_path': result[0]}

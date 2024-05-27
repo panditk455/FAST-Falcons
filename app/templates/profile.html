@@ -10,75 +10,128 @@
     <div class="wrapper">
       <nav class="navbar">
         <div class="close_button">
-        <a href="/">
-          <button>
-            <img class="icon" src="../static/asset/close_button.png" />
-            <img
-              class="icon-hover"
-              src="../static/asset/close_button_hover.png"
-            />
-          </button>
-        </a>
+          <a href="/">
+            <button>
+              <img class="icon" src="../static/asset/close_button.png" />
+              <img
+                class="icon-hover"
+                src="../static/asset/close_button_hover.png"
+              />
+            </button>
+          </a>
         </div>
       </nav>
 
-    <div class="content">
-      <div class="circle-image">
-        <img id="profile-avatar" src="../static/asset/avatar.png" />
-      </div>
-      <div class="change_button">
-        <button id = "modal-btn">
-          <img
-            class="icon"
-            src="../static/asset/change_button.png"
-            alt="Change"
-          />
-          <img
-            class="icon-hover"
-            src="../static/asset/change_button_hover.png"
-            alt="Change Hover"
-          />
-        </button>
-      </div>
+      <div class="content">
+        <div class="circle-image">
+          <img id="profile-avatar" src="../static/asset/avatar.png" />
+        </div>
+        <div class="change_button">
+          <button id="modal-btn">
+            <img
+              class="icon"
+              src="../static/asset/change_button.png"
+              alt="Change"
+            />
+            <img
+              class="icon-hover"
+              src="../static/asset/change_button_hover.png"
+              alt="Change Hover"
+            />
+          </button>
+        </div>
 
-      <!-- Modal or Popup -->
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <!-- Close button for the modal -->
-          <a href="/profile">
-          <span class="close">&times;</span>
-          </a>
-          <!-- Modal content goes here -->
-          <div class="avatar-container">
-            <img src="../static/asset/avatar.png" alt="avatar" />
-          </div>
-  
-          <div class="controls">
-            <div class="left-right-buttons">
-              <button id="left-btn">Left</button>
-              <button id="right-btn">Right</button>
+        <!-- Modal or Popup -->
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close">&times;</span>
+            <!-- Modal content goes here -->
+            <div class="avatar-container">
+              <img src="../static/asset/avatar.png" alt="avatar" />
             </div>
-            <div class="go-chat-button">
+
+            <div class="controls">
+              <div class="left-right-buttons">
+                <button id="left-btn">Left</button>
+                <button id="right-btn">Right</button>
+              </div>
+              <div class="go-chat-button">
                 <button id="save-btn">Save!</button>
+              </div>
             </div>
           </div>
         </div>
+
+        <div class="information">
+          <form id="update-username-form">
+            <label for="new-username">New Username:</label>
+            <input type="text" id="new-username" name="new-username" required />
+            <button type="submit">Update Username</button>
+          </form>
+          <form id="update-password-form">
+            <label for="new-password">New Password:</label>
+            <input
+              type="password"
+              id="new-password"
+              name="new-password"
+              required
+            />
+            <button type="submit">Update Password</button>
+          </form>
+        </div>
       </div>
-        
-      <div class= "information">
-        
     </div>
-   </div>
+
     <script src="../static/js/modal.js"></script>
     <script src="../static/js/choose.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        // FETCH THE AVATAR PATH AND UPDATE THE IMG SRC
-        fetch('/get_avatar_path')
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById('profile-avatar').src = data.avatar_path;
-            document.querySelector('.avatar-container img').src = data.avatar_path;
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fetch the avatar path and update the image source
+        fetch("/get_avatar_path")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("profile-avatar").src = data.avatar_path;
+            document.querySelector(".avatar-container img").src =
+              data.avatar_path;
+          });
+
+        // Handle update username form submission
+        document
+          .getElementById("update-username-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+            const newUsername = document.getElementById("new-username").value;
+            fetch("/update_username", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ new_username: newUsername }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                alert(data.message);
+              });
+          });
+
+        // Handle update password form submission
+        document
+          .getElementById("update-password-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+            const newPassword = document.getElementById("new-password").value;
+            fetch("/update_password", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ new_password: newPassword }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                alert(data.message);
+              });
           });
       });
     </script>
