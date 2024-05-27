@@ -277,9 +277,13 @@ def load_sayles():
 def load_library():
     if 'username' in session:
         username = session['username']
-        return render_template("library.html", username=username)
+        avatar_response = get_avatar_path()
+        avatar_path = avatar_response['avatar_path']
+        user_data = {'username': username, 'avatar_path': avatar_path}
+        return render_template("library.html", username=username, user_data=user_data)
     else:
         return redirect('/login')
+
 
 
 @app.route('/baldspot')

@@ -169,10 +169,10 @@ html {
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding-top: 10rem; /* No padding at the top */
+  padding-top: 8rem; /* No padding at the top */
   padding-bottom: 0; /* No padding at the bottom */
-  padding-left: 1.25rem; /* Converted from 20px to rem */
-  padding-right: 1.25rem; /* Converted from 20px to rem */
+  padding-left: 0.1rem; /* Converted from 20px to rem */
+  padding-right: 0.1rem; /* Converted from 20px to rem */
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
   justify-content: center; /* Center vertically */
@@ -180,7 +180,23 @@ html {
   background-color: rgba(246, 246, 246);
 }
 
-/* Add this CSS to your existing style_library.css */
+h1.intro {
+  font-size: 36px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 24px;
+  color: #666;
+  text-align: center;
+  margin-bottom: -5rem;
+}
+
+.image-wrapper #music_image {
+  max-width: 70rem;
+}
 
 .section {
   position: absolute;
@@ -190,19 +206,19 @@ html {
   cursor: pointer;
 }
 #section1 {
-  top: 40%;
+  top: 20%;
 }
 #section2 {
-  top: 60%;
+  top: 40%;
 }
 #section3 {
-  top: 80%;
+  top: 60%;
 }
 #section4 {
-  top: 100%;
+  top: 80%;
 }
 .clicked {
-  background-color: rgba(0, 0, 255, 0.3);
+  background-color: rgba(175, 225, 252, 0.169);
 }
 .image-wrapper {
   position: relative;
@@ -210,4 +226,17 @@ html {
 }
 #music_image {
   max-width: 100%;
+}
+
+.user-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensure it's on top of other elements */
+}
+
+.user-avatar img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
 }
