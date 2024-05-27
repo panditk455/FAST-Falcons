@@ -12,7 +12,7 @@
 
 body,
 html {
-  height: 200%;
+  height: 100%;
 }
 
 .wrapper {
@@ -20,7 +20,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 200%;
+  height: 100%;
   padding-top: 0; /* No padding at the top */
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */

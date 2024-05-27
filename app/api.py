@@ -310,7 +310,8 @@ def logout():
 @app.route('/aboutus')
 def load_aboutus_page():
     if 'username' in session:
-        return render_template("about-us-page.html")
+        username = session['username']
+        return render_template("about-us-page.html", username=username)
     else:
         return redirect('/login')
 
