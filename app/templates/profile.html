@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
+    <title>One-Card</title> 
+    <!-- this is for makin it specific for the Carleton -->
     <link rel="stylesheet" href="../static/style_profile.css" />
   </head>
   <body>
@@ -64,25 +65,20 @@
         </div>
 
         <div class="information">
-          <form id="update-username-form">
-            <label for="new-username">New Username:</label>
-            <input type="text" id="new-username" name="new-username" required />
-            <button type="submit">Update Username</button>
+          <form id="update-username-form" class="flex">
+              <label for="new-username">New Username:</label>
+              <input type="text" id="new-username" name="new-username" required>
+              <button type="submit">Update Username</button>
           </form>
-          <form id="update-password-form">
-            <label for="new-password">New Password:</label>
-            <input
-              type="password"
-              id="new-password"
-              name="new-password"
-              required
-            />
-            <button type="submit">Update Password</button>
+          <form id="update-password-form" class="flex">
+              <label for="new-password">New Password:</label>
+              <input type="password" id="new-password" name="new-password" required>
+              <button type="submit">Update Password</button>
           </form>
-        </div>
       </div>
-    </div>
+      
 
+  
     <script src="../static/js/modal.js"></script>
     <script src="../static/js/choose.js"></script>
     <script>

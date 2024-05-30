@@ -48,6 +48,7 @@ html {
   transition-duration: 0.4s;
   position: relative; /* Ensure proper positioning for icon-hover */
 }
+
 /* Add this CSS for manual positioning of buttons */
 .home_button,
 .setting_button,

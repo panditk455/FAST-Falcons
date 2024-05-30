@@ -10,10 +10,6 @@
   font-family: "font1", sans-serif;
 }
 
-body,
-html {
-  height: 100%;
-}
 
 .wrapper {
   display: flex;
@@ -136,6 +132,8 @@ html {
 
 /* --- everything in nav bar end here --- */
 
+
+/* top part of the content */
 .content {
   text-align: center; /* Center the text inside the content */
   padding: 150px;
@@ -146,9 +144,9 @@ html {
 }
 
 .circle-image {
-  width: 220px;
-  height: 220px;
-  background-color: transparent;
+  width: 200px;
+  height: 200px;
+  background-color: white;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
@@ -172,12 +170,14 @@ html {
   display: flex; /* Use flexbox for avatar images */
   justify-content: center; /* Center avatar images horizontally */
   align-items: center; /* Center avatar images vertically */
+  background-color: transparent;
 }
 
 .avatar-container img {
   max-width: 100%;
   max-height: 100%;
   display: block;
+  align-items: center;
 }
 
 .controls {
@@ -203,4 +203,121 @@ button {
 
 .go-chat-button {
   margin-top: 10px; /* Add margin between left-right buttons and go-chat button */
+}
+
+
+
+/* ends here things inside the button */
+
+
+
+/* information starts here */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* 100% viewport height */
+  background-color: rgb(
+    153,
+    148,
+    148
+  ); /* Background color for the wrapper using RGB values */
+
+}
+
+.content {
+  text-align: center;
+  padding: 80px;
+  background-size: cover; /* Adjusted to cover */
+  background-position: center; /* Centered background image */
+  width: 100%;
+}
+
+
+label {
+  color: white;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 80%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: #333;
+  color: black;
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.56);
+  outline: none;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Moved box-sizing here */
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+  color: #ccc;
+  width: 100%;
+}
+
+button[type="submit"] {
+  width: 60%;
+  padding: 16px 0;
+  margin: 25px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: black;
+  cursor: pointer;
+}
+
+p {
+  color: white; /* Changed to white */
+  text-align: center;
+}
+
+p a {
+  color: black;
+}
+
+@media only screen and (max-width: 600px) {
+  form {
+    width: 90%;
+    color: black;
+  }
+}
+
+
+
+/* CSS for Username and Password input fields */
+#new-username, 
+#new-password {
+  width: 80%; 
+  padding: 10px; 
+  margin: 10px 0; 
+  border: 2px solid #ccc; 
+  border-radius: 5px; 
+  background-color: #f8f8f8; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  font-size: 16px; 
+}
+
+/* Style for the form buttons */
+form button {
+  width: 85%; 
+  padding: 10px; 
+  margin-top: 10px; 
+  border: none; 
+  border-radius: 5px; 
+  background-color: #333; 
+  color: white; 
+  font-size: 16px; 
+  cursor: pointer; 
+}
+
+form button:hover {
+  background-color: #555; /* Darken button color on hover */
 }
