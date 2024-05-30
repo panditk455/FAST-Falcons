@@ -16,7 +16,7 @@ room_data = {}
 web_sockets = {}
 currenttext = 0
 Oneonone_count = 2
-
+room_data = {'2': {'red': [" "] * 20, 'names': [], 'avatars': {}}}
 
 # Connect to the mySQL database
 db = mysql.connector.connect(
@@ -27,6 +27,95 @@ db = mysql.connector.connect(
     database="USER_LOGINS"
 )
 cursor = db.cursor()
+        
+from flask import url_for
+
+@app.route('/get_avatar_path')
+def get_avatar_path():
+    if 'username' in session:
+        username = session['username']
+        cursor.execute(
+            "SELECT Avatar_Path FROM user WHERE username=%s", (username,))
+        result = cursor.fetchone()
+        if result:
+            avatar_path = url_for('static', filename=result[0])
+            return {'avatar_path': avatar_path}
+        else:
+            avatar_path = url_for('static', filename='asset/avatar.png')
+            return {'avatar_path': avatar_path}
+    else:
+        avatar_path = url_for('static', filename='asset/avatar.png')
+        return {'avatar_path': avatar_path}
+
+@app.route('/requestLibrary/<name>')
+def requestLibrary(name):
+    my_dict = {'num': '2'}  # Always return room number 2
+    return jsonify(my_dict)
+
+@app.route('/libraryRoom/<num>/<name>')
+def libraryRoom(num, name):
+    if 'username' in session:
+        username = session['username']
+        avatar_response = get_avatar_path()
+        avatar_path = avatar_response['avatar_path']
+        user_data = {'username': username, 'avatar_path': avatar_path}
+
+        global room_data
+        if name not in room_data[num]['names']:
+            room_data[num]['names'].append(name)
+            room_data[num]['avatars'][name] = avatar_path
+
+        notify_sockets(num)
+        return render_template("library.html", username=username, user_data=user_data, room_num=num)
+    else:
+        return redirect('/login')
+
+@sock.route('/ws')
+def handle_websocket(ws):
+    while True:
+        data = ws.receive()
+        if data is None:
+            break
+        message = json.loads(data)
+        event = message.get('event')
+
+        if event == 'join':
+            username = message['username']
+            avatar_path = message['avatar_path']
+            room_num = message['room_num']
+
+            if room_num not in web_sockets:
+                web_sockets[room_num] = []
+
+            if ws not in web_sockets[room_num]:
+                web_sockets[room_num].append(ws)
+
+            if username not in room_data[room_num]['names']:
+                room_data[room_num]['names'].append(username)
+                room_data[room_num]['avatars'][username] = avatar_path
+
+            notify_sockets(room_num)
+
+        elif event == 'leave':
+            username = message['username']
+            room_num = message['room_num']
+
+            if room_num in web_sockets and ws in web_sockets[room_num]:
+                web_sockets[room_num].remove(ws)
+
+            if username in room_data[room_num]['names']:
+                room_data[room_num]['names'].remove(username)
+                del room_data[room_num]['avatars'][username]
+
+            notify_sockets(room_num)
+
+def notify_sockets(room_num):
+    users = [{"username": name, "avatar_path": room_data[room_num]['avatars'][name]} for name in room_data[room_num]['names']]
+    message = json.dumps({"event": "update_users", "users": users})
+    if room_num in web_sockets:
+        for ws in web_sockets[room_num]:
+            ws.send(message)
+
 
 
 @app.route('/requestRoomNum/<name>')
@@ -107,6 +196,38 @@ def gameRoom(num, name):
 
     return render_template("chatroom.html", username=username)
 
+
+@app.route('/leaveroom/<num>/<name>')
+def leave_room(num, name):
+    global web_sockets
+    global room_data
+
+    # Remove the WebSocket from the global dictionary
+    if (num, name) in web_sockets:
+        del web_sockets[(num, name)]
+
+    # Remove the player from the list of names in the room
+    if num in room_data:
+        data_dict = room_data[num]
+        if name in data_dict['names']:
+            data_dict['names'].remove(name)
+
+    notify_sockets(num)
+    return "Player: " + name + " Left"
+
+
+@sock.route('/openSocket/<num>/<name>')
+def open_socket(ws, num, name):
+    global web_sockets
+
+    # Add this to the global websocket dictionary
+    web_sockets[(num, name)] = ws
+
+    # We want to keep the socket open as long as the browser client is active
+    while True:
+        time.sleep(10)
+
+    return ""
 
 @app.route('/getupdate/<num>')
 def returnData(num):
@@ -273,27 +394,6 @@ def load_sayles():
         return redirect('/login')
 
 
-@app.route('/library')
-def load_library():
-    if 'username' in session:
-        username = session['username']
-        avatar_response = get_avatar_path()
-        avatar_path = avatar_response['avatar_path']
-        user_data = {'username': username, 'avatar_path': avatar_path}
-        return render_template("library.html", username=username, user_data=user_data)
-    else:
-        return redirect('/login')
-    
-# sockets = Sockets(app)
-
-# @sockets.route('/ws')
-# def ws_handler(ws):
-#     while not ws.closed:
-#         message = ws.receive()
-#         # Broadcast the message to all connected clients
-#         for client in sockets.clients:
-#             client.send(message)
-
 @app.route('/baldspot')
 def load_baldspot():
     if 'username' in session:
@@ -322,59 +422,29 @@ def logout():
 @app.route('/aboutus')
 def load_aboutus_page():
     if 'username' in session:
-        return render_template("about-us-page.html")
+        username = session['username']
+        return render_template("about-us-page.html", username=username)
     else:
         return redirect('/login')
 
 
-def notify_sockets(room):
-    global web_sockets
+# def notify_sockets(room):
+#     global web_sockets
 
-    dead_sockets = []
+#     dead_sockets = []
 
-    for num, name in web_sockets:
-        ws = web_sockets[(num, name)]
-        if num == room:
-            try:
-                ws.send("Update")
-            except:
-                dead_sockets.append((num, name))
+#     for num, name in web_sockets:
+#         ws = web_sockets[(num, name)]
+#         if num == room:
+#             try:
+#                 ws.send("Update")
+#             except:
+#                 dead_sockets.append((num, name))
 
-    for num, name in dead_sockets:
-        leave_room(num, name)
-
-
-@app.route('/leaveroom/<num>/<name>')
-def leave_room(num, name):
-    global web_sockets
-    global room_data
-
-    # Remove the WebSocket from the global dictionary
-    if (num, name) in web_sockets:
-        del web_sockets[(num, name)]
-
-    # Remove the player from the list of names in the room
-    if num in room_data:
-        data_dict = room_data[num]
-        if name in data_dict['names']:
-            data_dict['names'].remove(name)
-
-    notify_sockets(num)
-    return "Player: " + name + " Left"
+#     for num, name in dead_sockets:
+#         leave_room(num, name)
 
 
-@sock.route('/openSocket/<num>/<name>')
-def open_socket(ws, num, name):
-    global web_sockets
-
-    # Add this to the global websocket dictionary
-    web_sockets[(num, name)] = ws
-
-    # We want to keep the socket open as long as the browser client is active
-    while True:
-        time.sleep(10)
-
-    return ""
 
 
 @app.route('/save_avatar', methods=['POST'])
@@ -391,21 +461,6 @@ def save_avatar():
         return {'status': 'success'}
     else:
         return {'status': 'error', 'message': 'User not logged in'}, 401
-
-
-@app.route('/get_avatar_path')
-def get_avatar_path():
-    if 'username' in session:
-        username = session['username']
-        cursor.execute(
-            "SELECT Avatar_Path FROM user WHERE username=%s", (username,))
-        result = cursor.fetchone()
-        if result:
-            return {'avatar_path': result[0]}
-        else:
-            return {'avatar_path': '../static/asset/avatar.png'}
-    else:
-        return {'avatar_path': '../static/asset/avatar.png'}
 
 
 if __name__ == '__main__':

@@ -1,42 +1,59 @@
-// Establish WebSocket connection
-const socket = new WebSocket("ws://your-backend-server-url");
+function initializeSocket() {
+  const socket = new WebSocket("ws://" + location.host + "/ws");
 
-socket.addEventListener("open", function (event) {
-  console.log("WebSocket connected");
-});
+  socket.onopen = function () {
+    console.log("WebSocket connection established.");
+    socket.send(
+      JSON.stringify({
+        event: "join",
+        username: user_data.username,
+        avatar_path: user_data.avatar_path,
+        room_num: room_number,
+      })
+    );
+  };
 
-socket.addEventListener("message", function (event) {
-  const data = JSON.parse(event.data);
-  const { username, avatar_path, section } = data;
+  socket.onmessage = function (event) {
+    console.log("WebSocket message received:", event.data);
+    const data = JSON.parse(event.data);
 
-  // Update or create avatar based on received data
-  updateAvatar(username, avatar_path, section);
-});
+    if (data.event === "update_users") {
+      updateUsersList(data.users);
+    }
+  };
 
-function updateAvatar(username, avatarPath, sectionId) {
-  // Create or update avatar element
-  let avatar = document.querySelector(`#${username}`);
-  if (!avatar) {
-    avatar = document.createElement("div");
-    avatar.id = username;
-    avatar.classList.add("user-avatar");
-    avatar.innerHTML = `<img src="${avatarPath}" alt="${username}'s Avatar" />`;
-    document.querySelector(".image-wrapper").appendChild(avatar);
-  }
+  socket.onclose = function () {
+    console.log("WebSocket connection closed.");
+  };
 
-  // Move avatar to the specified section
-  moveAvatarToSection(avatar, sectionId);
+  socket.onerror = function (error) {
+    console.log("WebSocket error:", error);
+  };
+
+  window.onbeforeunload = function () {
+    socket.send(
+      JSON.stringify({
+        event: "leave",
+        username: user_data.username,
+        room_num: room_number,
+      })
+    );
+  };
 }
 
-// Function to send user's current section to the server
-function sendSectionToServer(sectionId) {
-  socket.send(JSON.stringify({ section: sectionId }));
+function updateUsersList(users) {
+  console.log("Updating users list:", users);
+  const usersListDiv = document.getElementById("usersList");
+  usersListDiv.innerHTML = ""; // Clear current list
+
+  users.forEach(function (user) {
+    const userDiv = document.createElement("div");
+    userDiv.className = "user";
+    userDiv.innerHTML = `<img src="${user.avatar_path}" alt="${user.username}'s Avatar" /><p>${user.username}</p>`;
+    usersListDiv.appendChild(userDiv);
+  });
 }
 
-// Event listeners for section clicks
-document.getElementById("section1").addEventListener("click", function () {
-  sendSectionToServer("section1");
+document.addEventListener("DOMContentLoaded", function () {
+  initializeSocket();
 });
-
-// Add event listeners for other sections as needed
-// Repeat the above pattern for section2, section3, etc.
