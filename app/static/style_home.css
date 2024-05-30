@@ -36,7 +36,7 @@ html {
 
 /* Style for individual buttons */
 .home_button button,
-.setting_button button,
+.aboutus_button button,
 .profile_button button,
 .sayles_button button,
 .library_button button,
@@ -51,7 +51,7 @@ html {
 
 /* Add this CSS for manual positioning of buttons */
 .home_button,
-.setting_button,
+.aboutus_button,
 .profile_button,
 .sayles_button,
 .library_button,
@@ -66,7 +66,7 @@ html {
   z-index: 50;
 }
 
-.setting_button {
+.aboutus_button {
   position: fixed;
   right: 11rem;
   top: 1rem;
@@ -95,7 +95,7 @@ html {
 
 /* Show icon-hover on button hover */
 .home_button button:hover .icon-hover,
-.setting_button button:hover .icon-hover,
+.aboutus_button button:hover .icon-hover,
 .profile_button button:hover .icon-hover,
 .sayles_button button:hover .icon-hover,
 .library_button button:hover .icon-hover,
@@ -107,7 +107,7 @@ html {
 
 /* Hide icon on button hover */
 .home_button button:hover .icon,
-.setting_button button:hover .icon,
+.aboutus_button button:hover .icon,
 .profile_button button:hover .icon,
 .sayles_button button:hover .icon,
 .library_button button:hover .icon,

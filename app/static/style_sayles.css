@@ -36,7 +36,7 @@ html {
 
 /* Style for individual buttons */
 .home_button button,
-.setting_button button,
+.aboutus_button button,
 .profile_button button {
   background-color: transparent;
   color: transparent;
@@ -47,7 +47,7 @@ html {
 }
 /* Add this CSS for manual positioning of buttons */
 .home_button,
-.setting_button,
+.aboutus_button,
 .profile_button {
   position: absolute;
 }
@@ -59,7 +59,7 @@ html {
   z-index: 50;
 }
 
-.setting_button {
+.aboutus_button {
   position: fixed;
   right: 11rem;
   top: 1rem;
@@ -88,7 +88,7 @@ html {
 
 /* Show icon-hover on button hover */
 .home_button button:hover .icon-hover,
-.setting_button button:hover .icon-hover,
+.aboutus_button button:hover .icon-hover,
 .profile_button button:hover .icon-hover {
   display: block;
   margin-top: 1px;
@@ -97,7 +97,7 @@ html {
 
 /* Hide icon on button hover */
 .home_button button:hover .icon,
-.setting_button button:hover .icon,
+.aboutus_button button:hover .icon,
 .profile_button button:hover .icon {
   display: none;
 }
