@@ -7,6 +7,7 @@ var socket;
 var room_num;
 var currenttext = -1; // Start with 'red1'
 var play_name;
+var editedMessages = {};
 
 // This function is called when the page loads
 function initializeNumbers() {
@@ -37,6 +38,7 @@ function initializeNumbers() {
     bElement.className = "red";
     bElement.id = "text" + i;
     bElement.style.display = "block";
+    bElement.addEventListener("click", enableEditing);
     textContainer.appendChild(bElement);
   }
 }
@@ -75,12 +77,21 @@ function applyUpdate(the_json) {
       red_elem.className = "red"
     }
     
-    if(room_num > 1){
-      red_elem.innerHTML = part2;
-    }else{
-      red_elem.innerHTML = new_red;
+    if (room_num > 1) {
+      // Check if the message has been edited
+      if (editedMessages.hasOwnProperty(i)) { 
+        red_elem.innerHTML = editedMessages[i]; 
+      } else {
+        red_elem.innerHTML = part2;
+      }
+    } else {
+      // Check if the message has been edited
+      if (editedMessages.hasOwnProperty(i)) { 
+        red_elem.innerHTML = editedMessages[i]; 
+      } else {
+        red_elem.innerHTML = new_red;
+      }
     }
-   
 }
 
 
@@ -165,6 +176,55 @@ function redirectRoom(the_json) {
 
   location.href = URL;
 }
+// Function to enable text editing
+function enableEditing(event) {
+  var textElement = event.target;
+  var textContent = textElement.innerHTML;
+  var colonSplit = textContent.indexOf(":");
+  if (colonSplit !== -1) {
+    var usernamePart = textContent.substring(0, colonSplit + 1);
+    var messagePart = textContent.substring(colonSplit + 2); // Skipping the space after colon
+    textElement.setAttribute("data-username", usernamePart);
+    textElement.innerHTML = messagePart;
+  }
+  textElement.contentEditable = true;
+  textElement.focus();
+  textElement.addEventListener("blur", disableEditing);
+  textElement.addEventListener("keydown", saveOnEnter);
+}
 
-// The following functions change the numbers when the buttons are clicked
-// Each function also notifies the server of the change
+// Function to save edited message on Enter key press
+function saveOnEnter(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Prevent inserting a newline
+    var textElement = event.target;
+    var usernamePart = textElement.getAttribute("data-username");
+    var messagePart = textElement.innerHTML;
+    textElement.innerHTML = messagePart;
+    textElement.contentEditable = false;
+    saveEditedMessage(textElement.id, messagePart);
+    textElement.removeEventListener("blur", disableEditing);
+    textElement.removeEventListener("keydown", saveOnEnter);
+  }
+}
+
+// Function to disable editing on blur
+function disableEditing(event) {
+  var textElement = event.target;
+  var usernamePart = textElement.getAttribute("data-username");
+  var messagePart = textElement.innerHTML;
+  textElement.innerHTML = usernamePart + " " + messagePart;
+  textElement.contentEditable = false;
+  saveEditedMessage(textElement.id, messagePart);
+  textElement.removeEventListener("blur", disableEditing);
+  textElement.removeEventListener("keydown", saveOnEnter);
+}
+
+// Function to save edited message
+function saveEditedMessage(elementId, newText) {
+  var index = parseInt(elementId.replace("text", ""), 10);
+  var message = play_name + ": " + newText;
+  editedMessages[index] = message
+  var URL = "/editmessage/" + room_num + "/" + message + "/" + index;
+  fetch(URL);
+}
