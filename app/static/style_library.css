@@ -36,7 +36,7 @@ html {
 
 /* Style for individual buttons */
 .home_button button,
-.aboutus_button button,
+.setting_button button,
 .profile_button button {
   background-color: transparent;
   color: transparent;
@@ -47,7 +47,7 @@ html {
 }
 /* Add this CSS for manual positioning of buttons */
 .home_button,
-.aboutus_button,
+.setting_button,
 .profile_button {
   position: absolute;
 }
@@ -59,7 +59,7 @@ html {
   z-index: 50;
 }
 
-.aboutus_button {
+.setting_button {
   position: fixed;
   right: 11rem;
   top: 1rem;
@@ -88,7 +88,7 @@ html {
 
 /* Show icon-hover on button hover */
 .home_button button:hover .icon-hover,
-.aboutus_button button:hover .icon-hover,
+.setting_button button:hover .icon-hover,
 .profile_button button:hover .icon-hover {
   display: block;
   margin-top: 1px;
@@ -97,7 +97,7 @@ html {
 
 /* Hide icon on button hover */
 .home_button button:hover .icon,
-.aboutus_button button:hover .icon,
+.setting_button button:hover .icon,
 .profile_button button:hover .icon {
   display: none;
 }
@@ -169,10 +169,10 @@ html {
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding-top: 10rem; /* No padding at the top */
+  padding-top: 6rem; /* No padding at the top */
   padding-bottom: 0; /* No padding at the bottom */
-  padding-left: 1.25rem; /* Converted from 20px to rem */
-  padding-right: 1.25rem; /* Converted from 20px to rem */
+  padding-left: 0.1rem; /* Converted from 20px to rem */
+  padding-right: 0.1rem; /* Converted from 20px to rem */
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
   justify-content: center; /* Center vertically */
@@ -180,7 +180,23 @@ html {
   background-color: rgba(246, 246, 246);
 }
 
-/* Add this CSS to your existing style_library.css */
+h1.intro {
+  font-size: 36px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 24px;
+  color: #666;
+  text-align: center;
+  margin-bottom: -3rem;
+}
+
+.image-wrapper #music_image {
+  max-width: 70rem;
+}
 
 .section {
   position: absolute;
@@ -190,24 +206,66 @@ html {
   cursor: pointer;
 }
 #section1 {
-  top: 40%;
+  top: 20%;
 }
 #section2 {
-  top: 60%;
+  top: 40%;
 }
 #section3 {
-  top: 80%;
+  top: 60%;
 }
 #section4 {
-  top: 100%;
+  top: 80%;
 }
 .clicked {
-  background-color: rgba(0, 0, 255, 0.3);
+  background-color: rgba(175, 225, 252, 0.169);
 }
 .image-wrapper {
   position: relative;
   text-align: center;
+  z-index: 1;
 }
 #music_image {
   max-width: 100%;
+}
+
+.user-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensure it's on top of other elements */
+}
+
+.user-avatar img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 2; /* Ensure it's above .image-wrapper */
+  margin-top: 13.5rem;
+  margin-bottom: 0; /* You can remove this line as it's already 0 */
+}
+
+#muteButton {
+  padding: 0.5rem 1rem;
+  margin-right: 0.625rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+label {
+  font-size: 1rem;
+  margin-right: 0.625rem;
+}
+
+#volumeControl {
+  width: 9.375rem;
 }
