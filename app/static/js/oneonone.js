@@ -2,6 +2,12 @@
 // this function asks the server for the number of a room that isn't full
 // This function then calls redirectRoom to join the given room number
 
+function resetplayer() {
+  URl = "/resetplayer";
+  fetch(URl)
+  }
+
+
  function join_oneonone_chat() {
     const joinBtn = document.getElementById("joinRoomBtn");
     joinBtn.disabled = true;
@@ -11,7 +17,6 @@
  }
  function redirectRoom(the_json){
      chat_list = the_json;
-     room_number = chat_list['chatroom']
  
      if (chat_list['count'] == 1) {
       document.getElementById("waitingMessage").style.display = "block";

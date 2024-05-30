@@ -79,6 +79,13 @@ def getchat():
     global Oneonone_list
     return json.dumps(Oneonone_list)
 
+@app.route('/resetplayer')
+def resetplayer():
+    global Oneonone_list
+    global Oneonone_count
+    Oneonone_list = {}
+    return json.dumps(Oneonone_count)
+
 
 @app.route('/gameRoom/<num>/<name>')
 def gameRoom(num, name):
@@ -266,9 +273,10 @@ def load_homepage():
 
 @app.route('/sayles')
 def load_sayles():
+    global Oneonone_count
     if 'username' in session:
         username = session['username']
-        return render_template("sayles.html", username=username)
+        return render_template("sayles.html", username=username, room_number = Oneonone_count)
     else:
         return redirect('/login')
 

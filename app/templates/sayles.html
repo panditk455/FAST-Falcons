@@ -6,7 +6,7 @@
     <title>Sayles</title>
     <link rel="stylesheet" href="../static/style_sayles.css" />
   </head>
-  <body>
+  <body onbeforeunload = "resetplayer();">
     <div class="wrapper">
       <nav class="navbar">
         <div class="home_button">
@@ -126,6 +126,7 @@
     </div>
     <script src="/static/js/oneonone.js"></script>
     <script> var username = {{username|tojson|safe}}; </script>
+    <script> var room_number = {{room_number|tojson|safe}}; </script>
     <script src="../static/js/modal.js"></script>
     <script src="../static/js/menu.js"></script>
     <script src="../static/js/drag.js"></script>
