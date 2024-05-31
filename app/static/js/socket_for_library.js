@@ -1,3 +1,9 @@
+var socket;
+
+// Global Variable to store the room number and player name
+var room_num;
+var play_name;
+
 function initializeSocket() {
   const socket = new WebSocket("ws://" + location.host + "/ws");
 

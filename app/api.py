@@ -16,7 +16,8 @@ room_data = {}
 web_sockets = {}
 currenttext = 0
 Oneonone_count = 2
-room_data = {'2': {'red': [" "] * 20, 'names': [], 'avatars': {}}}
+# room_data = {'2': {'names': [], 'avatars': {}}}
+
 
 # Connect to the mySQL database
 db = mysql.connector.connect(
@@ -49,9 +50,18 @@ def get_avatar_path():
 
 @app.route('/requestLibrary/<name>')
 def requestLibrary(name):
-    my_dict = {'num': '2'}  # Always return room number 2
-    return jsonify(my_dict)
+    room_num = 2  
+    if room_num not in room_data:
+        room_data[room_num] = {'names': [], 'avatars': {}}  # Initialize room data if not already present
+    
+    data_dict = room_data[room_num]
+    if name not in data_dict['names']:
+        data_dict['names'].append(name) 
+    
+    my_dict = {'num': str(room_num)}
+    return json.dumps(my_dict)
 
+    
 @app.route('/libraryRoom/<num>/<name>')
 def libraryRoom(num, name):
     if 'username' in session:
@@ -61,61 +71,30 @@ def libraryRoom(num, name):
         user_data = {'username': username, 'avatar_path': avatar_path}
 
         global room_data
-        if name not in room_data[num]['names']:
-            room_data[num]['names'].append(name)
-            room_data[num]['avatars'][name] = avatar_path
+        if name not in room_data[2]['names']:
+            room_data[2]['names'].append(name)
+            room_data[2]['avatars'][name] = avatar_path
 
         notify_sockets(num)
         return render_template("library.html", username=username, user_data=user_data, room_num=num)
     else:
         return redirect('/login')
 
-@sock.route('/ws')
-def handle_websocket(ws):
-    while True:
-        data = ws.receive()
-        if data is None:
-            break
-        message = json.loads(data)
-        event = message.get('event')
+def notify_sockets(room):
+    global web_sockets
 
-        if event == 'join':
-            username = message['username']
-            avatar_path = message['avatar_path']
-            room_num = message['room_num']
+    dead_sockets = []
 
-            if room_num not in web_sockets:
-                web_sockets[room_num] = []
+    for num, name in web_sockets:
+        ws = web_sockets[(num, name)]
+        if num == room:
+            try:
+                ws.send("Update")
+            except:
+                dead_sockets.append((num, name))
 
-            if ws not in web_sockets[room_num]:
-                web_sockets[room_num].append(ws)
-
-            if username not in room_data[room_num]['names']:
-                room_data[room_num]['names'].append(username)
-                room_data[room_num]['avatars'][username] = avatar_path
-
-            notify_sockets(room_num)
-
-        elif event == 'leave':
-            username = message['username']
-            room_num = message['room_num']
-
-            if room_num in web_sockets and ws in web_sockets[room_num]:
-                web_sockets[room_num].remove(ws)
-
-            if username in room_data[room_num]['names']:
-                room_data[room_num]['names'].remove(username)
-                del room_data[room_num]['avatars'][username]
-
-            notify_sockets(room_num)
-
-def notify_sockets(room_num):
-    users = [{"username": name, "avatar_path": room_data[room_num]['avatars'][name]} for name in room_data[room_num]['names']]
-    message = json.dumps({"event": "update_users", "users": users})
-    if room_num in web_sockets:
-        for ws in web_sockets[room_num]:
-            ws.send(message)
-
+    for num, name in dead_sockets:
+        leave_room(num, name)
 
 
 @app.route('/requestRoomNum/<name>')
