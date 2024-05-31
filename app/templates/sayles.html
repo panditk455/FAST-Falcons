@@ -119,11 +119,25 @@
       <p class="JoinMed">
         <button class="JoinButton" id="joinRoomBtn" onclick="join_oneonone_chat();">JOIN A ROOM</button>
       </p>
-      
-      <p id="waitingMessage" style="display: none;">Waiting for another player...</p>
-
+      <!-- <p id="waitingMessageText" style="display: none;">Waiting for another player...</p> -->
+      <p id="waitingMessage" style="display: none;">
+        <img
+        src="../static/asset/Loading_Button.gif" alt="Loading..." /> 
+      </p>
+      </div>
 
     </div>
+
+    <script>
+      // JavaScript to toggle display
+      function showWaitingMessage() {
+        document.getElementById('waitingMessageText').style.display = 'block';
+        document.getElementById('waitingMessage').style.display = 'block';
+      }
+    
+      setTimeout(showWaitingMessage, 1000); // Adjust the delay as needed
+
+    </script>
     <script src="/static/js/oneonone.js"></script>
     <script> var username = {{username|tojson|safe}}; </script>
     <script> var room_number = {{room_number|tojson|safe}}; </script>
@@ -132,3 +146,5 @@
     <script src="../static/js/drag.js"></script>
   </body>
 </html>
+
+
