@@ -21,11 +21,12 @@ function initializeSocket() {
 
   socket.onmessage = function (event) {
     console.log("WebSocket message received:", event.data);
-    const data = JSON.parse(event.data);
+    // const data = await fetch(/getlibrary/ ??? ).json();
+    // namelist = data['name'];
+    // avatarlist = data['avatar'];
 
-    // userlist = data['  ']
-    // Pull the users (and/or the avatars) out of the JSON dictionary
-
+    // For each avatar loop ... 
+    
     // GetElementByID the Section
     // Create an Image element in Javascript
     // Set the location to be where you want.
