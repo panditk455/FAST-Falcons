@@ -32,7 +32,7 @@ html {
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
   padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color: rgba(246, 246, 246);
+  background-color: #9999A2;
 }
 
 /* --- everything in nav bar start here --- */
@@ -184,7 +184,9 @@ html {
   flex-direction: column; /* Arrange child elements vertically */
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  background-color: rgba(246, 246, 246);
+  background-color: #d5d5d5;
+  margin-top: 10%;
+  max-width: 75%;
 }
 
 h1.intro {
@@ -271,6 +273,10 @@ h2 {
 
 .JoinButton {
   font-size: large;
+  background-color: black;
+  color: white;
+  border: 1px white;
+  margin-top: 10px;
 }
 
 /* 

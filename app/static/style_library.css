@@ -33,7 +33,7 @@ html {
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
   padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color: rgba(246, 246, 246);
+  background-color:  #9099A2;
 }
 
 /* --- everything in nav bar start here --- */
@@ -123,11 +123,12 @@ html {
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: #9099A2;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  
 }
 
 .close {
@@ -185,7 +186,7 @@ html {
   flex-direction: column; /* Arrange child elements vertically */
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  background-color: rgba(246, 246, 246);
+  background-color: #9099A2;
 }
 
 h1.intro {
@@ -232,6 +233,7 @@ h2 {
   position: relative;
   text-align: center;
   z-index: 1;
+  background-color: #9099A2;
 }
 #music_image {
   max-width: 100%;

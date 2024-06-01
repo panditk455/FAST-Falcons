@@ -24,16 +24,21 @@ CSS file for the profile page.
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
   padding-top: 0; /* No padding at the top */
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
   padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color: rgba(246, 246, 246);
+  background-color:  #9099A2;
+}
+
+.body{
+  background-color:  #9099A2;
 }
 
 /* --- everything in nav bar start here --- */
 .navbar {
-  background-color: lightblue;
+  background-color: #9099A2;
   position: relative; /* Required for absolute positioning of children */
 }
 
@@ -108,10 +113,10 @@ CSS file for the profile page.
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: #9099A2;
   margin: 0 auto; /* Center horizontally */
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid black;
   width: 80%;
   max-width: 500px; /* Example max-width for content */
 }
@@ -147,6 +152,7 @@ CSS file for the profile page.
   flex-direction: column; /* Arrange child elements vertically */
   align-items: center;
   height: 100vh;
+  background-color: #9099A2;
 }
 
 .circle-image {
@@ -204,6 +210,7 @@ CSS file for the profile page.
   overflow: hidden;
   display: flex;
   justify-content: center;
+  background-color: #9099A2;
   align-items: center;
   margin: 0 auto 20px; /* Center horizontally and add margin bottom */
 }
@@ -229,8 +236,8 @@ CSS file for the profile page.
 }
 
 #myModal .go-chat-button button {
-  background-color: rgb(153, 148, 148);
-  color: #fff;
+  background-color: black;
+  color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -248,8 +255,8 @@ button {
   padding: 5px 10px; /* Adjust padding as needed */
   margin: 0px;
   border: none;
-  background-color: rgb(255, 255, 255);
-  color: rgb(70, 64, 64);
+  background-color: black;
+  color: white;
   cursor: pointer;
 }
 
@@ -261,54 +268,56 @@ button {
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* 100% viewport height */
-  background-color: rgb(
-    153,
-    148,
-    148
-  ); /* Background color for the wrapper using RGB values */
+  background-color:#96858F; /* Background color for the wrapper using RGB values */
 }
 
-.content {
-  text-align: center;
-  padding: 80px;
-  background-size: cover; /* Adjusted to cover */
-  background-position: center; /* Centered background image */
-  width: 100%;
+.information {
+  width: 60%;
+  max-width: 400px; /* Added max-width for better responsiveness */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 label {
   color: white;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+
+.content {
+text-align: center;
+padding: 80px;
+background-size: cover; /* Adjusted to cover */
+background-position: center; /* Centered background image */
+width: 100%;
 }
 
 input[type="text"],
 input[type="password"] {
-  width: 80%;
+  width: 100%;
   border: none;
   border-radius: 10px;
   padding: 15px;
-  background: #333;
+  background: #d5d5d5;
   color: black;
   font-size: 12pt;
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.56);
   outline: none;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 10px;
   box-sizing: border-box; /* Moved box-sizing here */
 }
 
 input[type="text"]::placeholder,
 input[type="password"]::placeholder {
-  color: #ccc;
-  width: 100%;
+  color: black;
 }
 
 button[type="submit"] {
-  width: 50%;
-  padding: 10px 0;
-
-  margin-bottom: 70px;
+  width: 100%;
+  padding: 16px 0;
+  margin: 25px 0;
   border: none;
   border-radius: 8px;
   outline: none;
@@ -317,6 +326,7 @@ button[type="submit"] {
   letter-spacing: 3px;
   color: white;
   cursor: pointer;
+  background-color: black;
 }
 
 p {
@@ -338,27 +348,33 @@ p a {
 /* CSS for Username and Password input fields */
 #new-username,
 #new-password {
-  width: 80%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f8f8;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  background: #d5d5d5;
+  color: black;
+  font-size: 12pt;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.56);
+  outline: none;
+  margin-bottom: 10px;
+  box-sizing: border-box; 
 }
 
 /* Style for the form buttons */
 form button {
-  width: 85%;
-  padding: 10px;
-  margin-top: 10px;
+  width: 100%;
+  padding: 16px 0;
+  margin: 25px 0;
   border: none;
-  border-radius: 5px;
-  background-color: #333;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
   color: white;
-  font-size: 16px;
   cursor: pointer;
+  background-color: #6D7993;
 }
 
 form button:hover {

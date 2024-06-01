@@ -16,13 +16,13 @@ CSS file for the about-us-page.html  where there is the desciption of the users
   padding: 0;
   box-sizing: border-box;
   font-family: "font1", sans-serif;
-  background-color: #A1D6E2;
+  background-color: #96858F;
 }
 
 body,
 html {
   height: 100%;
-  background-color: #A1D6E2;
+  background-color: #96858F;
 }
 
 .wrapper {
@@ -35,12 +35,11 @@ html {
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
   padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color: #A1D6E2;
+  background-color: #96858F;
 }
 
 /* --- everything in nav bar start here --- */
 .navbar {
-  background-color: lightblue;
   position: relative; /* Required for absolute positioning of children */
 }
 

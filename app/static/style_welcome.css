@@ -30,23 +30,20 @@ html {
   align-items: center;
   height: 100vh;
   margin-top: 0;
-  background-color: rgb(
-    245,
-    244,
-    240
-  ); /* Background color for the wrapper using RGB values */
+  background-color: #96858F; /* Background color for the wrapper using RGB values */
 }
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding: 150px;
-  background-image: url("../static/asset/background.gif"); /* Background image for the content */
+  padding: 150px; /* Background image for the content */
   background-size: cover; /* Cover the entire content area with the background image */
   background-position: center;
   background-repeat: no-repeat;
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
   align-items: center;
+  background-color: #96858F ;
+
 }
 
 .intro {
@@ -55,12 +52,15 @@ html {
 
 .avatar-container {
   margin-bottom: 20px;
-  width: 200px;
-  height: 200px;
+  /* width: 200px;
+  height: 200px; */
   overflow: hidden;
   display: flex; /* Use flexbox for avatar images */
   justify-content: center; /* Center avatar images horizontally */
   align-items: center; /* Center avatar images vertically */
+  background-color:  #9099A2 ;
+  width: 50%;
+
 }
 
 .avatar-container img {
@@ -70,7 +70,8 @@ html {
 }
 
 .controls {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  width: 10% ;
   display: flex;
   flex-direction: column; /* Arrange children in a column */
 }
@@ -79,17 +80,34 @@ html {
   display: flex; /* Arrange children in a row */
   justify-content: space-between; /* Space evenly between children */
   margin-bottom: 10px;
+  background-color: black;
+  color: white;
+  width: 100%
 }
 
 button {
   padding: 5px 10px; /* Adjust padding as needed */
   margin: 0px;
+  width: 100%;
   border: none;
-  background-color: rgb(255, 255, 255);
-  color: rgb(70, 64, 64);
+  background-color: black;
+  color: white;
   cursor: pointer;
+  margin: 4px 2px;
 }
 
+/* #save-btn{
+  align-items: center;
+  background-color: black;
+  width: 100%;
+  color: white;
+  margin: 4px 2px;
+  margin-top: 10px; 
+} */
+
 .go-chat-button {
-  margin-top: 10px; /* Add margin between left-right buttons and go-chat button */
+  margin-top: 10px; 
+  background-color: black;
+  color: white;
+  width: 100%;
 }
