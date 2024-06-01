@@ -23,6 +23,13 @@ function initializeSocket() {
     console.log("WebSocket message received:", event.data);
     const data = JSON.parse(event.data);
 
+    // userlist = data['  ']
+    // Pull the users (and/or the avatars) out of the JSON dictionary
+
+    // GetElementByID the Section
+    // Create an Image element in Javascript
+    // Set the location to be where you want.
+
     if (data.event === "update_users") {
       updateUsersList(data.users);
     }
