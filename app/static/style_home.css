@@ -32,7 +32,7 @@ html {
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
   padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color: rgba(246, 246, 246);
+  background-color: #1995AD;
 }
 
 /* --- everything in nav bar start here --- */
@@ -197,7 +197,7 @@ html {
   flex-direction: column; /* Arrange child elements vertically */
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  background-color: rgba(246, 246, 246);
+
 }
 
 .intro {
@@ -205,7 +205,9 @@ html {
 }
 
 #image {
-  max-width: 60%; /* No change needed, as percentage values are relative */
+  margin-top: 10px;
+  max-width: 80%; /* No change needed, as percentage values are relative */
+  background-color:  #EDF4F2;
 }
 
 .sayles_button {
