@@ -5,8 +5,7 @@ Updated: May 31, 2024
 CSS file for the chatroom.
  */
 
-
-font-face {
+@font-face {
   font-family: "font1";
   src: url("../static/font.ttf") format("truetype");
 }
@@ -49,7 +48,6 @@ html {
   background-color: transparent;
   color: transparent;
   border: none;
-  font-family: "Brush Script MT", sans-serif;
   transition-duration: 0.4s;
   position: relative; /* Ensure proper positioning for icon-hover */
 }
@@ -198,7 +196,6 @@ html {
 }
 
 .center-big {
-  
   font-size: 50px;
   margin-top: 20px;
   margin-bottom: 10px;

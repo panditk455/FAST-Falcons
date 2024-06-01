@@ -1,17 +1,18 @@
-    <!-- charoomt.html
+<!-- charoomt.html
      Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
     Updated: May 31, 2024 
     This is html for the chatroom where users can chat, it is html for both the one to one as well as the global chat.
   -->
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carl Chat Posting</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style_chatroom.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style_chatroom.css') }}"
+    />
     <script src="/static/js/chatroom.js"></script>
   </head>
   <body onload="initializeNumbers();">
@@ -20,16 +21,30 @@
         <div class="home_button">
           <a href="/">
             <button>
-              <img class="icon" src="{{ url_for('static', filename='asset/home_button.png') }}" />
-              <img class="icon-hover" src="{{ url_for('static', filename='asset/home_button_hover.png') }}" />
+              <img
+                class="icon"
+                src="{{ url_for('static', filename='asset/home_button.png') }}"
+              />
+              <img
+                class="icon-hover"
+                src="{{ url_for('static', filename='asset/home_button_hover.png') }}"
+              />
             </button>
           </a>
         </div>
         <div class="aboutus_button">
           <a href="/aboutus">
             <button id="modal-btn">
-              <img class="icon" src="{{ url_for('static', filename='asset/aboutus_button.png') }}" alt="About Us" />
-              <img class="icon-hover" src="{{ url_for('static', filename='asset/aboutus_button_hover.png') }}" alt="About Us Hover" />
+              <img
+                class="icon"
+                src="{{ url_for('static', filename='asset/aboutus_button.png') }}"
+                alt="About Us"
+              />
+              <img
+                class="icon-hover"
+                src="{{ url_for('static', filename='asset/aboutus_button_hover.png') }}"
+                alt="About Us Hover"
+              />
             </button>
           </a>
         </div>
@@ -37,18 +52,26 @@
         <!-- Modal or Popup -->
         <!-- <div id="myModal" class="modal">
           <div class="modal-content"> -->
-            <!-- Close button for the modal -->
-            <!-- <span class="close">&times;</span> -->
-            <!-- Modal content goes here -->
-            <!-- <h2>Ss</h2>
+        <!-- Close button for the modal -->
+        <!-- <span class="close">&times;</span> -->
+        <!-- Modal content goes here -->
+        <!-- <h2>Ss</h2>
             <p>This is the content of the modal. It can cover most of the screen.</p>
           </div>
         </div> -->
 
         <div class="profile_button">
           <button>
-            <img class="icon" src="{{ url_for('static', filename='asset/profile_button.png') }}" alt="Profile" />
-            <img class="icon-hover" src="{{ url_for('static', filename='asset/profile_button_hover.png') }}" alt="Profile Hover" />
+            <img
+              class="icon"
+              src="{{ url_for('static', filename='asset/profile_button.png') }}"
+              alt="Profile"
+            />
+            <img
+              class="icon-hover"
+              src="{{ url_for('static', filename='asset/profile_button_hover.png') }}"
+              alt="Profile Hover"
+            />
           </button>
           <div class="dropdown-content">
             <a href="/profile">Profile</a>
@@ -65,20 +88,23 @@
         </div>
       </nav>
 
-       <div class="content">
-
+      <div class="content">
         <div id="chatroom">
           <h1>Chatroom</h1>
 
-          <p class="heading-class">Welcome to Room # <b id="roomNumber">?</b></p>
+          <p class="heading-class">
+            Welcome to Room # <b id="roomNumber">?</b>
+          </p>
 
           <p class="center-big" id="textContainer"></p>
 
           <p id="chat">
-
-            <input type="text" id="message_input" placeholder="Type your message..." />
+            <input
+              type="text"
+              id="message_input"
+              placeholder="Type your message..."
+            />
             <button onclick="sendMessage()">Send</button>
-               
           </p>
         </div>
 
@@ -87,13 +113,13 @@
         <p class="center-med">
           <button class="big-button" onclick="leaveRoom();">LEAVE ROOM</button>
         </p>
-        
       </div>
-
     </div>
 
     <!-- Include the JavaScript file -->
     <!-- <script src="/static/js/chatroom.js"></script> -->
-    <script>var username = {{username|tojson|safe}}; </script>
+    <script>
+      var username = {{username|tojson|safe}};
+    </script>
   </body>
 </html>
