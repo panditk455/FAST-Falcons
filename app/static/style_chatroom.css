@@ -175,7 +175,7 @@ html {
 
 .content {
   text-align: center; /* Center the text inside the content */
-  padding-top: 10rem; /* No padding at the top */
+  padding-top: 1rem; /* No padding at the top */
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 1.25rem; /* Converted from 20px to rem */
   padding-right: 1.25rem; /* Converted from 20px to rem */
