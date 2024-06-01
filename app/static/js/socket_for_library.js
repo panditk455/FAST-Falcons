@@ -23,7 +23,8 @@ function initializeSocket() {
     console.log("WebSocket message received:", event.data);
     // const data = await fetch(/getlibrary/ ??? ).json();
     // namelist = data['name'];
-    // avatarlist = data['avatar'];
+    // avatarDictionary = data['avatar'];
+    // ... avatarDictionary[username] is the path
 
     // For each avatar loop ... 
     
