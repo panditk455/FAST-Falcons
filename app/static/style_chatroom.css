@@ -184,6 +184,8 @@ html {
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
   background-color: rgba(246, 246, 246);
+  border: 5px solid black;
+  border-radius: 20px;
 }
 
 .center-med {
@@ -431,4 +433,35 @@ emoji-picker {
   height: 20px;
   background-repeat: no-repeat;
   display: inline-block;
+}
+
+.chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px;
+  width: 300px; /* Adjust the width as needed */
+  margin: 20px auto; /* Center the container */
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+#message_input {
+  width: 100%; /* Full width of the parent container */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.chat button {
+  width: 100%; /* Full width of the parent container */
+  padding: 10px;
+  background-color: #4a82c8;
+  color: rgb(255, 246, 246);
+  font-size: 15px; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
