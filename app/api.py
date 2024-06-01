@@ -59,6 +59,9 @@ def requestLibrary(name):
         data_dict['names'].append(name) 
     
     my_dict = {'num': str(room_num)}
+    my_dict['names'] = room[2]['names']
+    my_dict['avatars'] = room[2]['avatars']
+    
     return json.dumps(my_dict)
 
     
