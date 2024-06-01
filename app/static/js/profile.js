@@ -1,3 +1,9 @@
+// profile.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// This script fetches the user's avatar path and updates the image source, and 
+// it handles form submissions for updating the username and password.
+
 document.addEventListener("DOMContentLoaded", function () {
     // Fetch the avatar path and update the image source
     fetch("/get_avatar_path")

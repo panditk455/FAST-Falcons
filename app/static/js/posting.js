@@ -1,3 +1,8 @@
+// posting.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// This script manages the posting functionality, including text input and emoji.
+
 const textarea = document.querySelector("#post-desc");
 const postBtn = document.querySelector(".post-btn");
 const postAudienceBtn = document.querySelector(".post-audience");

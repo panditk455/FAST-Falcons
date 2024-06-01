@@ -1,4 +1,8 @@
-// ../static/js/drag.js
+// drag.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// This enables draggable elements on a webpage, 
+// saving their positions in localStorage so that their positions persist across page reloads.
 
 document.addEventListener("DOMContentLoaded", function () {
   // Get all draggable elements

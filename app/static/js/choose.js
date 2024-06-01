@@ -1,3 +1,9 @@
+// choose.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// This allows users to select and 
+// save an avatar by navigating through options and sending the chosen avatar path to the server.
+
 document.addEventListener("DOMContentLoaded", function () {
   let avatarIndex = 0;
   const totalAvatars = 4;

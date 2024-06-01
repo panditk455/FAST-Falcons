@@ -1,3 +1,10 @@
+/* 
+style_welcome.css
+Authors: Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+Updated: May 31, 2024 
+CSS file for the welcome page.
+ */
+
 @font-face {
   font-family: "font1";
   src: url("../static/font.ttf") format("truetype");

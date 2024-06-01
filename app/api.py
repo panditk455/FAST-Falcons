@@ -1,3 +1,13 @@
+'''
+    api.py
+    Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+    Updated: May 31, 2024
+    This Flask application handles user registration,
+    login, chat room management, and avatar handling 
+    for a web-based chat platform.
+'''
+
+
 from flask import Flask, jsonify, render_template, redirect, session, request
 from flask_sock import Sock
 from threading import Lock

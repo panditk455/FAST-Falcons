@@ -1,3 +1,11 @@
+// menu.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// This  manages the display of a popup image when certain areas of an image map are clicked, showing relevant
+//  images (different food items) based on the clicked area's `alt` attribute.
+//  The popup can be hidden as well, and the default state of the popup is hidden.
+
+
 // Get the popup container and image element
 const popupContainer = document.getElementById("popupContainer");
 const popupImage = document.getElementById("popupImage");

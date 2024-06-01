@@ -1,3 +1,11 @@
+// chatroom.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+//This manages the chatroom functionality, including sending and receiving messages, and enabling message editing.
+
+
+
+
 // This function is called from within fetchUpdate()
 // This function changes the webpage based on the new numbers from the server
 // Global Variable to store the websocket object

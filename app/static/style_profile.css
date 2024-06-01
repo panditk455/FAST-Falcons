@@ -1,3 +1,11 @@
+/* 
+style_profile.css
+Authors: Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+Updated: May 31, 2024 
+CSS file for the profile page.
+ */
+
+
 @font-face {
   font-family: "font1";
   src: url("../static/font.ttf") format("truetype");

@@ -1,3 +1,11 @@
+// moveavatar.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// This  controls the movement of an avatar on the page based on the sections(different floors of the libarary) clicked 
+// and plays different background music accordingly. 
+// It also includes functionality for volume control and muting the music.
+
+
 document.addEventListener("DOMContentLoaded", function () {
   // Move the avatar to section1 by default when the page loads
   moveAvatarToSection("section1");

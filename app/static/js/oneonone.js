@@ -1,6 +1,14 @@
+
+// oneonone.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// The  facilitates joining a one-on-one chat room, waiting for another user to join 
+// if necessary, and then redirecting both users to the room.
+
 // When the button is clicked,
 // this function asks the server for the number of a room that isn't full
 // This function then calls redirectRoom to join the given room number
+
 
 function resetplayer() {
   URl = "/resetplayer";

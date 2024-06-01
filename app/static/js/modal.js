@@ -1,3 +1,11 @@
+// modal.js
+// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
+// Updated: May 31, 2024 
+// This controls the behavior of a modal dialog, allowing it to be opened by clicking a button and closed either
+//  by clicking on a close button within the modal or by clicking anywhere outside of the modal.
+
+
+
 var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
