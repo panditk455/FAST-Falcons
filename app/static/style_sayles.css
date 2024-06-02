@@ -28,10 +28,10 @@ html {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding-top: 0; /* No padding at the top */
-  padding-bottom: 0; /* No padding at the bottom */
-  padding-left: 0.625rem; /* Converted from 10px to rem */
-  padding-right: 0.625rem; /* Converted from 10px to rem */
+  padding-top: 0; 
+  padding-bottom: 0; 
+  padding-left: 0.625rem; 
+  padding-right: 0.625rem; 
   background-color:  rgb(239, 234, 223);
 }
 
@@ -52,7 +52,8 @@ html {
   transition-duration: 0.4s;
   position: relative; /* Ensure proper positioning for icon-hover */
 }
-/* Add this CSS for manual positioning of buttons */
+
+
 .home_button,
 .aboutus_button,
 .profile_button {

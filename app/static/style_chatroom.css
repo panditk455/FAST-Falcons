@@ -27,12 +27,15 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  padding-top: 0; /* No padding at the top */
-  padding-bottom: 0; /* No padding at the bottom */
-  padding-left: 0.625rem; /* Converted from 10px to rem */
-  padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color: rgba(246, 246, 246);
+  height: 100vh; 
+  padding-top: 0; 
+  padding-bottom: 0; 
+  padding-left: 0.625rem;
+  padding-right: 0.625rem; 
+  background-color: #CADCFC; 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
 
 /* --- everything in nav bar start here --- */
@@ -229,16 +232,6 @@ html {
   padding: 5px;
 }
 
-/*.message {
-  display: block;
-  Font: 25px;
-  color: rgb(38, 0, 255);
-}
-
-.play_name{
-  Font: 25px;
-  color: red
-}*/
 
 .create-post {
   border-radius: 5px;

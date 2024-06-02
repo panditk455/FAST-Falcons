@@ -9,8 +9,6 @@
 // This function then calls redirectRoom to join the given room number
 
 function joinRoom(){
-   // player_name = document.getElementById("playerName").value;
-    
     URL = "/requestRoomNum/" + username;
     fetch(URL).then( response => response.json()).then( the_json => redirectRoom(the_json) );
 }

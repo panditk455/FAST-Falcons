@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Save button clicked!");
     const avatarPath = avatars[avatarIndex];
 
-    // Send AJAX request to save the chosen avatar path
+    
     fetch("/save_avatar", {
       method: "POST",
       headers: {
