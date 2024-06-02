@@ -47,20 +47,23 @@ h2 {
 }
 
 .circle-image {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   background-color: white;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto; /* Add this to center the container horizontally */
+  margin: 0 auto;
+  border: 8px solid #07102c; /* Increase border width */
+  margin-bottom: 30px;
+  margin-top: 10 px;
 }
 
 .circle-image img {
-  width: 150%; /* Changed width to 100% */
-  height: 150%; /* Changed height to 100% */
+  width: 100%; /* Changed width to 100% */
+  height: 100%; /* Changed height to 100% */
   object-fit: cover; /* Changed background to object-fit */
 }
 
