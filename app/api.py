@@ -162,6 +162,32 @@ def sendmessage(num, text, count):
     return json.dumps(room_dict)
 
 # Check if the user has already visited the welcome page
+@app.route('/editmessage/<num>/<message>/<index>')
+def editmessage(num, message, index):
+    global currenttext
+    global room_data
+    room_dict = room_data[num]
+
+    room_dict['red'][int(index)] = message
+   
+
+    notify_sockets(num)
+
+    return json.dumps(room_dict)
+
+@app.route('/deletemessage/<num>/<index>')
+def deletemessage(num,index):
+    global currenttext
+    global room_data
+    room_dict = room_data[num]
+
+    room_dict['red'].pop(int(index))
+    room_dict['red'].append(" ")
+   
+
+    notify_sockets(num)
+
+    return json.dumps(room_dict)
 
 def has_visited_welcome(username):
     cursor.execute(

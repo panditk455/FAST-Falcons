@@ -10,6 +10,10 @@
 // This function changes the webpage based on the new numbers from the server
 // Global Variable to store the websocket object
 var socket;
+// const MOVE_THRESHOLD = 50;
+// // let initialX = 0;
+// let moveX = 0;
+// let isDeleteButtonOpen = false;
 
 // Global Variable to store the room number and player name
 var room_num;
@@ -46,7 +50,7 @@ function initializeNumbers() {
     bElement.className = "red";
     bElement.id = "text" + i;
     bElement.style.display = "block";
-    bElement.addEventListener("click", enableEditing);
+  
     textContainer.appendChild(bElement);
   }
 }
@@ -77,18 +81,23 @@ function applyUpdate(the_json) {
     part2 = new_red.substring(index + 1);
 
     red_elem = document.getElementById("text" + i);
-    // Check if "ohay" is in new_red
+    
     if (part1 === username) {
-      red_elem.className = "sent_text"
-        
+      red_elem.className = "sent_text";
+      red_elem.addEventListener("dblclick", enableEditing);   
     }else{
-      red_elem.className = "red"
+      red_elem.className = "red";
     }
     
     if (room_num > 1) {
       // Check if the message has been edited
       if (editedMessages.hasOwnProperty(i)) { 
-        red_elem.innerHTML = editedMessages[i]; 
+        editedtext = editedMessages[i];
+        editedindex = editedtext.indexOf(":");
+        editedpart2 = editedtext.substring(index+1);
+
+        red_elem.innerHTML = editedpart2;
+        delete editedMessages[i];
       } else {
         red_elem.innerHTML = part2;
       }
@@ -96,6 +105,7 @@ function applyUpdate(the_json) {
       // Check if the message has been edited
       if (editedMessages.hasOwnProperty(i)) { 
         red_elem.innerHTML = editedMessages[i]; 
+        delete editedMessages[i];
       } else {
         red_elem.innerHTML = new_red;
       }
@@ -105,9 +115,26 @@ function applyUpdate(the_json) {
 
   currenttext = counter;
 
-
+  if(room_num == 1){
   names_elem = document.getElementById("playerNames");
-  names_elem.innerHTML = the_json["names"];
+  list_names = the_json["names"];
+  names_elem.innerHTML = list_names.length;
+  }else{
+    names_elem = document.getElementById("playerNames");
+    names_elem.innerHTML = the_json["names"];
+    list_names = the_json["names"];
+    if (list_names.length == 2) {
+      wasLengthTwo = true;
+  }
+  
+  // Check the flag variable in the if statement
+  if (list_names.length == 1 && wasLengthTwo) {
+    wasLengthTwo = false
+    showPopup();
+  }
+
+  }
+
 }
 
 function sendMessage() {
@@ -125,7 +152,7 @@ function sendMessage() {
     for (var i = 0; i < 19; i++) {
       var currentElement = document.getElementById("text" + i);
       var nextElement = document.getElementById("text" + (i + 1));
-      currentElement.className = nextElement.className
+      currentElement.className = nextElement.className;
       currentElement.innerHTML = nextElement.innerHTML;
     }
     // Update the last element 'text19' with the new message
@@ -170,6 +197,11 @@ function leaveRoom() {
   fetch(URL).then((response) => changeRoom());
 }
 
+function leaveOneonOne() {
+  URL = "/sayles";
+  location.href = URL;
+}
+
 function changeRoom() {
   URL = "/";
   location.href = URL;
@@ -188,6 +220,7 @@ function redirectRoom(the_json) {
 function enableEditing(event) {
   var textElement = event.target;
   var textContent = textElement.innerHTML;
+  if(room_num == 1){
   var colonSplit = textContent.indexOf(":");
   if (colonSplit !== -1) {
     var usernamePart = textContent.substring(0, colonSplit + 1);
@@ -195,8 +228,11 @@ function enableEditing(event) {
     textElement.setAttribute("data-username", usernamePart);
     textElement.innerHTML = messagePart;
   }
+}
+  textElement.setAttribute("data-original-text", textElement.innerHTML);
   textElement.contentEditable = true;
   textElement.focus();
+  textElement.setAttribute("data-saved", "false"); // Add flag for saving
   textElement.addEventListener("blur", disableEditing);
   textElement.addEventListener("keydown", saveOnEnter);
 }
@@ -210,9 +246,12 @@ function saveOnEnter(event) {
     var messagePart = textElement.innerHTML;
     textElement.innerHTML = messagePart;
     textElement.contentEditable = false;
-    saveEditedMessage(textElement.id, messagePart);
     textElement.removeEventListener("blur", disableEditing);
     textElement.removeEventListener("keydown", saveOnEnter);
+    if (textElement.innerHTML !== textElement.getAttribute("data-original-text") && textElement.getAttribute("data-saved") === "false") {
+      saveEditedMessage(textElement.id, messagePart);
+      textElement.setAttribute("data-saved", "true"); // Set flag to true after saving
+    }
   }
 }
 
@@ -221,18 +260,44 @@ function disableEditing(event) {
   var textElement = event.target;
   var usernamePart = textElement.getAttribute("data-username");
   var messagePart = textElement.innerHTML;
-  textElement.innerHTML = usernamePart + " " + messagePart;
+  if (room_num == 1) {
+    textElement.innerHTML = usernamePart + " " + messagePart;
+  } 
   textElement.contentEditable = false;
-  saveEditedMessage(textElement.id, messagePart);
   textElement.removeEventListener("blur", disableEditing);
   textElement.removeEventListener("keydown", saveOnEnter);
+  if (textElement.innerHTML !== textElement.getAttribute("data-original-text") && textElement.getAttribute("data-saved") === "false") {
+    saveEditedMessage(textElement.id, messagePart);
+    textElement.setAttribute("data-saved", "true"); // Set flag to true after saving
+  }
 }
 
 // Function to save edited message
 function saveEditedMessage(elementId, newText) {
   var index = parseInt(elementId.replace("text", ""), 10);
   var message = play_name + ": " + newText;
-  editedMessages[index] = message
+  editedMessages[index] = message;
   var URL = "/editmessage/" + room_num + "/" + message + "/" + index;
   fetch(URL);
 }
+
+
+
+function deleteMessage(elementId) {
+  var index = parseInt(elementId.replace("text", ""), 10);
+  var URL = "/deletemessage/" + room_num + "/" + index;
+  document.getElementById(elementId).innerHTML = "";
+  fetch(URL);
+   // Clear the message content
+}
+
+function showPopup() {
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("popup").style.display = "block";
+}
+
+// document.getElementById("closeButton").addEventListener("click", function() {
+//   document.getElementById("overlay").style.display = "none";
+//   document.getElementById("popup").style.display = "none";
+//   leaveRoom(); // Call the leaveRoom function
+// });
