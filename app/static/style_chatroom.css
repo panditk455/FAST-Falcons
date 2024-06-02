@@ -37,7 +37,7 @@ html {
 
 /* --- everything in nav bar start here --- */
 .navbar {
-  background-color: lightblue;
+  background-color: white;
   position: relative; /* Required for absolute positioning of children */
 }
 

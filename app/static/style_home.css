@@ -32,7 +32,7 @@ html {
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
   padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color:  #9999A2;
+  background-color:  rgb(239, 234, 223);
 }
 
 /* --- everything in nav bar start here --- */
@@ -206,8 +206,8 @@ html {
 
 #image {
   margin-top: 10px;
-  max-width: 80%; /* No change needed, as percentage values are relative */
-  background-color:  #d5d5d5;
+  max-width: 60%; /* No change needed, as percentage values are relative */
+  background-color:  rgb(239, 234, 223);
 }
 
 .sayles_button {

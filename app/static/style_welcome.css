@@ -30,7 +30,7 @@ html {
   align-items: center;
   height: 100vh;
   margin-top: 0;
-  background-color: #96858F; /* Background color for the wrapper using RGB values */
+  background-color: rgb(239, 234, 223); /* Background color for the wrapper using RGB values */
 }
 
 .content {
@@ -42,7 +42,7 @@ html {
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Arrange child elements vertically */
   align-items: center;
-  background-color: #96858F ;
+  background-color:rgb(239, 234, 223) ;
 
 }
 
@@ -58,9 +58,10 @@ html {
   display: flex; /* Use flexbox for avatar images */
   justify-content: center; /* Center avatar images horizontally */
   align-items: center; /* Center avatar images vertically */
-  background-color:  #9099A2 ;
+  background-color:  rgb(239, 234, 223) ;
   width: 50%;
-
+  border: 5px solid #07102c;
+  border-radius: 20px;
 }
 
 .avatar-container img {

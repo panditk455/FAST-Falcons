@@ -33,7 +33,7 @@ html {
   padding-bottom: 0; /* No padding at the bottom */
   padding-left: 0.625rem; /* Converted from 10px to rem */
   padding-right: 0.625rem; /* Converted from 10px to rem */
-  background-color:  #9099A2;
+  background-color: rgb(239, 234, 223);
 }
 
 /* --- everything in nav bar start here --- */
@@ -186,7 +186,7 @@ html {
   flex-direction: column; /* Arrange child elements vertically */
   justify-content: center; /* Center vertically */
   align-items: center; /* Center horizontally */
-  background-color: #9099A2;
+  background-color: rgb(239, 234, 223);
 }
 
 h1.intro {
@@ -233,7 +233,7 @@ h2 {
   position: relative;
   text-align: center;
   z-index: 1;
-  background-color: #9099A2;
+  background-color: rgb(239, 234, 223);
 }
 #music_image {
   max-width: 100%;

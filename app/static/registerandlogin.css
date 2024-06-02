@@ -29,7 +29,7 @@ html {
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* 100% viewport height */
-  background-color: #96858F; /* Background color for the wrapper using RGB values */
+  background-color: #CADCFC; /* Background color for the wrapper using RGB values */
 }
 
 .content {
@@ -47,8 +47,8 @@ h2 {
 }
 
 .circle-image {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   background-color: white;
   border-radius: 50%;
   overflow: hidden;
@@ -59,8 +59,8 @@ h2 {
 }
 
 .circle-image img {
-  width: 130%; /* Changed width to 100% */
-  height: 130%; /* Changed height to 100% */
+  width: 150%; /* Changed width to 100% */
+  height: 150%; /* Changed height to 100% */
   object-fit: cover; /* Changed background to object-fit */
 }
 
@@ -71,10 +71,11 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 10px;
 }
 
 label {
-  color: white;
+  color: black;
   margin-bottom: 10px;
 }
 
@@ -95,7 +96,7 @@ input[type="password"] {
 
 input[type="text"]::placeholder,
 input[type="password"]::placeholder {
-  color: #ccc;
+  color:  rgb(239, 234, 223);
 }
 
 button[type="submit"] {
