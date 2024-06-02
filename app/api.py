@@ -41,10 +41,11 @@ cursor = db.cursor()
 
 @app.route('/requestRoomNum/<name>')
 def requestRoom(name):
+    '''
+    Requests a room based on username of player
+    '''
     done = False
 
-    # Pick a random Room number
-    # Check and make sure that player name isn't already in the room
     while (not done):
         room_num = 1
         if room_num in room_data:
@@ -64,6 +65,9 @@ def requestRoom(name):
 
 @app.route('/oneononechat/<name>')
 def oneononechat(name):
+    '''
+    Establishes connection between two users to allow interaction
+    '''
     global Oneonone_count
     global Oneonone_list
     if Oneonone_list == {}:
@@ -86,11 +90,17 @@ def oneononechat(name):
 
 @app.route('/getchat')
 def getchat():
+    '''
+    Returns list of player and player number
+    '''
     global Oneonone_list
     return json.dumps(Oneonone_list)
 
 @app.route('/resetplayer')
 def resetplayer():
+    '''
+    Reset player list when player leaves room
+    '''
     global Oneonone_list
     global Oneonone_count
     Oneonone_list = {}
@@ -99,24 +109,24 @@ def resetplayer():
 
 @app.route('/gameRoom/<num>/<name>')
 def gameRoom(num, name):
+    '''
+    Establishes room for global chat, keep track of room number, usernames, and player count
+    '''    
     if 'username' in session:
         username = session['username']
     else:
         return redirect('/login')
     global room_data
 
-    # Initialize the room data if it doesn't exist
     if not (num in room_data):
         data = {}
-        data['red'] = [" "] * 20  # CHANGED: List of 20 messages instead of 5
-        # CHANGED: Initialize names list with the provided name
+        data['red'] = [" "] * 20  
         data['names'] = [name]
         data['counter'] = 0
         room_data[num] = data
 
     else:
         data = room_data[num]
-        # CHANGED: Check if the name is already in the list
         if name not in data['names']:
             data['names'].append(name)
 
@@ -127,12 +137,14 @@ def gameRoom(num, name):
 
 @app.route('/getupdate/<num>')
 def returnData(num):
+    '''
+    Returns updated data to see new chats for the room with the corresponding room number
+    '''
     global room_data
 
     if num in room_data:
         data_dict = room_data[num]
     else:
-        # CHANGED: List of 20 messages instead of 5
         data_dict = {'red': [" "] * 20, 'names': [], 'counter': 0}
 
     return json.dumps(data_dict)
@@ -140,6 +152,9 @@ def returnData(num):
 
 @app.route('/sendmessage/<num>/<text>/<count>')
 def sendmessage(num, text, count):
+    '''
+    Handles user sending a message to the other players
+    '''
     v = count
     global currenttext
     global Message
@@ -161,9 +176,12 @@ def sendmessage(num, text, count):
 
     return json.dumps(room_dict)
 
-# Check if the user has already visited the welcome page
+
 @app.route('/editmessage/<num>/<message>/<index>')
 def editmessage(num, message, index):
+    '''
+    Allows player to edit message when clicked
+    '''
     global currenttext
     global room_data
     room_dict = room_data[num]
@@ -195,7 +213,6 @@ def has_visited_welcome(username):
     result = cursor.fetchone()
     return result[0] if result else False
 
-# Update the visited_welcome flag in the database
 
 
 def mark_welcome_visited(username):
@@ -206,6 +223,9 @@ def mark_welcome_visited(username):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    '''
+    Handles user regigstration
+    '''
     if request.method == 'POST':
         # Retrieve the username and password submitted in the registration form
         username = request.form['username']
@@ -232,6 +252,9 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    '''
+    Handles user login
+    '''
     if request.method == 'POST':
         # Retrieve the username and password submitted in the login form
         username = request.form['username']
@@ -260,6 +283,9 @@ def login():
 
 @app.route('/update_username', methods=['POST'])
 def update_username():
+    '''
+    Handles updating username and storing new updates
+    '''
     if 'username' in session:
         old_username = session['username']
         new_username = request.json.get('new_username')
@@ -278,6 +304,9 @@ def update_username():
 
 @app.route('/update_password', methods=['POST'])
 def update_password():
+    '''
+    Handles updating password and storing new updates
+    '''
     if 'username' in session:
         username = session['username']
         new_password = request.json.get('new_password')
@@ -291,6 +320,9 @@ def update_password():
 
 @app.route('/welcome')
 def load_welcome():
+    '''
+    loads welcome page
+    '''
     if 'username' in session:
         username = session['username']
         return render_template("welcome.html", username=username)
@@ -300,6 +332,9 @@ def load_welcome():
 
 @app.route('/')
 def load_homepage():
+    '''
+    loads home page
+    '''
     if 'username' in session:
         username = session['username']
         return render_template("home.html", username=username)
@@ -309,6 +344,9 @@ def load_homepage():
 
 @app.route('/sayles')
 def load_sayles():
+    '''
+    loads sayles page
+    '''
     global Oneonone_count
     if 'username' in session:
         username = session['username']
@@ -318,6 +356,9 @@ def load_sayles():
 
 @app.route('/library')
 def load_library():
+    '''
+    loads library page
+    '''
     if 'username' in session:
         username = session['username']
         avatar_response = get_avatar_path()
@@ -328,17 +369,12 @@ def load_library():
         return redirect('/login')
 
 
-@app.route('/baldspot')
-def load_baldspot():
-    if 'username' in session:
-        username = session['username']
-        return render_template("baldspot.html", username=username)
-    else:
-        return redirect('/login')
-
 
 @app.route('/profile')
 def load_profile():
+    '''
+    loads profile page
+    '''
     if 'username' in session:
         username = session['username']
         return render_template("profile.html", username=username)
@@ -348,6 +384,9 @@ def load_profile():
 
 @app.route('/logout')
 def logout():
+    '''
+    loads logout page and logs user out
+    '''
     # Remove the username from the session to indicate that the user is logged out
     session.pop('username', None)
     return redirect('/login')
@@ -355,6 +394,9 @@ def logout():
 
 @app.route('/aboutus')
 def load_aboutus_page():
+    '''
+    loads about us page
+    '''
     if 'username' in session:
         username = session['username']
         return render_template("about-us-page.html", username=username)
@@ -363,6 +405,9 @@ def load_aboutus_page():
 
 
 def notify_sockets(room):
+    '''
+    updates sockets
+    '''
     global web_sockets
 
     dead_sockets = []
@@ -381,6 +426,9 @@ def notify_sockets(room):
 
 @app.route('/leaveroom/<num>/<name>')
 def leave_room(num, name):
+    '''
+    Leave one on one chat room
+    '''
     global web_sockets
     global room_data
 
@@ -402,10 +450,8 @@ def leave_room(num, name):
 def open_socket(ws, num, name):
     global web_sockets
 
-    # Add this to the global websocket dictionary
     web_sockets[(num, name)] = ws
 
-    # We want to keep the socket open as long as the browser client is active
     while True:
         time.sleep(10)
 
@@ -414,11 +460,13 @@ def open_socket(ws, num, name):
 
 @app.route('/save_avatar', methods=['POST'])
 def save_avatar():
+    '''
+    saves updates to user's avatar
+    '''
     if 'username' in session:
         username = session['username']
         avatar_path = request.json.get('avatar_path')
 
-        # Update the avatar path in the database
         cursor.execute(
             "UPDATE user SET Avatar_Path = %s WHERE username = %s", (avatar_path, username))
         db.commit()
@@ -430,6 +478,9 @@ def save_avatar():
 
 @app.route('/get_avatar_path')
 def get_avatar_path():
+    '''
+    access to avatar path
+    '''
     if 'username' in session:
         username = session['username']
         cursor.execute(
