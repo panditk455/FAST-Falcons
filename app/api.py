@@ -10,12 +10,9 @@
 
 from flask import Flask, jsonify, render_template, redirect, session, request
 from flask_sock import Sock
-from threading import Lock
 import json
-import sys
 import mysql.connector
 import time
-import random
 
 app = Flask(__name__)
 app.secret_key = 'secretkeyfornow'
