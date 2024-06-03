@@ -398,16 +398,18 @@ def notify_sockets(room):
 
     dead_sockets = []
 
-    for num, name in web_sockets:
-        ws = web_sockets[(num, name)]
+    for num, name in list(web_sockets):  
         if num == room:
-            try:
-                ws.send("Update")
-            except:
-                dead_sockets.append((num, name))
+            ws = web_sockets.get((num, name)) 
+            if ws:
+                try:
+                    ws.send("Update")
+                except:
+                    dead_sockets.append((num, name))
 
     for num, name in dead_sockets:
-        leave_room(num, name)
+        if (num, name) in web_sockets:  
+            del web_sockets[(num, name)]
 
 
 @app.route('/leaveroom/<num>/<name>')

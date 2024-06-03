@@ -280,3 +280,10 @@ function showPopup() {
   document.getElementById("overlay").style.display = "block";
   document.getElementById("popup").style.display = "block";
 }
+
+window.addEventListener('beforeunload', function (event) {
+  URL = "/leaveroom/" + room_num + "/" + play_name;
+  fetch(URL);
+  
+
+});
