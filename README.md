@@ -1,10 +1,10 @@
 ### Carls Chat
 
-Welcome to the Carleton College Chat Website, a collaborative project developed by students at Carleton College in Northfield, Minnesota. Created as part of our Software Design, we, Team FAST-Falcons, have crafted a website exclusively for the community of Carleton College in Northfield, Minnesota. This chatting platform offers various features for communication to enhance campus interactivity. Upon logging in, users can select an avatar, and a doodle of the campus map will welcome them, featuring places such as Sayles Hill Campus Center, Gould Library, and the BaldSpot. By clicking on these locations, users can explore various features and engage in different activities. Whether it's participating in global chat discussions in the BaldSpot, virtually navigating the floors of Gould Library with music features, or getting food at the Sayles Campus Center, Carls Chat provides an immersive experience for all members of the Carleton community.
+Welcome to the Carleton College Chat Website, a collaborative project developed by students at Carleton College in Northfield, Minnesota. Created as part of our Software Design, we, Team FAST-Falcons, have crafted a website exclusively for the community of Carleton College. This chatting platform offers various features for communication to enhance campus interactivity. Upon logging in, users can select an avatar, and a doodle of the campus map will welcome them, featuring places such as Sayles Hill Campus Center, Gould Library, and the BaldSpot. By clicking on these locations, users can explore various features and engage in different activities. Whether it's participating in global chat discussions in the BaldSpot, virtually navigating the floors of Gould Library with music features, or getting food at the Sayles Campus Center, Carls Chat provides an immersive experience for all members of the Carleton community.
 
 ## Introduction
 
-This repository FAST-Falcons hosts the code, images and the documentations for the Carleton College Chat Website. Created by a team of four developers during an advanced software design class, this project aims to enhance the social experience of students at Carleton College through a dynamic and user-friendly online platform.
+This repository FAST-Falcons hosts the code, images, and documentation for the Carleton College Chat Website. Created by a team of four developers during an advanced software design class, this project aims to enhance the social experience of students at Carleton College through a dynamic and user-friendly online platform.
 
 ## Project Overview
 
@@ -107,9 +107,6 @@ Including api.py which is the Flask Application that runs the webvsite.
 - **Alex Wcislo**
 - **Palmy Klangsathorn**
 
-## How to Contribute to our website
-
-If you're interested in contributing to our website, feel free to fork this repository, make your changes, and submit a pull request. We welcome any enhancements in the website, bug fixes, or new features that can improve the user experience of our platform.
 
 ## Acknowledgments
 
