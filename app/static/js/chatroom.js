@@ -4,17 +4,26 @@
 //This manages the chatroom functionality, including sending and receiving messages, and enabling message editing.
 
 
+
+
+// This function is called from within fetchUpdate()
+// This function changes the webpage based on the new numbers from the server
 // Global Variable to store the websocket object
 var socket;
+// const MOVE_THRESHOLD = 50;
+// // let initialX = 0;
+// let moveX = 0;
+// let isDeleteButtonOpen = false;
 
 // Global Variable to store the room number and player name
 var room_num;
-var currenttext = -1; 
+var currenttext = -1; // Start with 'red1'
 var play_name;
 var editedMessages = {};
 
 // This function is called when the page loads
 function initializeNumbers() {
+  // Set the Room Number based on the URL
   var pathArray = location.pathname.split("/");
   play_name = pathArray[3];
   room_num = pathArray[2];
@@ -27,6 +36,7 @@ function initializeNumbers() {
 
   socket = new WebSocket(sock_url);
 
+  // Fetch the initial numbers from the server
   fetchUpdate();
 
   // Fetch a new update whenever the socket receives a message
@@ -45,8 +55,13 @@ function initializeNumbers() {
   }
 }
 
+function scrollToBottom() {
+  var chatDiv = document.getElementById("textContainer");
+  chatDiv.scrollTop = chatDiv.scrollHeight;
+}
 
 // This function is called periodically to fetch updates from the server
+
 function fetchUpdate() {
   URL = "/getupdate/" + room_num;
   fetch(URL)
@@ -124,34 +139,35 @@ function applyUpdate(the_json) {
 
 function sendMessage() {
   var message = document.getElementById("message_input").value;
-  if (!message.trim()) return;
+  if (!message.trim()) return; // Avoid sending empty messages
   document.getElementById("message_input").value = "";
-
+  // currenttext += 1;
   if(room_num == 1){
     message = play_name + ": " + message;
   }
   
 
   if (currenttext > 19) {
+    // Shift content of each element to the previous one, up to 'text19'
     for (var i = 0; i < 19; i++) {
       var currentElement = document.getElementById("text" + i);
       var nextElement = document.getElementById("text" + (i + 1));
       currentElement.className = nextElement.className;
       currentElement.innerHTML = nextElement.innerHTML;
     }
-   
+    // Update the last element 'text19' with the new message
     var lastElement = document.getElementById("text19");
-   
+    // Change the class of the last element
     lastElement.className = "sent_text";
     lastElement.innerHTML = message;
   } else {
-    
+    // Update the current 'red' element based on the counter
     var red_elem = document.getElementById("text" + currenttext);
     red_elem.className = "sent_text"; 
     red_elem.innerHTML = message;
   }
 
-  
+  // Update the URL and send the message to the server
   if(room_num > 1){
     message = play_name + ": " + message;
   }
@@ -160,9 +176,11 @@ function sendMessage() {
   var URL = "/sendmessage/" + room_num + "/" + message + "/" + currenttext;
   fetch(URL);
 
+  // Increment the counter and wrap around if necessary
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Add event listener for the Enter key
   document
     .getElementById("message_input")
     .addEventListener("keydown", function (event) {
@@ -174,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function leaveRoom() {
+  // Alert the server that a player has left the room
   URL = "/leaveroom/" + room_num + "/" + play_name;
   fetch(URL).then((response) => changeRoom());
 }
@@ -205,7 +224,7 @@ function enableEditing(event) {
   var colonSplit = textContent.indexOf(":");
   if (colonSplit !== -1) {
     var usernamePart = textContent.substring(0, colonSplit + 1);
-    var messagePart = textContent.substring(colonSplit + 2); 
+    var messagePart = textContent.substring(colonSplit + 2); // Skipping the space after colon
     textElement.setAttribute("data-username", usernamePart);
     textElement.innerHTML = messagePart;
   }
@@ -213,7 +232,7 @@ function enableEditing(event) {
   textElement.setAttribute("data-original-text", textElement.innerHTML);
   textElement.contentEditable = true;
   textElement.focus();
-  textElement.setAttribute("data-saved", "false"); 
+  textElement.setAttribute("data-saved", "false"); // Add flag for saving
   textElement.addEventListener("blur", disableEditing);
   textElement.addEventListener("keydown", saveOnEnter);
 }
@@ -221,7 +240,7 @@ function enableEditing(event) {
 // Function to save edited message on Enter key press
 function saveOnEnter(event) {
   if (event.key === "Enter") {
-    event.preventDefault(); 
+    event.preventDefault(); // Prevent inserting a newline
     var textElement = event.target;
     var usernamePart = textElement.getAttribute("data-username");
     var messagePart = textElement.innerHTML;
@@ -231,7 +250,7 @@ function saveOnEnter(event) {
     textElement.removeEventListener("keydown", saveOnEnter);
     if (textElement.innerHTML !== textElement.getAttribute("data-original-text") && textElement.getAttribute("data-saved") === "false") {
       saveEditedMessage(textElement.id, messagePart);
-      textElement.setAttribute("data-saved", "true"); 
+      textElement.setAttribute("data-saved", "true"); // Set flag to true after saving
     }
   }
 }
@@ -249,7 +268,7 @@ function disableEditing(event) {
   textElement.removeEventListener("keydown", saveOnEnter);
   if (textElement.innerHTML !== textElement.getAttribute("data-original-text") && textElement.getAttribute("data-saved") === "false") {
     saveEditedMessage(textElement.id, messagePart);
-    textElement.setAttribute("data-saved", "true"); 
+    textElement.setAttribute("data-saved", "true"); // Set flag to true after saving
   }
 }
 
@@ -262,7 +281,23 @@ function saveEditedMessage(elementId, newText) {
   fetch(URL);
 }
 
+
+
+function deleteMessage(elementId) {
+  var index = parseInt(elementId.replace("text", ""), 10);
+  var URL = "/deletemessage/" + room_num + "/" + index;
+  document.getElementById(elementId).innerHTML = "";
+  fetch(URL);
+   // Clear the message content
+}
+
 function showPopup() {
   document.getElementById("overlay").style.display = "block";
   document.getElementById("popup").style.display = "block";
 }
+
+// document.getElementById("closeButton").addEventListener("click", function() {
+//   document.getElementById("overlay").style.display = "none";
+//   document.getElementById("popup").style.display = "none";
+//   leaveRoom(); // Call the leaveRoom function
+// });
