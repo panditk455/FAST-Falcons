@@ -36,7 +36,7 @@ function resetplayer() {
             .then(updated_json => {
                 chat_list = updated_json; })
         if (chat_list['count'] == 2) {
-            URL = "/gameRoom/" + room_number + "/" + username;
+            URL = "/chatRoom/" + room_number + "/" + username;
             URL = "http://" + location.host + URL;
             location.href = URL;
             clearInterval(intervalId); // Stop the interval from calling this function
@@ -47,7 +47,7 @@ function resetplayer() {
   
     } else {
       
-      URL = "/gameRoom/" + room_number + "/" + username;
+      URL = "/chatRoom/" + room_number + "/" + username;
  
       URL = "http://" + location.host + URL;
   

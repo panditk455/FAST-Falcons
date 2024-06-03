@@ -16,7 +16,7 @@ function joinRoom(){
 function redirectRoom(the_json){
     room_number = the_json['num'];
 
-    URL = "/gameRoom/" + room_number + "/" + username;
+    URL = "/chatRoom/" + room_number + "/" + username;
 
     URL = "http://" + location.host + URL;
 

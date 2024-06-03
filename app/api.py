@@ -21,10 +21,10 @@ app = Flask(__name__)
 app.secret_key = 'secretkeyfornow'
 sock = Sock(app)
 Oneonone_list = {}
-Message = "Hello"
-room_data = {}
+Message = " "
+chat_data = {}
 web_sockets = {}
-currenttext = 0
+text_index = 0
 Oneonone_count = 2
 
 
@@ -48,8 +48,8 @@ def requestRoom(name):
 
     while (not done):
         room_num = 1
-        if room_num in room_data:
-            data_dict = room_data[room_num]
+        if room_num in chat_data:
+            data_dict = chat_data[room_num]
             if (name in data_dict['names']):
                 done = False
             else:
@@ -107,8 +107,8 @@ def resetplayer():
     return json.dumps(Oneonone_count)
 
 
-@app.route('/gameRoom/<num>/<name>')
-def gameRoom(num, name):
+@app.route('/chatRoom/<num>/<name>')
+def chatRoom(num, name):
     '''
     Establishes room for global chat, keep track of room number, usernames, and player count
     '''    
@@ -116,17 +116,17 @@ def gameRoom(num, name):
         username = session['username']
     else:
         return redirect('/login')
-    global room_data
+    global chat_data
 
-    if not (num in room_data):
+    if not (num in chat_data):
         data = {}
-        data['red'] = [" "] * 20  
+        data['received_text'] = [" "] * 20  
         data['names'] = [name]
         data['counter'] = 0
-        room_data[num] = data
+        chat_data[num] = data
 
     else:
-        data = room_data[num]
+        data = chat_data[num]
         if name not in data['names']:
             data['names'].append(name)
 
@@ -140,12 +140,12 @@ def returnData(num):
     '''
     Returns updated data to see new chats for the room with the corresponding room number
     '''
-    global room_data
+    global chat_data
 
-    if num in room_data:
-        data_dict = room_data[num]
+    if num in chat_data:
+        data_dict = chat_data[num]
     else:
-        data_dict = {'red': [" "] * 20, 'names': [], 'counter': 0}
+        data_dict = {'received_text': [" "] * 20, 'names': [], 'counter': 0}
 
     return json.dumps(data_dict)
 
@@ -156,25 +156,25 @@ def sendmessage(num, text, count):
     Handles user sending a message to the other players
     '''
     v = count
-    global currenttext
+    global text_index
     global Message
-    global room_data
+    global chat_data
     Message = text
-    room_dict = room_data[num]
+    chatroom_data = chat_data[num]
 
-    if currenttext >= 20:
+    if text_index >= 20:
         for i in range(19):
-            room_dict['red'][i] = room_dict['red'][i + 1]
-        room_dict['red'][19] = Message
+            chatroom_data['received_text'][i] = chatroom_data['received_text'][i + 1]
+        chatroom_data['received_text'][19] = Message
     else:
-        room_dict['red'][currenttext] = Message
-        room_dict['counter'] += 1
+        chatroom_data['received_text'][text_index] = Message
+        chatroom_data['counter'] += 1
 
-    currenttext += 1
+    text_index += 1
 
     notify_sockets(num)
 
-    return json.dumps(room_dict)
+    return json.dumps(chatroom_data)
 
 
 @app.route('/editmessage/<num>/<message>/<index>')
@@ -182,16 +182,16 @@ def editmessage(num, message, index):
     '''
     Allows player to edit message when clicked
     '''
-    global currenttext
-    global room_data
-    room_dict = room_data[num]
+    global text_index
+    global chat_data
+    chatroom_data = chat_data[num]
 
-    room_dict['red'][int(index)] = message
+    chatroom_data['received_text'][int(index)] = message
    
 
     notify_sockets(num)
 
-    return json.dumps(room_dict)
+    return json.dumps(chatroom_data)
 
 def has_visited_welcome(username):
     cursor.execute(
@@ -418,15 +418,15 @@ def leave_room(num, name):
     Leave one on one chat room
     '''
     global web_sockets
-    global room_data
+    global chat_data
 
     # Remove the WebSocket from the global dictionary
     if (num, name) in web_sockets:
         del web_sockets[(num, name)]
 
     # Remove the player from the list of names in the room
-    if num in room_data:
-        data_dict = room_data[num]
+    if num in chat_data:
+        data_dict = chat_data[num]
         if name in data_dict['names']:
             data_dict['names'].remove(name)
 

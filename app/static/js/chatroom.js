@@ -10,21 +10,21 @@
 // Global Variable to store the websocket object
 var socket;
 // Global Variable to store the room number and player name
-var room_num;
-var currenttext = -1; 
-var play_name;
+var chat_num;
+var text_index = -1; 
+var player_name;
 var editedMessages = {};
 
 // This function is called when the page loads
 function initializeNumbers() {
   // Set the Room Number based on the URL
   var pathArray = location.pathname.split("/");
-  play_name = pathArray[3];
-  room_num = pathArray[2];
+  player_name = pathArray[3];
+  chat_num = pathArray[2];
 
   //Open the Websocket when the page loads
   sock_url = "ws://" + location.host + "/openSocket";
-  sock_url = sock_url + "/" + room_num + "/" + play_name;
+  sock_url = sock_url + "/" + chat_num + "/" + player_name;
 
   console.log(sock_url);
 
@@ -41,7 +41,7 @@ function initializeNumbers() {
   const textContainer = document.getElementById("textContainer");
   for (let i = 0; i < 20; i++) {
     const bElement = document.createElement("b");
-    bElement.className = "red";
+    bElement.className = "received_text";
     bElement.id = "text" + i;
     bElement.style.display = "block";
   
@@ -57,60 +57,60 @@ function scrollToBottom() {
 // This function is called periodically to fetch updates from the server
 
 function fetchUpdate() {
-  URL = "/getupdate/" + room_num;
+  URL = "/getupdate/" + chat_num;
   fetch(URL)
     .then((response) => response.json())
     .then((the_json) => applyUpdate(the_json));
 }
 
 function applyUpdate(the_json) {
-  room_elem = document.getElementById("roomNumber");
-  room_elem.innerHTML = room_num;
+  chat_elem = document.getElementById("roomNumber");
+  chat_elem.innerHTML = chat_num;
   counter = the_json["counter"];
 
   for (i = 0; i <= 19; i++) {
-    new_red = the_json["red"][i];
-    index = new_red.indexOf(":");
-    part1 = new_red.substring(0, index);
-    part2 = new_red.substring(index + 1);
+    new_text = the_json["received_text"][i];
+    index = new_text.indexOf(":");
+    part1 = new_text.substring(0, index);
+    part2 = new_text.substring(index + 1);
 
-    red_elem = document.getElementById("text" + i);
+    text_elem = document.getElementById("text" + i);
     
-    if (part1 === play_name) {
-      red_elem.className = "sent_text";
-      red_elem.addEventListener("dblclick", enableEditing);
+    if (part1 === player_name) {
+      text_elem.className = "sent_text";
+      text_elem.addEventListener("dblclick", enableEditing);
     } else {
-      red_elem.className = "red";
-      red_elem.removeEventListener("dblclick", enableEditing); 
+      text_elem.className = "received_text";
+      text_elem.removeEventListener("dblclick", enableEditing); 
     }
     
-    if (room_num > 1) {
+    if (chat_num > 1) {
       // Check if the message has been edited
       if (editedMessages.hasOwnProperty(i)) { 
         editedtext = editedMessages[i];
         editedindex = editedtext.indexOf(":");
         editedpart2 = editedtext.substring(index+1);
 
-        red_elem.innerHTML = editedpart2;
+        text_elem.innerHTML = editedpart2;
         delete editedMessages[i];
       } else {
-        red_elem.innerHTML = part2;
+        text_elem.innerHTML = part2;
       }
     } else {
       // Check if the message has been edited
       if (editedMessages.hasOwnProperty(i)) { 
-        red_elem.innerHTML = editedMessages[i]; 
+        text_elem.innerHTML = editedMessages[i]; 
         delete editedMessages[i];
       } else {
-        red_elem.innerHTML = new_red;
+        text_elem.innerHTML = new_text;
       }
     }
 }
 
 
-  currenttext = counter;
+  text_index = counter;
 
-  if(room_num == 1){
+  if(chat_num == 1){
   names_elem = document.getElementById("playerNames");
   list_names = the_json["names"];
   names_elem.innerHTML = list_names.length;
@@ -136,13 +136,13 @@ function sendMessage() {
   var message = document.getElementById("message_input").value;
   if (!message.trim()) return; // Avoid sending empty messages
   document.getElementById("message_input").value = "";
-  // currenttext += 1;
-  if(room_num == 1){
-    message = play_name + ": " + message;
+  // text_index += 1;
+  if(chat_num == 1){
+    message = player_name + ": " + message;
   }
   
 
-  if (currenttext > 19) {
+  if (text_index > 19) {
     // Shift content of each element to the previous one, up to 'text19'
     for (var i = 0; i < 19; i++) {
       var currentElement = document.getElementById("text" + i);
@@ -157,18 +157,18 @@ function sendMessage() {
     lastElement.innerHTML = message;
   } else {
     // Update the current 'red' element based on the counter
-    var red_elem = document.getElementById("text" + currenttext);
-    red_elem.className = "sent_text"; 
-    red_elem.innerHTML = message;
+    var text_elem = document.getElementById("text" + text_index);
+    text_elem.className = "sent_text"; 
+    text_elem.innerHTML = message;
   }
 
   // Update the URL and send the message to the server
-  if(room_num > 1){
-    message = play_name + ": " + message;
+  if(chat_num > 1){
+    message = player_name + ": " + message;
   }
   
   scrollToBottom();
-  var URL = "/sendmessage/" + room_num + "/" + message + "/" + currenttext;
+  var URL = "/sendmessage/" + chat_num + "/" + message + "/" + text_index;
   fetch(URL);
 
   // Increment the counter and wrap around if necessary
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function leaveRoom() {
   // Alert the server that a player has left the room
-  URL = "/leaveroom/" + room_num + "/" + play_name;
+  URL = "/leaveroom/" + chat_num + "/" + player_name;
   fetch(URL).then((response) => changeRoom());
 }
 
@@ -205,7 +205,7 @@ function changeRoom() {
 function redirectRoom(the_json) {
   room_number = the_json["num"];
 
-  URL = "/gameRoom/" + room_number + "/" + play_name;
+  URL = "/chatRoom/" + room_number + "/" + player_name;
 
   URL = "http://" + location.host + URL;
 
@@ -215,7 +215,7 @@ function redirectRoom(the_json) {
 function enableEditing(event) {
   var textElement = event.target;
   var textContent = textElement.innerHTML;
-  if(room_num == 1){
+  if(chat_num == 1){
   var colonSplit = textContent.indexOf(":");
   if (colonSplit !== -1) {
     var usernamePart = textContent.substring(0, colonSplit + 1);
@@ -255,7 +255,7 @@ function disableEditing(event) {
   var textElement = event.target;
   var usernamePart = textElement.getAttribute("data-username");
   var messagePart = textElement.innerHTML;
-  if (room_num == 1) {
+  if (chat_num == 1) {
     textElement.innerHTML = usernamePart + " " + messagePart;
   } 
   textElement.contentEditable = false;
@@ -270,9 +270,9 @@ function disableEditing(event) {
 // Function to save edited message
 function saveEditedMessage(elementId, newText) {
   var index = parseInt(elementId.replace("text", ""), 10);
-  var message = play_name + ": " + newText;
+  var message = player_name + ": " + newText;
   editedMessages[index] = message;
-  var URL = "/editmessage/" + room_num + "/" + message + "/" + index;
+  var URL = "/editmessage/" + chat_num + "/" + message + "/" + index;
   fetch(URL);
 }
 
@@ -283,7 +283,7 @@ function showPopup() {
 }
 
 window.addEventListener('beforeunload', function (event) {
-  URL = "/leaveroom/" + room_num + "/" + play_name;
+  URL = "/leaveroom/" + chat_num + "/" + player_name;
   fetch(URL);
   
 
