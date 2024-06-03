@@ -6,18 +6,12 @@
 
 
 
-// This function is called from within fetchUpdate()
-// This function changes the webpage based on the new numbers from the server
+
 // Global Variable to store the websocket object
 var socket;
-// const MOVE_THRESHOLD = 50;
-// // let initialX = 0;
-// let moveX = 0;
-// let isDeleteButtonOpen = false;
-
 // Global Variable to store the room number and player name
 var room_num;
-var currenttext = -1; // Start with 'red1'
+var currenttext = -1; 
 var play_name;
 var editedMessages = {};
 
@@ -282,22 +276,7 @@ function saveEditedMessage(elementId, newText) {
 }
 
 
-
-function deleteMessage(elementId) {
-  var index = parseInt(elementId.replace("text", ""), 10);
-  var URL = "/deletemessage/" + room_num + "/" + index;
-  document.getElementById(elementId).innerHTML = "";
-  fetch(URL);
-   // Clear the message content
-}
-
 function showPopup() {
   document.getElementById("overlay").style.display = "block";
   document.getElementById("popup").style.display = "block";
 }
-
-// document.getElementById("closeButton").addEventListener("click", function() {
-//   document.getElementById("overlay").style.display = "none";
-//   document.getElementById("popup").style.display = "none";
-//   leaveRoom(); // Call the leaveRoom function
-// });

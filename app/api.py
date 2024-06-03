@@ -193,20 +193,6 @@ def editmessage(num, message, index):
 
     return json.dumps(room_dict)
 
-@app.route('/deletemessage/<num>/<index>')
-def deletemessage(num,index):
-    global currenttext
-    global room_data
-    room_dict = room_data[num]
-
-    room_dict['red'].pop(int(index))
-    room_dict['red'].append(" ")
-   
-
-    notify_sockets(num)
-
-    return json.dumps(room_dict)
-
 def has_visited_welcome(username):
     cursor.execute(
         "SELECT visited_welcome FROM user WHERE username=%s", (username,))
