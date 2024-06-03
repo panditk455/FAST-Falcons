@@ -76,11 +76,12 @@ function applyUpdate(the_json) {
 
     red_elem = document.getElementById("text" + i);
     
-    if (part1 === username) {
+    if (part1 === play_name) {
       red_elem.className = "sent_text";
-      red_elem.addEventListener("dblclick", enableEditing);   
-    }else{
+      red_elem.addEventListener("dblclick", enableEditing);
+    } else {
       red_elem.className = "red";
+      red_elem.removeEventListener("dblclick", enableEditing); 
     }
     
     if (room_num > 1) {
