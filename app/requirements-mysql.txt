@@ -1,0 +1,2 @@
+-r requirements.txt
+mysql-connector-python==26.7.0

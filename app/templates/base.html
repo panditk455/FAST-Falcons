@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="description" content="A little corner of Carleton, wherever you are. Explore campus, meet a Carl, and find your favorite study soundtrack.">
+  <title>{% block title %}Carls Chat{% endblock %}</title>
+  <link rel="icon" href="/static/asset/CarlsLogo.png">
+  <link rel="stylesheet" href="/static/site.css">
+  <script src="/static/js/common.js" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% if username %}
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Carls Chat campus map"><img src="/static/asset/CarlsLogo.png" alt=""><span>Carls Chat<small>A little closer to campus.</small></span></a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a class="art-link" href="/" {% if request.path == '/' %}aria-current="page"{% endif %}><img src="/static/asset/home_button.png" alt=""><span>Campus</span></a>
+    <a class="art-link" href="/aboutus" {% if request.path == '/aboutus' %}aria-current="page"{% endif %}><img src="/static/asset/aboutus_button.png" alt=""><span>Our story</span></a>
+    <details class="profile-menu"><summary class="art-link"><img src="{{ avatar_path }}" alt=""><span>{{ username }}</span></summary><div class="profile-dropdown"><a href="/profile">My OneCard</a><form method="post" action="/logout"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button type="submit">Log out</button></form></div></details>
+  </nav>
+</header>
+{% endif %}
+<main id="main">{% block content %}{% endblock %}</main>
+<footer class="site-footer">Made by Carls, for Carls. <span>FAST-Falcons · Carleton College</span></footer>
+<div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

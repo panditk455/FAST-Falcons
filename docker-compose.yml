@@ -1,30 +1,21 @@
-# docker-compose.yml
-## NOTE: The volumes command makes a directory on my laptop
-##    accessible from within the container machine
-
 services:
   app:
     build: ./app
     ports:
-      - "5555:5555"
-    restart: on-failure
-    depends_on:
-      - "db"
-  db:
-    build: ./db
-    ports:
-      - "3306:3306"
-    restart: on-failure
-
-    # volumes connect a folder on my machine with a folder on the container machine
-
-    # If I want the database to persist after the container ends and then restarts
-    # ... then I need to store the database on a volume connected to my machine
-    # This volume command links the location where mysql stores its database
-    # to the ./db-storage folder on my machine
-
-    # I looked online to discover that /var/lib/mysql
-    #   Is where MySQL stores the database data
-
+      - "${PORT:-5555}:5555"
+    environment:
+      APP_ENV: production
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      DATABASE_PATH: /app/instance/carls-chat.sqlite3
     volumes:
-      - ./db-storage:/var/lib/mysql
+      - carls-data:/app/instance
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5555/healthz', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+volumes:
+  carls-data:

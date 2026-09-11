@@ -1,65 +1,24 @@
-// choose.js
-// Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
-// Updated: May 31, 2024 
-// This allows users to select and 
-// save an avatar by navigating through options and sending the chosen avatar path to the server.
-
-document.addEventListener("DOMContentLoaded", function () {
-  let avatarIndex = 0;
-  const totalAvatars = 4;
-
-  const avatars = [
-    "../static/asset/avatar.png",
-    "../static/asset/avatar1.png",
-    "../static/asset/avatar2.png",
-    "../static/asset/avatar3.png",
-  ];
-
-  const avatarContainer = document.querySelector(".avatar-container");
-  const leftBtn = document.getElementById("left-btn");
-  const rightBtn = document.getElementById("right-btn");
-  const saveBtn = document.getElementById("save-btn");
-
-  function updateAvatar() {
-    avatarContainer.querySelector("img").src = avatars[avatarIndex];
-  }
-
-  updateAvatar();
-
-  leftBtn.addEventListener("click", () => {
-    console.log("Left button clicked!");
-    avatarIndex = (avatarIndex - 1 + totalAvatars) % totalAvatars;
-    updateAvatar();
-  });
-
-  rightBtn.addEventListener("click", () => {
-    console.log("Right button clicked!");
-    avatarIndex = (avatarIndex + 1) % totalAvatars;
-    updateAvatar();
-  });
-
-  saveBtn.addEventListener("click", () => {
-    console.log("Save button clicked!");
-    const avatarPath = avatars[avatarIndex];
-
-    
-    fetch("/save_avatar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ avatar_path: avatarPath }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "success") {
-          alert("Avatar saved successfully!");
-        } else {
-          alert("Error saving avatar: " + data.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
-});
+'use strict';
+const avatarImage = document.querySelector('.avatar-container img');
+const avatars = ['', '1', '2', '3'].map(number => `/static/asset/avatar${number}.png`);
+let avatarIndex = Math.max(0, avatars.indexOf(avatarImage.dataset.current));
+function updateAvatar() {
+  avatarImage.src = avatars[avatarIndex];
+  document.getElementById('avatar-count').textContent = `${avatarIndex + 1} of ${avatars.length}`;
+}
+document.getElementById('left-btn').onclick = () => { avatarIndex = (avatarIndex + 3) % 4; updateAvatar(); };
+document.getElementById('right-btn').onclick = () => { avatarIndex = (avatarIndex + 1) % 4; updateAvatar(); };
+document.getElementById('save-btn').onclick = async event => {
+  const button = event.currentTarget;
+  button.disabled = true;
+  try {
+    await carls.request('/save_avatar', { method: 'POST', body: JSON.stringify({ avatar_path: avatars[avatarIndex] }) });
+    if (button.dataset.next) location.assign(button.dataset.next);
+    else {
+      document.querySelector('.profile-menu img').src = avatars[avatarIndex];
+      carls.notice('Your campus companion is saved.');
+    }
+  } catch (error) { carls.notice(error.message, true); }
+  finally { button.disabled = false; }
+};
+updateAvatar();

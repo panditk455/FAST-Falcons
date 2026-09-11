@@ -1,41 +1,18 @@
-  <!-- login.html
-    Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
-    Updated: May 31, 2024 
-    This is html for the login page where users can login.
-  -->
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="../static/registerandlogin.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="content">
-        <h2>Login</h2>
-        <div class="circle-image">
-          <img src="../static/asset/CarlsLogo.png" />
-        </div>
-
-        {% if error %}
-        <p style="color: red">{{error}}</p>
-        {% endif %}
-
-        <form action="/login" method="post">
-          <label for="username">Username:</label><br />
-          <input type="text" id="username" name="username" required /><br />
-          <label for="password">Password:</label><br />
-          <input type="password" id="password" name="password" required /><br />
-          <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="/register">Register</a></p>
-      </div>
-    </div>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %}Welcome back · Carls Chat{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <img class="auth-logo" src="/static/asset/CarlsLogo.png" alt="Carls Chat">
+  <p class="eyebrow">YOUR CAMPUS, A LITTLE CLOSER</p><h1>Hey, Carl. Welcome back.</h1>
+  <p class="muted">A familiar place to catch up, hang out, and just be.</p>
+  {% if error %}<p class="form-error" role="alert">{{ error }}</p>{% endif %}
+  <form action="/login" method="post" class="stack-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="username">Username</label><input id="username" name="username" autocomplete="username" value="{{ entered_username|default('') }}" maxlength="128" required>
+    <label for="password">Password</label><input type="password" id="password" name="password" autocomplete="current-password" maxlength="128" required>
+    <button class="primary" type="submit">Back to campus →</button>
+  </form>
+  <p class="auth-switch">First time here? <a href="/register">Make yourself at home</a></p>
+</section>
+{% endblock %}

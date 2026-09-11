@@ -1,20 +1,4 @@
--- db-setup.sql
-CREATE DATABASE USER_LOGINS;
-
-USE USER_LOGINS;
-
-CREATE TABLE user(username TEXT, pass_word TEXT, visited_welcome BOOLEAN DEFAULT FALSE, avatar_path TEXT);
-
-INSERT INTO
-    user (username, pass_word)
-VALUES
-    ('db', 'randompasswordRN');
-
-CREATE USER 'webapp' @'%' IDENTIFIED BY 'randompasswordRN';
-
-GRANT ALL ON USER_LOGINS.* TO 'webapp' @'%';
-
-
--- mysql -u 
--- fuuncion to get called whe u press that button.
---x
+-- Current tables are created idempotently by app/storage.py.
+-- The official MySQL image creates the database and account from MYSQL_*
+-- environment variables. No database passwords or sample logins are embedded.
+-- Existing db-storage files are not changed by the new Compose setup.

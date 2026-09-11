@@ -1,14 +1,10 @@
-FROM python:3.7-alpine
-
-WORKDIR /usr/src/app
-
+FROM python:3.12-slim
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PORT=5555
+COPY requirements*.txt ./
+RUN pip install --no-cache-dir -r requirements-mysql.txt
 COPY . .
-
-RUN pip install mysql-connector-python
-RUN pip install Flask
-RUN pip install requests
-RUN pip install flask-sock
-
+RUN useradd --create-home carls && mkdir -p /app/instance && chown -R carls:carls /app
+USER carls
 EXPOSE 5555
-
-CMD ["python3", "api.py"]
+CMD ["sh", "-c", "exec gunicorn --no-control-socket --bind 0.0.0.0:${PORT:-5555} --workers 1 --threads 50 --timeout 120 --access-logfile - api:app"]

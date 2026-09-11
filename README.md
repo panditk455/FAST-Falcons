@@ -1,113 +1,110 @@
-### Carls Chat
+# Carls Chat · FAST-Falcons
 
-Welcome to the Carleton College Chat Website, a collaborative project developed by students at Carleton College in Northfield, Minnesota. We, Fast-Falcons created this website exclusively for the community of Carleton College. This chatting platform offers various features for communication to enhance campus interactivity. Upon logging in, users can select an avatar, and a doodle of the campus map will welcome them, featuring places such as Sayles Hill Campus Center, Gould Library, and the BaldSpot. By clicking on these locations, users can explore various features and engage in different activities. Whether it's participating in global chat discussions in the BaldSpot, virtually navigating the floors of Gould Library with music features, or getting food at the Sayles Campus Center, Carls Chat provides an immersive experience for all members of the Carleton community.
+A little corner of Carleton, wherever you are. The original campus drawings, handwritten font, pastel colors, avatars, café artwork, headshots, and music are preserved.
 
-## Introduction
+- **Sayles:** pick a virtual snack, rearrange your table, and match with another Carl for a private conversation.
+- **Gould Library:** choose between four floors and their study soundtracks.
+- **The Bald Spot:** join the shared campus conversation.
+- **Your OneCard:** change your avatar, username, and password.
 
-This repository FAST-Falcons hosts the code, images, and documentation for the Carleton College Chat Website. Created by a team of four developers during an advanced software design class, this project aims to enhance the social experience of students at Carleton College through a dynamic and user-friendly online platform.
+## Run locally
 
-## Project Overview
+Requires Python 3.12 (recommended).
 
-Carls Chat features three main locations within the campus:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r app/requirements.txt
+python app/api.py
+```
 
-1. **Sayles Hill Campus Center**: Offering a variety of features including a food menu and one-to-one chat rooms.
-2. **Gould Library**: Navigate through different floors, with your avatar appearing on each floor, and enjoy music tailored to the vibe of each floor.
-3. **Bald Spot**: Access a global chat room for group conversations and engage with fellow students in real-time discussions.
+Open `http://127.0.0.1:5555` and register an account. No Docker or database server is needed. SQLite is created automatically in `app/instance/carls-chat.sqlite3`; accounts and messages persist across restarts. This folder also holds the local session key. Keep it private and back it up.
 
-## Features
+## Free deployment
 
-### User Registration and Login
+See [DEPLOYMENT.md](DEPLOYMENT.md) for the PythonAnywhere free-account walkthrough. It uses persistent SQLite and short HTTP polling, so it does not require a paid database or a continuously occupied WebSocket worker.
 
-- **User Registration**: Create an account to access the website's features.
-- **Login**: Securely log in to your account with your credentials.
+`wsgi.py` supplies the production entry point and HTTPS-only cookies. `setup_hosting.py` creates the session key and prints the exact WSGI configuration for the upload location. No account credentials are embedded in the repository.
 
-### Avatar Selection
+Vercel is not a drop-in target for this version: the original app expects Docker's `db` hostname and process-local chat state. The repaired app persists state, but its SQLite file still needs a persistent filesystem. A Vercel deployment would require an external database and a compatible runtime setup.
 
-- Choose from a selection of avatars to represent yourself online.
+## Docker
 
-### Home Page 
+```bash
+cp .env.example .env
+# Replace SECRET_KEY in .env with a unique random value.
+# Generate one with: python3 -c "import secrets; print(secrets.token_hex(32))"
+docker compose up --build
+```
 
-- Interactive map of Carleton College with clickable locations.
-- Navigation buttons for easy access to different sections of the website.
+The default Compose setup uses SQLite in the `carls-data` named volume. Do not use `docker compose down -v` unless you intend to delete that volume. Set `COOKIE_SECURE=true` when serving over HTTPS behind your hosting provider's proxy.
 
-### Profile Management
+For MySQL, fill in `DB_PASSWORD` and `MYSQL_ROOT_PASSWORD` as well, then run:
 
-- Update your avatar, username, and password to personalize your profile.
+```bash
+docker compose -f docker-compose.mysql.yml up --build
+```
 
-### Chat Room Management
+The optional MySQL setup waits for database health before starting the app. It uses a new named volume and does **not** attach, upgrade, delete, or modify the original `db-storage/` directory. Database connections are scoped to transactions, rather than shared globally across request threads.
 
-- **Global Chat Room**: Engage in group conversations.
-- **One-on-One Chat**: Connect with other users for private conversations.
+## Existing accounts
 
-### Real-time Communication
+The original MySQL `user` table remains untouched. The new application uses a `users` table with password hashes and stable account IDs. To transfer existing real accounts, first back up the original database and run it using its original compatible MySQL version. Do not point MySQL 8.4 at an unidentified old data directory.
 
-- WebSocket technology for real-time communication.
+Install the optional connector:
 
-### Deployment
+```bash
+pip install -r app/requirements-mysql.txt
+```
 
-- Docker.
+Set `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, and `DB_NAME` for that running source database in your shell (do not commit them). Then:
 
-## Table of Contents(Which files to look into?)
+```bash
+# Copy accounts into SQLite for local use or free hosting:
+python app/migrate_legacy.py --sqlite app/instance/carls-chat.sqlite3
 
-- **Register**: `register.html`, `registerandlogin.css`
-- **Login**: `login.html`, `registerandlogin.css`
-- **Welcome**: `welcome.html`, `style_welcome.css`
-- **Home**: `home.html`, `style_home.css`
-- **Sayles**: `sayles.html`, `style_sayles.css`
-- **Library**: `library.html`, `style_library.css`
-- **Profile**: `profile.html`, `style_profile.css`
-- **About Us**: `about-us-page.html`, `about-us-page.css`
-- **Chat Room**: `chatroom.html`, `style_chatroom.css`
+# Or create the new users table in the same MySQL database:
+python app/migrate_legacy.py
+```
 
-Including api.py which is the Flask Application that runs the webvsite.
+The migration hashes the legacy plaintext passwords, retains avatars and welcome state, skips existing usernames and the original `db` sample login, and never overwrites or deletes source records. It can be rerun. Legacy names that do not meet the new registration format can still log in; changing a username follows the new format. Legacy chat messages were only in memory and cannot be recovered from the old database.
 
-### Routes and Functions
+SQLite migration files contain account information: transfer them privately into `app/instance/`, never into the static folder or a public repository. Back up the SQLite file while the app is stopped.
 
-#### User Management
+## Tests
 
-- **Registration (/register)**: Handles user registration, checks for username uniqueness, and stores user information.
-- **Login (/login)**: Verifies user credentials and redirects to the homepage upon successful login.
-- **Logout (/logout)**: Logs the user out and redirects to the login page.
+```bash
+pip install pytest
+python -m pytest -q tests
+```
 
-#### Profile Management
+Coverage includes registration, hashing, login, CSRF checks, profile changes, avatar validation, authenticated/private chat access, message ownership, punctuation and emoji, rate limits, concurrent matching, cancellation, stale peers, persistent history, asset routes, and legacy migration.
 
-- **Update Username (/update_username)**: Allows users to update their username.
-- **Update Password (/update_password)**: Allows users to update their password.
+For a standalone production Python server:
 
-#### Chat Room Management
+```bash
+gunicorn --no-control-socket --chdir app --bind 0.0.0.0:5555 --workers 1 --threads 50 --timeout 120 api:app
+```
 
-- **Global Chat Room**: Manages global chat functionality, including sending and editing messages.
-- **One-on-One Chat**: Facilitates private conversations between users.
+Set `APP_ENV=production` and a stable `SECRET_KEY` in the host environment first. Set `WEBSOCKETS_ENABLED=false` on a standard WSGI host that does not support WebSockets. Chat polls every five seconds as a fallback, even when sockets are enabled. `/healthz` checks the database connection. Production key requirements fail early with an actionable message.
 
-#### Real-time Communication
+This is intended for a small campus demo. The app does not verify Carleton affiliation; registration is open to anyone with the link. A larger public rollout would need campus authentication, moderation/reporting, and capacity planning. Private conversations are accessible only to their participants through the app; they are not end-to-end encrypted.
 
-- **WebSocket Management**: Handles WebSocket connections for real-time updates.
+## Project structure
 
-#### Avatar Management
+- `app/api.py`: Flask routes, login sessions, profile changes, matchmaking, and chat.
+- `app/storage.py`: SQLite/MySQL transactions and schema initialization.
+- `app/templates/`: shared layout and campus pages.
+- `app/static/site.css`: responsive styling using the original visual identity.
+- `app/static/js/`: browser interactions.
+- `app/static/asset/`: original artwork, avatars, music, and team photos.
+- `tests/`: behavioral regression tests.
+- `Deliverable/`: original class project documentation, retained for reference.
 
-- **Save Avatar (/save_avatar)**: Saves the user's selected avatar path to the database.
+The older page-specific styles and unused scripts are retained as historical source; the current templates load only `site.css` and the repaired scripts they use.
 
-#### Utility Functions
+## The team
 
-- **Database Utilities**: Various utility functions for database operations.
+Daniel Lumbu, Kritika Pandit, Daniel Estrada, Alex Wcislo, and Palmy Klangsathorn.
 
-### Technologies Used
-
-- **Frontend**: HTML, CSS, JavaScript, Adobe Fresco for doodling and GIF creation.
-- **Backend**: Flask, Flask-SocketIO, HTML Templates, JSON, Session Management, Threading (via `threading.Lock`), Static and Dynamic Data Handling.
-- **Database**: MySQL (via `mysql-connector-python`).
-- **Real-time Communication**: Socket.io for chat functionalities.
-- **Deployment**: Docker.
-
-### Collaborators (Look into About-us page for more information)
-
-- **Daniel Lumbu**
-- **Kritika Pandit**
-- **Daniel Estrada**
-- **Alex Wcislo**
-- **Palmy Klangsathorn**
-
-
-## Acknowledgments
-
-We are immensely grateful to the Carleton College community for their invaluable support and feedback throughout the entire journey of developing this project. Their support, whether it was assisting us in choosing colors, suggesting alternative locations, or simply providing the encouragement to continue with the project. We owe a special gratitude to our professor, Matthew Lepinski, whose guidance and support have been significant. Matthew's mentorship has not only helped us navigate the complexities of our project, but a motivation to work everyday on this prpject. Even in moments of uncertainty, Matthew stood by us, offering encouragement. His dedication to our success has been a driving force behind our project achievementss.
+Created during Advanced Software Design at Carleton College. Thank you to the Carleton community for its ideas, feedback, and encouragement, and to Professor Matthew Lepinski for his guidance.

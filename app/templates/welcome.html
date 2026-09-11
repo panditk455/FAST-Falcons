@@ -1,50 +1,10 @@
- <!-- welcome.html
-    Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
-    Updated: May 31, 2024 
-    This is html for the welcome page where you choose different avatars.
-  -->
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carl Chat</title>
-    <link rel="stylesheet" href="../static/style_welcome.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="top-element">
-        <div class="userinfo">
-          {% if username %}
-          <p>Logged in as: {{ username }}!</p>
-          {% else %}
-          <p>Playing as: guest!</p>
-          {% endif %}
-        </div>
-      </div>
-      <div class="content">
-        <h1>Welcome to Carl Chat</h1>
-
-        <p class="intro">Choose your Avatar and go talk with Carls!</p>
-
-        <div class="avatar-container">
-          <img src="../static/asset/avatar.png" alt="avatar" />
-        </div>
-
-        <div class="controls">
-          <div class="left-right-buttons">
-            <button id="left-btn">Left</button>
-            <button id="right-btn">Right</button>
-          </div>
-          <div class="go-chat-button">
-            <a href="/">
-              <button id="save-btn">Go Chat!</button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="../static/js/choose.js"></script>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %}Choose your avatar · Carls Chat{% endblock %}
+{% block content %}
+<section class="avatar-page"><p class="eyebrow">NICE TO MEET YOU, {{ username }}</p><h1>Which little Carl are you?</h1><p>Pick your campus companion. You can always change it later.</p>
+  <div class="avatar-container"><img src="{{ avatar_path }}" alt="Selected campus avatar" data-current="{{ avatar_path }}"></div>
+  <div class="avatar-controls"><button id="left-btn" aria-label="Previous avatar">← Previous</button><span id="avatar-count" aria-live="polite"></span><button id="right-btn" aria-label="Next avatar">Next →</button></div>
+  <button class="primary" id="save-btn" data-next="/">Let’s go to campus →</button>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/static/js/choose.js" defer></script>{% endblock %}

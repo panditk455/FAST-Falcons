@@ -1,125 +1,18 @@
-    <!-- homw.html
-    Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
-    Updated: May 31, 2024 
-    This is html for the chatroom where users can chat, it is html for both the one to one as well as the global chat.
-  -->
-
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carl Chat Main</title>
-    <link rel="stylesheet" href="../static/style_home.css" />
-    <script src="/static/js/baldspot.js"></script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <nav class="navbar">
-        <div class="home_button">
-          <a href="/">
-            <button>
-              <img class="icon" src="../static/asset/home_button.png" />
-              <img
-                class="icon-hover"
-                src="../static/asset/home_button_hover.png"
-              />
-            </button>
-          </a>
-        </div>
-        <div class="aboutus_button">
-          <a href="/aboutus">
-            <button id="modal-btn">
-              <img
-                class="icon"
-                src="../static/asset/aboutus_button.png"
-                alt="About Us"
-              />
-              <img
-                class="icon-hover"
-                src="../static/asset/aboutus_button_hover.png"
-                alt="About Us Hover"
-              />
-            </button>
-          </a>
-        </div>
-
-
-        <div class="profile_button">
-          <button>
-            <img
-              class="icon"
-              src="../static/asset/profile_button.png"
-              alt="Profile"
-            />
-            <img
-              class="icon-hover"
-              src="../static/asset/profile_button_hover.png"
-              alt="Profile Hover"
-            />
-          </button>
-          <div class="dropdown-content">
-            <a href="/profile">Profile</a>
-            <a href="/logout">Logout</a>
-          </div>
-        </div>
-
-        <div class="userinfo">
-          {% if username %}
-          <p>Logged in as: {{ username }}!</p>
-          {% else %}
-          <p>Playing as: guest!</p>
-          {% endif %}
-        </div>
-      </nav>
-
-      <div class="content">
-        <h1 class="intro">Carleton Campus Map</h1>
-
-        <img id="image" src="../static/asset/CarletonMap.png" />
-
-        <div class="sayles_button">
-          <a href="/sayles">
-            <button>
-              <img class="icon" src="../static/asset/location_button.png" />
-              <img
-                class="icon-hover"
-                src="../static/asset/location_button_hover.png"
-              />
-            </button>
-          </a>
-        </div>
-
-        <div class="library_button">
-          <a href="/library">
-            <button>
-              <img class="icon" src="../static/asset/location_button.png" />
-              <img
-                class="icon-hover"
-                src="../static/asset/location_button_hover.png"
-              />
-            </button>
-          </a>
-        </div>
-
-        <div class="baldspot_button">
-          <a>
-            <button onclick="joinRoom();">
-              <img class="icon" src="../static/asset/location_button.png" />
-              <img
-                class="icon-hover"
-                src="../static/asset/location_button_hover.png"
-              />
-            </button>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      var username = {{username|tojson|safe}};
-    </script>
-    <script src="../static/js/modal.js"></script>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %}Campus map · Carls Chat{% endblock %}
+{% block content %}
+<section class="campus-page">
+  <header class="page-intro"><p class="eyebrow">NO MATTER WHERE YOU ARE</p><h1>A little piece of Carleton.</h1><p>Pick a familiar spot. See who’s around. Stay a while.</p></header>
+  <div class="campus-map">
+    <img src="/static/asset/CarletonMap.png" alt="Hand-drawn map of Carleton College, with Sayles, Gould Library, and the Bald Spot" width="1920" height="1080">
+    <a class="map-pin sayles-pin" href="/sayles" aria-label="Visit Sayles for a one-on-one chat"><img src="/static/asset/location_button.png" alt=""><span>Sayles</span></a>
+    <a class="map-pin library-pin" href="/library" aria-label="Visit Gould Library for study music"><img src="/static/asset/location_button.png" alt=""><span>Gould Library</span></a>
+    <a class="map-pin baldspot-pin" href="/chat/1" aria-label="Join the Bald Spot group chat"><img src="/static/asset/location_button.png" alt=""><span>The Bald Spot</span></a>
+  </div>
+  <nav class="destinations" aria-label="Campus places">
+    <a href="/sayles"><span class="place-number">01</span><h2>Meet me at Sayles <span>↗</span></h2><p>Grab a virtual snack and meet another Carl, one on one.</p><small>COME FOR THE COFFEE, STAY FOR THE CHAT</small></a>
+    <a href="/library"><span class="place-number">02</span><h2>Settle into Gould <span>↗</span></h2><p>Four floors, four moods. Find your favorite study soundtrack.</p><small>A LITTLE FOCUS, A LITTLE COMPANY</small></a>
+    <a href="/chat/1"><span class="place-number">03</span><h2>Out on the Bald Spot <span>↗</span></h2><p>The campus conversation. Drop in and say what’s on your mind.</p><small>EVERYONE’S INVITED</small></a>
+  </nav>
+</section>
+{% endblock %}

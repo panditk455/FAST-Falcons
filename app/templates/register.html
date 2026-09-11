@@ -1,38 +1,19 @@
- <!-- register.html
-    Daniel Lumbu, Kritika Pandit Daniel Estrada, Alex Wcislo,Palmy Klangsathorn
-    Updated: May 31, 2024 
-    This is html for the  register where users first register wih their usernames and password.
-  -->
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
-    <link rel="stylesheet" href="../static/registerandlogin.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="content">
-        <h2>Register</h2>
-        <div class="circle-image">
-          <img src="../static/asset/CarlsLogo.png" />
-        </div>
-        {% if error %}
-        <p style="color: red">{{ error }}</p>
-        {% endif %}
-        <form action="/register" method="post">
-          <label for="username">Username:</label><br />
-          <input type="text" id="username" name="username" required /><br />
-          <label for="password">Password:</label><br />
-          <input type="password" id="password" name="password" required /><br />
-          <button type="submit">Register</button>
-        </form>
-        <p>Already have an account? <a href="/login">Login</a></p>
-      </div>
-    </div>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %}Join the campus · Carls Chat{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <img class="auth-logo" src="/static/asset/CarlsLogo.png" alt="Carls Chat">
+  <p class="eyebrow">THERE’S A SPOT FOR YOU HERE</p><h1>Come on in, Carl.</h1>
+  <p class="muted">Your own little corner of Carleton starts here.</p>
+  {% if error %}<p class="form-error" role="alert">{{ error }}</p>{% endif %}
+  <form action="/register" method="post" class="stack-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="username">Choose a username</label><input id="username" name="username" autocomplete="username" value="{{ entered_username|default('') }}" minlength="3" maxlength="32" pattern="[A-Za-z0-9_.\-]{3,32}" aria-describedby="username-hint" required>
+    <small id="username-hint">3–32 letters, numbers, dots, dashes, or underscores.</small>
+    <label for="password">Choose a password</label><input type="password" id="password" name="password" autocomplete="new-password" minlength="8" maxlength="128" aria-describedby="password-hint" required><small id="password-hint">At least 8 characters.</small>
+    <button class="primary" type="submit">Find my place →</button>
+  </form>
+  <p class="auth-switch">Already a regular? <a href="/login">Log in</a></p>
+</section>
+{% endblock %}
